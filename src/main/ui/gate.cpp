@@ -28,11 +28,19 @@ namespace lsp
     {
         //---------------------------------------------------------------------
         // Plugin UI factory
-        static const meta::plugin_t *uis[] =
+        static const meta::plugin_t *plug_uis[] =
         {
+            &meta::gate_mono,
+            &meta::gate_stereo,
+            &meta::gate_lr,
+            &meta::gate_ms,
+            &meta::sc_gate_mono,
+            &meta::sc_gate_stereo,
+            &meta::sc_gate_lr,
+            &meta::sc_gate_ms
         };
 
-        static ui::Factory factory(uis, 0);
+        static ui::Factory factory(plug_uis, 8);
 
     } // namespace plugui
 } // namespace lsp
