@@ -1,77 +1,84 @@
 <plugin resizable="true">
-	<vbox spacing="4">
+	<vbox>
 		<grid rows="2" cols="7" transpose="true" hspacing="2" vspacing="2" expand="true">
 			<!-- Time graph -->
-			<vbox expand="true">
-				<label />
-				<graph width="480" height="256" expand="true">
-					<!-- Gray grid -->
-					<marker value="3.98107" color="g_gray" basis="1" parallel="0" />  <!-- +12 dB -->
-					<marker value="0.25119" color="g_gray" basis="1" parallel="0" />  <!-- -12 dB -->
-					<marker value="0.01585" color="g_gray" basis="1" parallel="0" />  <!-- -36 dB -->
-					<marker value="0.001" color="g_gray" basis="1" parallel="0" />    <!-- -60 dB -->
-					<ui:for id="t" first="0" last="4">
-						<marker value="${t}.5" color="g_gray" basis="0" parallel="1" />
-					</ui:for>
-					
-					<!-- Yellow grid -->
-					<marker value="0.06310" color="g_yellow" basis="1" parallel="0" /><!-- -24 dB -->
-					<marker value="0.00398" color="g_yellow" basis="1" parallel="0" /><!-- -48 dB -->
-					<ui:for id="t" first="1" last="4">
-						<marker value="${t}" color="g_yellow" basis="0" parallel="1" />
-					</ui:for>
-	
-					<!-- Axises and boundaries -->
-					<center hpos="1" vpos="-1" visible="false" />
-					<axis min="0" max="5" color="g_white" angle="1.0" logarithmic="false" />
-					<axis min="-72 db" max="24 db" color="g_white" angle="0.5" logarithmic="true" />
-					<marker value="24 db" color="g_white" basis="1" parallel="0" /> <!-- +24 dB -->
-					<marker value="5" color="g_white" basis="0" parallel="1" />
-					
-					<!-- Baseline -->
-					<marker value="1.0" color="g_white" basis="1" parallel="0" width="2" /> <!-- 0 dB -->
-					
-					<!-- Meshes -->
-					<mesh id="icg_m" width="2" color="middle_channel_in" visibility=":ilv_m" />
-					<mesh id="icg_s" width="2" color="side_channel_in" visibility=":ilv_s" />
-					<mesh id="ocg_m" width="2" color="middle_channel" visibility=":olv_m" />
-					<mesh id="ocg_s" width="2" color="side_channel" visibility=":olv_s" />
-					<mesh id="scg_m" width="2" color="bright_green" visibility=":slv_m" />
-					<mesh id="scg_s" width="2" color="bright_green" visibility=":slv_s" />
-					<mesh id="evg_m" width="2" color="bright_magenta" visibility=":elv_m" />
-					<mesh id="evg_s" width="2" color="bright_magenta" visibility=":elv_s" />
-					<mesh id="grg_m" width="2" color="bright_blue" visibility=":grv_m" />
-					<mesh id="grg_s" width="2" color="bright_blue" visibility=":grv_s" />
-					
-					<!-- Markers -->
-					<marker id="gzs_m" color="g_blue" basis="1" parallel="0" />
-					<marker id="gzs_s" color="g_blue" basis="1" parallel="0" />
-					<marker id="hzs_m" color="g_blue" basis="1" parallel="0" visibility=":gh_m" />
-					<marker id="hzs_s" color="g_blue" basis="1" parallel="0" visibility=":gh_s" />
-					<marker id="gt_m" color="g_magenta" basis="1" parallel="0" />
-					<marker id="gt_s" color="g_magenta" basis="1" parallel="0" />
-					<marker id="hts_m" color="g_magenta" basis="1" parallel="0" visibility=":gh_m" />
-					<marker id="hts_s" color="g_magenta" basis="1" parallel="0" visibility=":gh_s" />
-					
-					<!-- Text -->
-					<text text="graph.units.db" coord="5;15.8489" halign="1" valign="-1" />
-					<text text="+12" coord="5;3.98107" halign="1" valign="-1" />
-					<text text="0" coord="5;1" halign="1" valign="-1" />
-					<text text="-12" coord="5;0.25119" halign="1" valign="-1" />
-					<text text="-24" coord="5;0.06310" halign="1" valign="-1" />
-					<text text="-36" coord="5;0.01585" halign="1" valign="-1" />
-					<text text="-48" coord="5;0.00398" halign="1" valign="-1" />
-					<text text="-60" coord="5;0.001" halign="1" valign="-1" />
-					
-					<text text="graph.units.s" coord="5;0.00025" halign="1" valign="1" />
-					<ui:for id="t" first="0" last="4" step="1">
-						<text text="${t}" coord="${t};0.00025" halign="-1" valign="1" color="white" />
-						<text text="${t}.5" coord="${t}.5;0.00025" halign="-1" valign="1" color="white" />
-					</ui:for>
-				</graph>
-				<label />
-			</vbox>
-			
+			<graph width.min="640" height.min="256" expand="true">
+				<origin hpos="1" vpos="-1" visible="false" />
+				
+				<!-- Gray grid -->
+				<ui:for id="t" first="0" last="4" step="1">
+					<ui:attributes ox="0" oy="1">
+						<marker v="${t}.25" color="graph_alt_2" />
+						<marker v="${t}.5" color="graph_alt_1" />
+						<marker v="${t}.75" color="graph_alt_2" />
+					</ui:attributes>
+				</ui:for>
+				<ui:attributes ox="1" oy="0" color="graph_alt_1">
+					<marker v="+12 db" />
+					<marker v="-12 db" />
+					<marker v="-36 db" />
+					<marker v="-60 db" />
+				</ui:attributes>
+
+				<!-- Yellow grid -->
+				<ui:for id="t" first="1" last="4" step="1">
+					<marker v="${t}" ox="0" oy="1" color="graph_sec" />
+				</ui:for>
+				<ui:attributes ox="1" oy="0" color="graph_sec">
+					<marker v="0 db" />
+					<marker v="-24 db" />
+					<marker v="-48 db" />
+				</ui:attributes>
+
+				<!-- Meshes -->
+				<mesh id="icg_m" width="2" color="mid_channel_in" visibility=":ilv_m" />
+				<mesh id="icg_s" width="2" color="side_channel_in" visibility=":ilv_s" />
+				<mesh id="ocg_m" width="2" color="mid_channel" visibility=":olv_m" />
+				<mesh id="ocg_s" width="2" color="side_channel" visibility=":olv_s" />
+				<mesh id="scg_m" width="2" color="bright_green" visibility=":slv_m" />
+				<mesh id="scg_s" width="2" color="bright_green" visibility=":slv_s" />
+				<mesh id="evg_m" width="2" color="bright_magenta" visibility=":elv_m" />
+				<mesh id="evg_s" width="2" color="bright_magenta" visibility=":elv_s" />
+				<mesh id="grg_m" width="2" color="bright_blue" visibility=":grv_m" />
+				<mesh id="grg_s" width="2" color="bright_blue" visibility=":grv_s" />
+				
+				<!-- Boundaries -->
+				<marker v="24 db" ox="1" oy="0" color="graph_prim" />
+				<marker v="5" ox="0" oy="1" color="graph_prim" />
+				
+				<!-- Axis -->
+				<axis min="0" max="5" angle="1.0" log="false" color="graph_prim" />
+				<axis min="-72 db" max="24 db" angle="0.5" log="true" color="graph_prim" />
+				
+				<!-- Markers -->
+				<ui:attributes ox="1" oy="0">
+					<marker id="gzs_m" color="g_blue" />
+					<marker id="gzs_s" color="g_blue" />
+					<marker id="hzs_m" color="g_blue" visibility=":gh_m" />
+					<marker id="hzs_s" color="g_blue" visibility=":gh_s" />
+					<marker id="gt_m" color="g_magenta" />
+					<marker id="gt_s" color="g_magenta" />
+					<marker id="hts_m" color="g_magenta" visibility=":gh_m" />
+					<marker id="hts_s" color="g_magenta" visibility=":gh_s" />
+				</ui:attributes>
+				
+				<!-- Text -->
+				<text x="5" y="-72 db" text="graph.units.s" halign="1" valign="1" color="graph_prim" />
+				<ui:for id="t" first="0" last="4" step="1">
+					<text x="${t}" y="-72 db" text="${t}" halign="-1" valign="1" color="graph_prim" />
+					<text x="${t}.5" y="-72 db" text="${t}.5" halign="-1" valign="1" color="graph_prim" />
+				</ui:for>
+				<ui:attributes x="5" halign="1" valign="1" color="graph_prim">
+					<text y="12 db" text="+12" />
+					<text y="0 db" text="0" />
+					<text y="-12 db" text="-12" />
+					<text y="-24 db" text="-24" />
+					<text y="-36 db" text="-36" />
+					<text y="-48 db" text="-48" />
+					<text y="-60 db" text="-60" />
+					<text x="5" y="24 db" text="graph.units.db" valign="-1" />
+				</ui:attributes>
+			</graph>
 			<!-- Graph buttons -->
 			<hbox>
 				<button id="pause" size="16" color="green" led="true" />
@@ -80,9 +87,7 @@
 				<label text="labels.clear" />
 				<button id="msl" size="16" color="yellow" led="true" />
 				<label text="ms_listen" />
-				<align pad_right="4" expand="true" hpos="1">
-					<label text="labels.graphs.time" />
-				</align>
+				<label text="labels.graphs.time" pad.r="4" hexpand="true" fill="true" htext="1" />
 			</hbox>
 			
 			<!-- Sidechain meters -->
@@ -93,11 +98,12 @@
 					<button id="slv_m" size="10" color="bright_green" led="true" />
 					<button id="slv_s" size="10" color="bright_green" led="true" />
 				</grid>
-				<meter expand="true"
-					id="slm_m" id2="slm_s" activity_id="slv_m" activity2_id="slv_s"
-					stereo="true" angle="1" type="peak"
-					min="0.000251189" max="15.8489" height="256"
-					color="bright_green" color2="bright_green" />
+				<ledmeter vexpand="true" height.min="256" angle="1">
+					<ledchannel id="slm_m" min="-72 db" max="24 db" log="true" type="peak"
+						activity=":slv_m" value.color="bright_green" />
+					<ledchannel id="slm_s" min="-72 db" max="24 db" log="true" type="peak"
+						activity=":slv_s" value.color="bright_green" />
+				</ledmeter>
 			</vbox>
 			<label text="labels.sc.SC" />
 		
@@ -109,11 +115,12 @@
 					<button id="elv_m" size="10" color="bright_magenta" led="true" />
 					<button id="elv_s" size="10" color="bright_magenta" led="true" />
 				</grid>
-				<meter expand="true"
-					id="elm_m" id2="elm_s" activity_id="elv_m" activity2_id="elv_s"
-					stereo="true" angle="1" type="peak"
-					min="0.000251189" max="15.8489" height="256"
-					color="bright_magenta" color2="bright_magenta" />
+				<ledmeter vexpand="true" height.min="256" angle="1">
+					<ledchannel id="elm_m" min="-72 db" max="24 db" log="true" type="peak"
+						activity=":elv_m" value.color="bright_magenta" />
+					<ledchannel id="elm_s" min="-72 db" max="24 db" log="true" type="peak"
+						activity=":elv_s" value.color="bright_magenta" />
+				</ledmeter>
 			</vbox>
 			<label text="labels.Env_elope" />
 			
@@ -125,104 +132,103 @@
 					<button id="grv_m" size="10" color="bright_blue" led="true" />
 					<button id="grv_s" size="10" color="bright_blue" led="true" />
 				</grid>
-				<meter expand="true"
-					id="rlm_m" id2="rlm_s" activity_id="grv_m" activity2_id="grv_s"
-					stereo="true" angle="1" type="peak"
-					min="0.00398" max="251.18861" balance="1.0" height="256"
-					color="bright_blue" color2="bright_blue" />
+				<ledmeter vexpand="true" height.min="256" angle="1">
+					<ledchannel id="rlm_m" min="-48 db" max="48 db" log="true"
+						balance="0 db" balance.visibility="true" type="peak"
+						activity=":grv_m" value.color="bright_blue" />
+					<ledchannel id="rlm_s" min="-48 db" max="48 db" log="true"
+						balance="0 db" balance.visibility="true" type="peak"
+						activity=":grv_s" value.color="bright_blue" />
+				</ledmeter>
 			</vbox>
 			<label text="labels.gain_" />
 			
 			<!-- Curve graph -->
-			<vbox expand="true">
-				<label />
-				<graph width="256" height="256" expand="true" fill="true">
-					<!-- Gray grid -->
-					<marker value="3.98107" color="g_gray" basis="1" parallel="0" />  <!-- +12 dB -->
-					<marker value="3.98107" color="g_gray" basis="0" parallel="1" />  <!-- +12 dB -->
-					<marker value="0.25119" color="g_gray" basis="1" parallel="0" />  <!-- -12 dB -->
-					<marker value="0.25119" color="g_gray" basis="0" parallel="1" />  <!-- -12 dB -->
-					<marker value="0.01585" color="g_gray" basis="1" parallel="0" />  <!-- -36 dB -->
-					<marker value="0.01585" color="g_gray" basis="0" parallel="1" />  <!-- -36 dB -->
-					<marker value="0.001" color="g_gray" basis="1" parallel="0" />    <!-- -60 dB -->
-					<marker value="0.001" color="g_gray" basis="0" parallel="1" />    <!-- -60 dB -->
-					
-					<!-- Yellow grid -->
-					<marker value="0.06310" color="g_yellow" basis="1" parallel="0" /><!-- -24 dB -->
-					<marker value="0.06310" color="g_yellow" basis="0" parallel="1" /><!-- -24 dB -->
-					<marker value="0.00398" color="g_yellow" basis="1" parallel="0" /><!-- -48 dB -->
-					<marker value="0.00398" color="g_yellow" basis="0" parallel="1" /><!-- -48 dB -->
+			<graph width.min="256" height.min="256" expand="true" fill="true">
+				<origin hpos="-1" vpos="-1" visible="false" />
 				
-					<!-- Axises and boundaries -->
-					<center hpos="-1" vpos="-1" visible="false" />
-					<axis min="0.00025" max="15.84893" color="g_gray" angle="0.0" logarithmic="true" /> <!-- horizontal axis -->
-					<axis min="0.00025" max="15.84893" color="g_gray" angle="0.5" logarithmic="true" /> <!-- vertical axis -->
-					<marker value="1" offset="1" color="g_gray" basis="1" parallel="0" dx=":_a_width" dy=":_a_height" width="2" smooth="true" /> <!-- 1:1 -->
-					<marker value="15.84893" color="g_gray" basis="1" parallel="0" /> <!-- +24 dB -->
-					<marker value="15.84893" color="g_gray" basis="0" parallel="1" /> <!-- +24 dB -->
+				<!-- Gray grid -->
+				<ui:for id="g" first="-60" last="12" step="24">
+					<marker v="${g} db" ox="0" oy="1" color="graph_alt_1" />
+					<marker v="${g} db" ox="1" oy="0" color="graph_alt_1" />
+				</ui:for>
+				
+				<!-- Yellow grid -->
+				<ui:for id="g" first="-48" last="-24" step="24">
+					<marker v="${g} db" ox="0" oy="1" color="graph_sec" />
+					<marker v="${g} db" ox="1" oy="0" color="graph_sec" />
+				</ui:for>
+			
+				<!-- Axes and boundaries -->
+				<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true" />
+				<marker v="24 db" ox="0" oy="1" color="graph_alt_1" />
+				<marker v="24 db" ox="1" oy="0"  color="graph_alt_1" />
+				<axis min="-72 db" max="24 db" color="graph_prim" angle="0.0" log="true" />
+				<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" />
 
-					<!-- 0 dB markers -->
-					<marker value="1.0" color="g_white" basis="1" parallel="0" width="2" /> <!-- 0 dB -->
-					<marker value="1.0" color="g_white" basis="0" parallel="1" width="2" /> <!-- 0 dB -->
-					
-					<!-- Meshes -->
-					<mesh id="hg_m" width="3" color="middle_channel" smooth="true" visibility=":gh_m" />
-					<mesh id="cg_m" width="3" color="middle_channel" smooth="true" />
-					<mesh id="hg_s" width="3" color="side_channel" smooth="true" visibility=":gh_s" />
-					<mesh id="cg_s" width="3" color="side_channel" smooth="true" />
-					<dot hpos_id="elm_m" vpos_id="clm_m" color="middle_channel" led="true" />
-					<dot hpos_id="elm_s" vpos_id="clm_s" color="side_channel" led="true" />
-					
-					<!-- Markers -->
-					<marker id="gzs_m" color="g_blue" basis="0" parallel="1" />
-					<marker id="gzs_s" color="g_blue" basis="0" parallel="1" />
-					<marker id="hzs_m" color="g_blue" basis="0" parallel="1" visibility=":gh_m" />
-					<marker id="hzs_s" color="g_blue" basis="0" parallel="1" visibility=":gh_s" />
-					<marker id="gt_m" color="g_magenta" basis="0" parallel="1" />
-					<marker id="gt_s" color="g_magenta" basis="0" parallel="1" />
-					<marker id="hts_m" color="g_magenta" basis="0" parallel="1" visibility=":gh_m" />
-					<marker id="hts_s" color="g_magenta" basis="0" parallel="1" visibility=":gh_s" />
+				<!-- 0 dB markers -->
+				<marker v="0 db" ox="0" oy="1" width="2" color="graph_prim" />
+				<marker v="0 db" ox="1" oy="0" width="2" color="graph_prim" />
 				
-					<!-- Text -->
-					<text text="0" coord="1;1" halign="1" valign="1" />
-					
-					<text text="graph.units.db" coord="1;15.8489" halign="1" valign="-1" />
-					<text text="+12" coord="1;3.98107" halign="1" valign="-1" />
-					<text text="-12" coord="1;0.25119" halign="1" valign="-1" />
-					<text text="-24" coord="1;0.06310" halign="1" valign="-1" />
-					<text text="-36" coord="1;0.01585" halign="1" valign="-1" />
-					<text text="-48" coord="1;0.00398" halign="1" valign="-1" />
-					<text text="-60" coord="1;0.001" halign="1" valign="-1" />
-					<text text="graph.axis.out" coord="1;0.00025" halign="1" valign="1" />
-					
-					<text text="graph.units.db" coord="15.8489;1" halign="-1" valign="1" />
-					<text text="+12" coord="3.98107;1" halign="-1" valign="1" />
-					<text text="-12" coord="0.25119;1" halign="-1" valign="1" />
-					<text text="-24" coord="0.06310;1" halign="-1" valign="1" />
-					<text text="-36" coord="0.01585;1" halign="-1" valign="1" />
-					<text text="-48" coord="0.00398;1" halign="-1" valign="1" />
-					<text text="-60" coord="0.001;1" halign="-1" valign="1" />
-					<text text="graph.axis.in" coord="0.00025;1" halign="1" valign="1" />
-				</graph>
-				<label />
-			</vbox>
-			<align pad_right="4" fill="true" hpos="0">
-				<label text="labels.graphs.gating" />
-			</align>
+				<!-- Meshes -->
+				<mesh id="hg_m" width="3" color="mid_channel" smooth="true" />
+				<mesh id="cg_m" width="3" color="mid_channel" smooth="true" />
+				<mesh id="hg_s" width="3" color="side_channel" smooth="true" />
+				<mesh id="cg_s" width="3" color="side_channel" smooth="true" />
+				<dot x.id="elm_m" y.id="clm_m" color="mid_channel" bcolor="mid_channel" />
+				<dot x.id="elm_s" y.id="clm_s" color="side_channel" bcolor="side_channel" />
+
+				<!-- Markers -->
+				<marker id="gzs_m" color="g_blue" />
+				<marker id="gzs_s" color="g_blue" />
+				<marker id="hzs_m" color="g_blue" visibility=":gh_m" />
+				<marker id="hzs_s" color="g_blue" visibility=":gh_s" />
+				<marker id="gt_m" color="g_magenta" />
+				<marker id="gt_s" color="g_magenta" />
+				<marker id="hts_m" color="g_magenta" visibility=":gh_m" />
+				<marker id="hts_s" color="g_magenta" visibility=":gh_s" />
+				
+				<!-- Text -->
+				<text x="0 db" y="0 db" text="0" halign="1" valign="1" />
+				<ui:attributes x="0 db" halign="1" valign="-1">
+					<text y="24 db" text="graph.units.db" />
+					<text y="12 db" text="+12" />
+					<text y="-12 db" text="-12" />
+					<text y="-24 db" text="-24" />
+					<text y="-36 db" text="-36" />
+					<text y="-48 db" text="-48" />
+					<text y="-60 db" text="-60" />
+					<text y="-72 db" text="graph.axis.out" valign="1" />
+				</ui:attributes>
+				<ui:attributes y="0 db" halign="-1" valign="1">
+					<text x="24 db" text="graph.units.db" />
+					<text x="12 db" text="+12" />
+					<text x="-12 db" text="-12" />
+					<text x="-24 db" text="-24" />
+					<text x="-36 db" text="-36" />
+					<text x="-48 db" text="-48" />
+					<text x="-60 db" text="-60" />
+					<text x="-72 db" text="graph.axis.in" halign="1" />
+				</ui:attributes>
+			</graph>
+			<label text="labels.graphs.gating" pad.r="4" fill="true" htext="-1" />
 			
 			<!-- Input signal meters -->
 			<vbox>
 				<grid rows="2" cols="2">
 					<label text="labels.chan.M_id" font_size="8" />
 					<label text="labels.chan.S_ide" font_size="8" />
-					<button id="ilv_m" size="10" color="middle_channel" led="true" />
+					<button id="ilv_m" size="10" color="mid_channel" led="true" />
 					<button id="ilv_s" size="10" color="side_channel" led="true" />
 				</grid>
-				<meter expand="true"
-					id="ilm_m" id2="ilm_s" activity_id="ilv_m" activity2_id="ilv_s"
-					stereo="true" angle="1" type="rms_peak"
-					min="0.000251189" max="15.8489" height="256"
-					color="middle_channel" color2="side_channel" />
+				<ledmeter vexpand="true" height.min="256" angle="1">
+					<ledchannel id="ilm_m" min="-72 db" max="24 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						activity=":ilv_m" value.color="mid_channel" />
+					<ledchannel id="ilm_s" min="-72 db" max="24 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						activity=":ilv_s" value.color="side_channel" />
+				</ledmeter>
 			</vbox>
 			<label text="labels.chan.in" />
 			
@@ -231,14 +237,17 @@
 				<grid rows="2" cols="2">
 					<label text="labels.chan.M_id" font_size="8" />
 					<label text="labels.chan.S_ide" font_size="8" />
-					<button id="olv_m" size="10" color="middle_channel" led="true" />
+					<button id="olv_m" size="10" color="mid_channel" led="true" />
 					<button id="olv_s" size="10" color="side_channel" led="true" />
 				</grid>
-				<meter expand="true"
-					id="olm_m" id2="olm_s" activity_id="olv_m" activity2_id="olv_s"
-					stereo="true" angle="1" type="rms_peak"
-					min="0.000251189" max="15.8489" height="256"
-					color="middle_channel" color2="side_channel" />
+				<ledmeter vexpand="true" height.min="256" angle="1">
+					<ledchannel id="olm_m" min="-72 db" max="24 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						activity=":olv_m" value.color="mid_channel" />
+					<ledchannel id="olm_s" min="-72 db" max="24 db" log="true" type="rms_peak"
+						peak.visibility="true" 
+						activity=":olv_s" value.color="side_channel" />
+				</ledmeter>
 			</vbox>
 			<label text="labels.chan.out" />
 		</grid>
