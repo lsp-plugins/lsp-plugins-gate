@@ -1,7 +1,7 @@
 <plugin resizable="true">
 	<vbox>
 		<!-- Top part -->
-		<grid rows="1" cols="5" hspacing="4">
+		<grid rows="1" cols="5" hspacing="4" expand="true">
 			<vbox expand="true">
 				<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.time">
 					<graph width.min="496" height.min="222" expand="true" fill="true">
@@ -52,9 +52,9 @@
 						<!-- Markers -->
 						<ui:with ox="1" oy="0">
 							<marker id="gzs" color="dark_cyan"/>
-							<marker id="hzs" color="graph_mesh" visibility=":gh"/>
+							<marker id="hzs" color="dark_cyan" visibility=":gh"/>
 							<marker id="gt" color="dark_magenta"/>
-							<marker id="hts" color="graph_mesh" visibility=":gh"/>
+							<marker id="hts" color="dark_magenta" visibility=":gh"/>
 						</ui:with>
 
 						<!-- Text -->
@@ -154,9 +154,9 @@
 
 					<!-- Markers -->
 					<marker id="gzs" color="dark_cyan"/>
-					<marker id="hzs" color="graph_mesh" visibility=":gh"/>
+					<marker id="hzs" color="dark_cyan" visibility=":gh"/>
 					<marker id="gt" color="dark_magenta"/>
-					<marker id="hts" color="graph_mesh" visibility=":gh"/>
+					<marker id="hts" color="dark_magenta" visibility=":gh"/>
 
 					<!-- Text -->
 					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
@@ -264,16 +264,17 @@
 					<cell rows="2"><knob id="scr" scolor="kscale"/></cell>
 					<cell rows="2"><knob id="sla" scolor="kscale"/></cell>
 					<cell rows="3">
-						<grid rows="3" cols="1">
-							<vbox fill="false">
-								<ui:with pad.h="6">
-									<combo id="scm" fill="true" pad.b="4"/>
-									<combo id="scs" fill="true"/>
+						<vbox>
+							<vbox vfill="false" pad.v="4">
+								<ui:with pad.h="6" hfill="true" >
+									<combo id="sci" pad.b="4" visiility="ex :sci" />
+									<combo id="scm" pad.b="4"/>
+									<combo id="scs" />
 								</ui:with>
 							</vbox>
 							<hsep fill="true" pad.v="2" reduce="true" bg.color="bg"/>
 							<button id="scl" height="22" pad.h="6" hfill="true" hexpand="true" text="labels.listen" ui:inject="Button_cyan"/>
-						</grid>
+						</vbox>
 					</cell>
 					<combo id="shpm" pad.h="6" bright="(:shpm_l igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
 					<combo id="slpm" pad.h="6" bright="(:slpm_l igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>

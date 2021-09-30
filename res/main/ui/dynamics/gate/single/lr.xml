@@ -1,7 +1,7 @@
 <plugin resizable="true">
 	<vbox>
 		<!-- Top part -->
-		<grid rows="1" cols="5" hspacing="4">
+		<grid rows="1" cols="5" hspacing="4" expand="true">
 			<vbox expand="true">
 				<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.time">
 					<graph width.min="496" height.min="222" expand="true" fill="true">
@@ -56,12 +56,12 @@
 						<ui:with ox="1" oy="0">
 							<marker id="gzs_l" color="dark_cyan"/>
 							<marker id="gzs_r" color="dark_cyan"/>
-							<marker id="hzs_l" color="left_in" visibility=":gh_l"/>
-							<marker id="hzs_r" color="right_in" visibility=":gh_r"/>
+							<marker id="hzs_l" color="dark_cyan" visibility=":gh_l"/>
+							<marker id="hzs_r" color="dark_cyan" visibility=":gh_r"/>
 							<marker id="gt_l" color="dark_magenta"/>
 							<marker id="gt_r" color="dark_magenta"/>
-							<marker id="hts_l" color="left" visibility=":gh_l"/>
-							<marker id="hts_r" color="right" visibility=":gh_r"/>
+							<marker id="hts_l" color="dark_magenta" visibility=":gh_l"/>
+							<marker id="hts_r" color="dark_magenta" visibility=":gh_r"/>
 						</ui:with>
 
 						<!-- Text -->
@@ -171,12 +171,12 @@
 					<!-- Markers -->
 					<marker id="gzs_l" color="dark_cyan"/>
 					<marker id="gzs_r" color="dark_cyan"/>
-					<marker id="hzs_l" color="left_in" visibility=":gh_l"/>
-					<marker id="hzs_r" color="right_in" visibility=":gh_r"/>
+					<marker id="hzs_l" color="dark_cyan" visibility=":gh_l"/>
+					<marker id="hzs_r" color="dark_cyan" visibility=":gh_r"/>
 					<marker id="gt_l" color="dark_magenta"/>
 					<marker id="gt_r" color="dark_magenta"/>
-					<marker id="hts_l" color="left" visibility=":gh_l"/>
-					<marker id="hts_r" color="right" visibility=":gh_r"/>
+					<marker id="hts_l" color="dark_magenta" visibility=":gh_l"/>
+					<marker id="hts_r" color="dark_magenta" visibility=":gh_r"/>
 
 					<!-- Text -->
 					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
@@ -284,11 +284,12 @@
 					<cell rows="2"><knob id="scr_l" scolor="left"/></cell>
 					<cell rows="2"><knob id="sla_l" scolor="left"/></cell>
 					<cell rows="3">
-						<vbox fill="false" spacing="1">
-							<ui:with pad.h="6" pad.b="4">
-								<combo id="scm_l" fill="true" pad.t="4"/>
-								<combo id="scs_l" fill="true"/>
-								<button id="scl_l" height="22" hfill="true" hexpand="true" text="labels.listen" ui:inject="Button_left"/>
+						<vbox fill="false" spacing="1" pad.t="4">
+							<ui:with pad.h="6" pad.b="4" hfill="true">
+								<combo id="sci_l" visibility="ex :sci_l" />
+								<combo id="scm_l" />
+								<combo id="scs_l" />
+								<button id="scl_l" height="22" text="labels.listen" ui:inject="Button_left"/>
 							</ui:with>
 						</vbox>
 					</cell>
@@ -319,11 +320,12 @@
 					<cell rows="2"><knob id="scr_r" scolor="right"/></cell>
 					<cell rows="2"><knob id="sla_r" scolor="right"/></cell>
 					<cell rows="3">
-						<vbox fill="false" spacing="1">
-							<ui:with pad.h="6" pad.b="4">
-								<combo id="scm_r" fill="true" pad.t="4"/>
-								<combo id="scs_r" fill="true"/>
-								<button id="scl_r" height="22" hfill="true" hexpand="true" text="labels.listen" ui:inject="Button_right"/>
+						<vbox fill="false" spacing="1" pad.t="4">
+							<ui:with pad.h="6" pad.b="4" hfill="true" >
+								<combo id="sci_r" visibility="ex :sci_r" />
+								<combo id="scm_r" />
+								<combo id="scs_r" />
+								<button id="scl_r" height="22" text="labels.listen" ui:inject="Button_right"/>
 							</ui:with>
 						</vbox>
 					</cell>

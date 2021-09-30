@@ -1,7 +1,7 @@
 <plugin resizable="true">
 	<vbox>
 		<!-- Top part -->
-		<grid rows="1" cols="5" hspacing="4">
+		<grid rows="1" cols="5" hspacing="4" expand="true">
 			<vbox expand="true">
 				<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.time">
 					<graph width.min="496" height.min="222" expand="true" fill="true">
@@ -285,11 +285,12 @@
 					<cell rows="2"><knob id="scr_m" scolor="mid"/></cell>
 					<cell rows="2"><knob id="sla_m" scolor="mid"/></cell>
 					<cell rows="3">
-						<vbox fill="false" spacing="1">
-							<ui:with pad.h="6" pad.b="4">
-								<combo id="scm_m" fill="true" pad.t="4"/>
-								<combo id="scs_m" fill="true"/>
-								<button id="scl_m" height="22" hfill="true" hexpand="true" text="labels.listen" ui:inject="Button_mid"/>
+						<vbox fill="false" spacing="1" pad.t="4">
+							<ui:with pad.h="6" pad.b="4" hfill="true">
+								<combo id="sci_m" visibility="ex :sci_m" />
+								<combo id="scm_m" />
+								<combo id="scs_m" />
+								<button id="scl_m" height="22" text="labels.listen" ui:inject="Button_mid"/>
 							</ui:with>
 						</vbox>
 					</cell>
@@ -320,11 +321,12 @@
 					<cell rows="2"><knob id="scr_s" scolor="side"/></cell>
 					<cell rows="2"><knob id="sla_s" scolor="side"/></cell>
 					<cell rows="3">
-						<vbox fill="false" spacing="1">
-							<ui:with pad.h="6" pad.b="4">
-								<combo id="scm_s" fill="true" pad.t="4"/>
-								<combo id="scs_s" fill="true"/>
-								<button id="scl_s" height="22" hfill="true" hexpand="true" text="labels.listen" ui:inject="Button_side"/>
+						<vbox fill="false" spacing="1" pad.t="4">
+							<ui:with pad.h="6" pad.b="4" hfill="true">
+								<combo id="sci_s" visibility="ex :sci_s" />
+								<combo id="scm_s" />
+								<combo id="scs_s" />
+								<button id="scl_s" height="22" text="labels.listen" ui:inject="Button_side"/>
 							</ui:with>
 						</vbox>
 					</cell>
