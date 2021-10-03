@@ -49,10 +49,10 @@
 
 						<!-- Markers -->
 						<ui:with ox="1" oy="0">
-							<marker id="gzs" color="dark_cyan"/>
-							<marker id="hzs" color="dark_cyan" visibility=":gh"/>
-							<marker id="gt" color="dark_magenta"/>
-							<marker id="hts" color="dark_magenta" visibility=":gh"/>
+							<marker id="gzs" color="kscale"/>
+							<marker id="hzs" color="kscale" visibility=":gh"/>
+							<marker id="gt" color="attack"/>
+							<marker id="hts" color="attack" visibility=":gh"/>
 						</ui:with>
 
 						<!-- Text -->
@@ -151,10 +151,10 @@
 					<dot x.id="elm" y.id="clm" color="graph_mesh" bcolor="graph_mesh"/>
 
 					<!-- Markers -->
-					<marker id="gzs" color="dark_cyan"/>
-					<marker id="hzs" color="dark_cyan" visibility=":gh"/>
-					<marker id="gt" color="dark_magenta"/>
-					<marker id="hts" color="dark_magenta" visibility=":gh"/>
+					<marker id="gzs" color="kscale"/>
+					<marker id="hzs" color="kscale" visibility=":gh"/>
+					<marker id="gt" color="attack"/>
+					<marker id="hts" color="attack" visibility=":gh"/>
 
 					<!-- Text -->
 					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>

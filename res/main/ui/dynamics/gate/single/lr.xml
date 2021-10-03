@@ -54,14 +54,14 @@
 
 						<!-- Markers -->
 						<ui:with ox="1" oy="0">
-							<marker id="gzs_l" color="dark_cyan"/>
-							<marker id="gzs_r" color="dark_cyan"/>
-							<marker id="hzs_l" color="dark_cyan" visibility=":gh_l"/>
-							<marker id="hzs_r" color="dark_cyan" visibility=":gh_r"/>
-							<marker id="gt_l" color="dark_magenta"/>
-							<marker id="gt_r" color="dark_magenta"/>
-							<marker id="hts_l" color="dark_magenta" visibility=":gh_l"/>
-							<marker id="hts_r" color="dark_magenta" visibility=":gh_r"/>
+							<marker id="gzs_l" color="cyan"/>
+							<marker id="gzs_r" color="cyan"/>
+							<marker id="hzs_l" color="cyan" visibility=":gh_l"/>
+							<marker id="hzs_r" color="cyan" visibility=":gh_r"/>
+							<marker id="gt_l" color="attack_1"/>
+							<marker id="gt_r" color="attack_2"/>
+							<marker id="hts_l" color="attack_1" visibility=":gh_l"/>
+							<marker id="hts_r" color="attack_2" visibility=":gh_r"/>
 						</ui:with>
 
 						<!-- Text -->
@@ -169,14 +169,14 @@
 					<dot x.id="elm_r" y.id="clm_r" color="right" bcolor="right"/>
 
 					<!-- Markers -->
-					<marker id="gzs_l" color="dark_cyan"/>
-					<marker id="gzs_r" color="dark_cyan"/>
-					<marker id="hzs_l" color="dark_cyan" visibility=":gh_l"/>
-					<marker id="hzs_r" color="dark_cyan" visibility=":gh_r"/>
-					<marker id="gt_l" color="dark_magenta"/>
-					<marker id="gt_r" color="dark_magenta"/>
-					<marker id="hts_l" color="dark_magenta" visibility=":gh_l"/>
-					<marker id="hts_r" color="dark_magenta" visibility=":gh_r"/>
+					<marker id="gzs_l" color="left"/>
+					<marker id="gzs_r" color="right"/>
+					<marker id="hzs_l" color="left" visibility=":gh_l"/>
+					<marker id="hzs_r" color="right" visibility=":gh_r"/>
+					<marker id="gt_l" color="attack_1"/>
+					<marker id="gt_r" color="attack_2"/>
+					<marker id="hts_l" color="attack_1" visibility=":gh_l"/>
+					<marker id="hts_r" color="attack_2" visibility=":gh_r"/>
 
 					<!-- Text -->
 					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>

@@ -54,14 +54,14 @@
 
 						<!-- Markers -->
 						<ui:with ox="1" oy="0">
-							<marker id="gzs_m" color="dark_cyan"/>
-							<marker id="gzs_s" color="dark_cyan"/>
-							<marker id="hzs_m" color="dark_cyan" visibility=":gh_m"/>
-							<marker id="hzs_s" color="dark_cyan" visibility=":gh_s"/>
-							<marker id="gt_m" color="dark_magenta"/>
-							<marker id="gt_s" color="dark_magenta"/>
-							<marker id="hts_m" color="dark_magenta" visibility=":gh_m"/>
-							<marker id="hts_s" color="dark_magenta" visibility=":gh_s"/>
+							<marker id="gzs_m" color="mid"/>
+							<marker id="gzs_s" color="side"/>
+							<marker id="hzs_m" color="mis" visibility=":gh_m"/>
+							<marker id="hzs_s" color="side" visibility=":gh_s"/>
+							<marker id="gt_m" color="attack_1"/>
+							<marker id="gt_s" color="attack_2"/>
+							<marker id="hts_m" color="attack_1" visibility=":gh_m"/>
+							<marker id="hts_s" color="attack_2" visibility=":gh_s"/>
 						</ui:with>
 
 						<!-- Text -->
@@ -170,14 +170,14 @@
 					<dot x.id="elm_s" y.id="clm_s" color="side" bcolor="side"/>
 
 					<!-- Markers -->
-					<marker id="gzs_m" color="dark_cyan"/>
-					<marker id="gzs_s" color="dark_cyan"/>
-					<marker id="hzs_m" color="dark_cyan" visibility=":gh_m"/>
-					<marker id="hzs_s" color="dark_cyan" visibility=":gh_s"/>
-					<marker id="gt_m" color="dark_magenta"/>
-					<marker id="gt_s" color="dark_magenta"/>
-					<marker id="hts_m" color="dark_magenta" visibility=":gh_m"/>
-					<marker id="hts_s" color="dark_magenta" visibility=":gh_s"/>
+					<marker id="gzs_m" color="mid"/>
+					<marker id="gzs_s" color="side"/>
+					<marker id="hzs_m" color="mid" visibility=":gh_m"/>
+					<marker id="hzs_s" color="side" visibility=":gh_s"/>
+					<marker id="gt_m" color="attack_1"/>
+					<marker id="gt_s" color="attack_2"/>
+					<marker id="hts_m" color="attack_1" visibility=":gh_m"/>
+					<marker id="hts_s" color="attack_2" visibility=":gh_s"/>
 
 					<!-- Text -->
 					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
