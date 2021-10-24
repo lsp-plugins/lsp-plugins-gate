@@ -382,8 +382,8 @@
 						<grid rows="3" cols="2">
 							<knob id="gr_l" scolor="left"/>
 							<knob id="mk_l" scolor="left"/>
-							<value id="gr_l" sline="true"/>
-							<value id="mk_l" sline="true"/>
+							<value id="gr_l" sline="true" width="48"/>
+							<value id="mk_l" sline="true" width="48"/>
 							<cell cols="2"><button id="gh_l" height="22" hfill="true" pad.h="6" text="labels.hysteresis" ui:inject="Button_left"/></cell>
 						</grid>
 					</cell>
@@ -435,8 +435,8 @@
 						<grid rows="3" cols="2">
 							<knob id="gr_r" scolor="right"/>
 							<knob id="mk_r" scolor="right"/>
-							<value id="gr_r" sline="true"/>
-							<value id="mk_r" sline="true"/>
+							<value id="gr_r" sline="true" width="48"/>
+							<value id="mk_r" sline="true" width="48"/>
 							<cell cols="2"><button id="gh_r" height="22" hfill="true" pad.h="6" text="labels.hysteresis" ui:inject="Button_right"/></cell>
 						</grid>
 					</cell>

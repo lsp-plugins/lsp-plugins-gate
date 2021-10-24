@@ -320,8 +320,8 @@
 						<grid rows="3" cols="2">
 							<knob id="gr" scolor="kscale"/>
 							<knob id="mk" scolor="kscale"/>
-							<value id="gr" sline="true"/>
-							<value id="mk" sline="true"/>
+							<value id="gr" sline="true" width="48"/>
+							<value id="mk" sline="true" width="48"/>
 							<cell cols="2"><button id="gh" height="22" hfill="true" pad.h="6" text="labels.hysteresis" ui:inject="Button_cyan"/></cell>
 						</grid>
 					</cell>
