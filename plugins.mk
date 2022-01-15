@@ -18,13 +18,6 @@
 # along with lsp-plugins-gate.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-# Package version
-ARTIFACT_ID                 = LSP_PLUGINS_GATE
-ARTIFACT_NAME               = lsp-plugins-gate
-ARTIFACT_TYPE               = plug
-ARTIFACT_DESC               = LSP Gate Plugin Series
-ARTIFACT_HEADERS            = lsp-plug.in
-ARTIFACT_VERSION            = 1.0.3-devel
-
-
-
+# Variables that describe dependencies
+PLUGIN_DEPENDENCIES     = LSP_PLUGINS_GATE
+PLUGIN_PACKAGE_NAME     = lsp-plugins
