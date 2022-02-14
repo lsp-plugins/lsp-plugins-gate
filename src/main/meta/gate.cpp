@@ -258,6 +258,15 @@ namespace lsp
             PORTS_END
         };
 
+        const meta::bundle_t gate_bundle =
+        {
+            "gate",
+            "Gate",
+            B_DYNAMICS,
+            "p6otNrilF0U",
+            "This plugin performs gating of input signal. Flexible sidechain-control\nconfiguration provided. Additional Hysteresis curve is available to provide\naccurate control of the fading of the signal. Also additional dry/wet control\nallows to mix processed and unprocessed signal together."
+        };
+
         // Gate
         const meta::plugin_t  gate_mono =
         {
@@ -277,7 +286,8 @@ namespace lsp
             gate_mono_ports,
             "dynamics/gate/single/mono.xml",
             NULL,
-            mono_plugin_port_groups
+            mono_plugin_port_groups,
+            &gate_bundle
         };
 
         const meta::plugin_t  gate_stereo =
@@ -298,7 +308,8 @@ namespace lsp
             gate_stereo_ports,
             "dynamics/gate/single/stereo.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &gate_bundle
         };
 
         const meta::plugin_t  gate_lr =
@@ -319,7 +330,8 @@ namespace lsp
             gate_lr_ports,
             "dynamics/gate/single/lr.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &gate_bundle
         };
 
         const meta::plugin_t  gate_ms =
@@ -340,7 +352,8 @@ namespace lsp
             gate_ms_ports,
             "dynamics/gate/single/ms.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &gate_bundle
         };
 
         // Sidechain gate
@@ -362,7 +375,8 @@ namespace lsp
             sc_gate_mono_ports,
             "dynamics/gate/single/mono.xml",
             NULL,
-            mono_plugin_sidechain_port_groups
+            mono_plugin_sidechain_port_groups,
+            &gate_bundle
         };
 
         const meta::plugin_t  sc_gate_stereo =
@@ -383,7 +397,8 @@ namespace lsp
             sc_gate_stereo_ports,
             "dynamics/gate/single/stereo.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &gate_bundle
         };
 
         const meta::plugin_t  sc_gate_lr =
@@ -404,7 +419,8 @@ namespace lsp
             sc_gate_lr_ports,
             "dynamics/gate/single/lr.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &gate_bundle
         };
 
         const meta::plugin_t  sc_gate_ms =
@@ -425,7 +441,8 @@ namespace lsp
             sc_gate_ms_ports,
             "dynamics/gate/single/ms.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &gate_bundle
         };
     } // namespace meta
 } // namespace lsp
