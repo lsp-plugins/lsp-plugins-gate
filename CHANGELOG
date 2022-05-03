@@ -2,5 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.4 ===
+* Updated plugin metadata (contributed by Dennis Braun).
+* Updated dependencies and build scripts.
+
 === 1.0.3 ===
 * Initial release.

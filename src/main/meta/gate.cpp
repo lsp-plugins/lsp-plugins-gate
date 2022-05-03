@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_GATE_VERSION_MAJOR       1
 #define LSP_PLUGINS_GATE_VERSION_MINOR       0
-#define LSP_PLUGINS_GATE_VERSION_MICRO       3
+#define LSP_PLUGINS_GATE_VERSION_MICRO       4
 
 #define LSP_PLUGINS_GATE_VERSION  \
     LSP_MODULE_VERSION( \
@@ -264,7 +264,7 @@ namespace lsp
             "Gate",
             B_DYNAMICS,
             "p6otNrilF0U",
-            "This plugin performs gating of input signal. Flexible sidechain-control\nconfiguration provided. Additional Hysteresis curve is available to provide\naccurate control of the fading of the signal. Also additional dry/wet control\nallows to mix processed and unprocessed signal together."
+            "This plugin performs gating of input signal. Flexible sidechain-control\nconfiguration provided. Additional Hysteresis curve is available to provide\naccurate control of the fading of the signal. Also additional dry/wet control\nallows one to mix processed and unprocessed signal together."
         };
 
         // Gate
