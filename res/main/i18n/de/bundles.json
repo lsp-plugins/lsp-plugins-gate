@@ -1,0 +1,7 @@
+{
+	"gate": {
+		"name": "Gate",
+		"description": "Dieses Plugin dient als Gate für das Eingangssignal. Eine flexible Konfiguration \nder Sidechain ist verfügbar. Mithilfe einer Hysteresischen Kurve ist \ndie genaue Kontrolle des Fadens des Signals möglich. Zusätzliche Dry-/Wet-Steuerung erlaubt das \nMixen von bearbeiteten und unbearbeiteten Signalen gleichzeitig."
+	}
+}
+
