@@ -67,7 +67,7 @@
 </ul>
 <p><b>'Gate' section:</b></p>
 <ul>
-	<li><b>Reduction</b> - the amount of gain applied to the input signal when the gate is cloed.</li>
+	<li><b>Reduction</b> - the amount of gain applied to the input signal when the gate is closed (if negative) or open (if positive).</li>
 	<li><b>Makeup</b> - additional amplification gain after processing stage.</li>
 	<li><b>Attack</b> - attack time of the gate.</li>
 	<li><b>Release</b> - release time of the gate.</li>

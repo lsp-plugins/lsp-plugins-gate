@@ -43,7 +43,7 @@ namespace lsp
             static constexpr float  H_THRESHOLD_STEP        = 0.05f;
 
             static constexpr float  REDUCTION_MIN           = GAIN_AMP_M_72_DB;
-            static constexpr float  REDUCTION_MAX           = GAIN_AMP_0_DB;
+            static constexpr float  REDUCTION_MAX           = GAIN_AMP_P_72_DB;
             static constexpr float  REDUCTION_DFL           = GAIN_AMP_M_24_DB;
             static constexpr float  REDUCTION_STEP          = 0.05f;
 
