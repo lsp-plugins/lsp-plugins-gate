@@ -4,6 +4,7 @@
 
 === 1.0.7 ===
 * Updated build scripts and dependencies.
+* Assigned more correct names for sidechain types.
 * Now gate allows to work in reverse-operation mode.
 
 === 1.0.6 ===
