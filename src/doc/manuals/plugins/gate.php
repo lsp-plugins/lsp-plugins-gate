@@ -51,9 +51,9 @@
 			<li><b>External</b> - sidechain signal is taken from additional (external) sidechain inputs of plugin.</li>
 		<?php }?>
 		<li><b>Peak</b> - peak mode.</li>
-		<li><b>RMS</b> - root mean square of the input signal.</li>
-		<li><b>Low-pass</b> - input signal processed by low-pass filter.</li>
-		<li><b>Uniform</b> - input signal processed by uniform filter.</li>
+		<li><b>RMS</b> - Root Mean Square (SMA) of the input signal.</li>
+		<li><b>LPF</b> - input signal processed by recursive 1-pole Low-Pass Filter (LPF).</li>
+		<li><b>SMA</b> - input signal processed by Simple Moving Average (SMA) filter.</li>
 		<?php if ($m != 'm') { ?>
 			<li><b>Middle</b> - middle part of signal is used for sidechain processing.</li>
 			<li><b>Side</b> - side part of signal is used for sidechain processing.</li>
@@ -67,7 +67,7 @@
 </ul>
 <p><b>'Gate' section:</b></p>
 <ul>
-	<li><b>Reduction</b> - the amount of gain applied to the input signal when the gate is cloed.</li>
+	<li><b>Reduction</b> - the amount of gain applied to the input signal when the gate is closed (if negative) or open (if positive).</li>
 	<li><b>Makeup</b> - additional amplification gain after processing stage.</li>
 	<li><b>Attack</b> - attack time of the gate.</li>
 	<li><b>Release</b> - release time of the gate.</li>

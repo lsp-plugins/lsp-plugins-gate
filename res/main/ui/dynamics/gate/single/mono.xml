@@ -261,7 +261,7 @@
 						<vbox>
 							<vbox vfill="false">
 								<ui:with pad.h="6" pad.b="4" hfill="true">
-									<combo id="sci" visiility="ex :sci" />
+									<combo id="sci" visibility="ex :sci" />
 									<combo id="scm" />
 								</ui:with>
 							</vbox>

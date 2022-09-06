@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_GATE_VERSION_MAJOR       1
 #define LSP_PLUGINS_GATE_VERSION_MINOR       0
-#define LSP_PLUGINS_GATE_VERSION_MICRO       6
+#define LSP_PLUGINS_GATE_VERSION_MICRO       7
 
 #define LSP_PLUGINS_GATE_VERSION  \
     LSP_MODULE_VERSION( \
@@ -42,10 +42,10 @@ namespace lsp
 
         static const port_item_t gate_sc_modes[] =
         {
-            { "Peak",       "sidechain.peak"            },
-            { "RMS",        "sidechain.rms"             },
-            { "Low-Pass",   "sidechain.lowpass"         },
-            { "Uniform",    "sidechain.uniform"         },
+            { "Peak",           "sidechain.peak"            },
+            { "RMS",            "sidechain.rms"             },
+            { "LPF",            "sidechain.lpf"             },
+            { "SMA",            "sidechain.sma"             },
             { NULL, NULL }
         };
 
