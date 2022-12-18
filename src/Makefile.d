@@ -348,6 +348,7 @@ $(LSP_PLUGINS_GATE_BIN)/main/ui/gate.o: main/ui/gate.cpp \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/base/Registry.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/cast.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/base/WidgetContainer.h \
+ $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/Bevel.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/Button.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/CheckBox.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/Edit.h \
@@ -365,7 +366,6 @@ $(LSP_PLUGINS_GATE_BIN)/main/ui/gate.o: main/ui/gate.cpp \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/Separator.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/Switch.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/Void.h \
- $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/simple/Bevel.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/Window.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/PopupWindow.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/Align.h \
@@ -374,6 +374,8 @@ $(LSP_PLUGINS_GATE_BIN)/main/ui/gate.o: main/ui/gate.cpp \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/Group.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/ScrollArea.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/MultiLabel.h \
+ $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/Tab.h \
+ $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/containers/TabControl.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/compound/Menu.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/compound/ListBox.h \
  $(LSP_TK_LIB_INC)/lsp-plug.in/tk/widgets/compound/ComboBox.h \
@@ -411,6 +413,7 @@ $(LSP_PLUGINS_GATE_BIN)/main/ui/gate.o: main/ui/gate.cpp \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/ISchemaListener.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/PortResolver.h \
  $(LSP_RUNTIME_LIB_INC)/lsp-plug.in/expr/Expression.h \
+ $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/IPlayListener.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/ControlPort.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/PathPort.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/Factory.h \
@@ -450,12 +453,14 @@ $(LSP_PLUGINS_GATE_BIN)/main/ui/gate.o: main/ui/gate.cpp \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/simple/Hyperlink.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/simple/Fader.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/simple/ProgressBar.h \
+ $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/simple/CheckBox.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/containers/Box.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/containers/Align.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/containers/Group.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/containers/Grid.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/containers/Cell.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/containers/MultiLabel.h \
+ $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/containers/TabControl.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/compound/ComboBox.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/compound/ComboGroup.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ctl/graph/Graph.h \
