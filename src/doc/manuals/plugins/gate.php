@@ -59,6 +59,8 @@
 			<li><b>Side</b> - side part of signal is used for sidechain processing.</li>
 			<li><b>Left</b> - only left channel is used for sidechain processing.</li>
 			<li><b>Right</b> - only right channel is used for sidechain processing.</li>
+			<li><b>Min</b> - the absolute minimum value is taken from stereo input.</li>
+			<li><b>Max</b> - the absolute maximum value is taken from stereo input.</li>
 		<?php } ?>
 	</ul>
 	<li><b>Listen</b> - allows to listen the <b>processed</b> sidechain signal.</li>
