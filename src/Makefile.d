@@ -407,6 +407,7 @@ $(LSP_PLUGINS_GATE_BIN)/main/ui/gate.o: main/ui/gate.cpp \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/IPlayListener.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/ControlPort.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/PathPort.h \
+ $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/ProxyPort.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/Factory.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/UIOverrides.h \
  $(LSP_PLUGIN_FW_INC)/lsp-plug.in/plug-fw/ui/UIContext.h \
