@@ -37,9 +37,12 @@
 						<mesh id="icg_r" width="2" color="right_in" visibility=":ilv_r"/>
 						<mesh id="ocg_l" width="2" color="left" visibility=":olv_l"/>
 						<mesh id="ocg_r" width="2" color="right" visibility=":olv_r"/>
-						<mesh id="scg" width="2" color="sidechain_1" visibility=":slv"/>
-						<mesh id="evg" width="2" color="envelope_1" visibility=":elv"/>
-						<mesh id="grg" width="2" color="bright_blue" visibility=":grv"/>
+						<mesh id="scg_l" width="2" color="sidechain_1" visibility=":slv_l"/>
+						<mesh id="scg_r" width="2" color="sidechain_2" visibility=":slv_r"/>
+						<mesh id="evg_l" width="2" color="envelope_1" visibility=":elv_l"/>
+						<mesh id="evg_r" width="2" color="envelope_2" visibility=":elv_r"/>
+						<mesh id="grg_l" width="2" color="bright_blue" visibility=":grv_l"/>
+						<mesh id="grg_r" width="2" color="bright_blue" visibility=":grv_r"/>
 
 						<!-- Boundaries -->
 						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
@@ -76,12 +79,13 @@
 					</graph>
 				</group>
 				<void bg.color="bg" vexpand="false" fill="false" pad.v="2"/>
-				<align halign="1" vexpand="false">
-					<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
-						<button id="pause" height="22" width="48" text="labels.pause" ui:inject="Button_green"/>
-						<button id="clear" height="22" width="48" text="labels.clear" ui:inject="Button_red"/>
-					</hbox>
-				</align>
+				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
+					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
+					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
+					<void hexpand="true" />
+					<vsep pad.h="2" bg.color="bg" reduce="true" />
+					<button id="ssplit" text="labels.stereo_split" size="22" pad.v="4" ui:inject="Button_blue"/>
+				</hbox>
 			</vbox>
 
 			<grid rows="3" cols="3" hfill="false" hspacing="4" hexpand="false">
@@ -91,31 +95,37 @@
 					<label text="labels.gain_" padding="4"/>
 
 					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="slv" height="10" width="22" ui:inject="Button_orange" led="true"/>
+						<button id="slv_l" size="10" ui:inject="Button_orange" led="true"/>
+						<button id="slv_r" size="10" ui:inject="Button_orange" led="true"/>
 					</grid>
 
 					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="elv" height="10" width="22" ui:inject="Button_violet" led="true"/>
+						<button id="elv_l" size="10" ui:inject="Button_violet" led="true"/>
+						<button id="elv_r" size="10" ui:inject="Button_violet" led="true"/>
 					</grid>
 
 					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="grv" height="10" width="22" ui:inject="Button_blue" led="true"/>
+						<button id="grv_l" size="10" ui:inject="Button_blue" led="true"/>
+						<button id="grv_r" size="10" ui:inject="Button_blue" led="true"/>
 					</grid>
 				</ui:with>
 
 				<!-- Sidechain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="slm" min="-72 db" max="24 db" log="true" type="peak" activity=":slv" value.color="sidechain"/>
+					<ledchannel id="slm_l" min="-72 db" max="24 db" log="true" type="peak" activity=":slv_l" value.color="sidechain"/>
+					<ledchannel id="slm_r" min="-72 db" max="24 db" log="true" type="peak" activity=":slv_r" value.color="sidechain"/>
 				</ledmeter>
 
 				<!-- Envelope signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="elm" min="-72 db" max="24 db" log="true" type="peak" activity=":elv" value.color="envelope"/>
+					<ledchannel id="elm_l" min="-72 db" max="24 db" log="true" type="peak" activity=":elv_l" value.color="envelope"/>
+					<ledchannel id="elm_r" min="-72 db" max="24 db" log="true" type="peak" activity=":elv_r" value.color="envelope"/>
 				</ledmeter>
 
 				<!-- Gain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="rlm" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv" value.color="blue"/>
+					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_l" value.color="blue"/>
+					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_r" value.color="blue"/>
 				</ledmeter>
 			</grid>
 
@@ -150,7 +160,9 @@
 					<!-- Meshes -->
 					<mesh id="hg" width="3" color="graph_mesh" smooth="true" visibility=":gh"/>
 					<mesh id="cg" width="3" color="graph_mesh" smooth="true"/>
-					<dot x.id="elm" y.id="clm" color="graph_mesh" bcolor="graph_mesh"/>
+					<dot x.id="elm_l" y.id="clm_l" color="graph_mesh" bcolor="graph_mesh" visibility="!:ssplit"/>
+					<dot x.id="elm_l" y.id="clm_l" color="left" bcolor="left" visibility=":ssplit"/>
+					<dot x.id="elm_r" y.id="clm_r" color="right" bcolor="right" visibility=":ssplit"/>
 
 					<!-- Markers -->
 					<marker id="gzs" color="kscale"/>
@@ -269,7 +281,8 @@
 								<ui:with pad.h="6" hfill="true" >
 									<combo id="sci" pad.b="4" visibility="ex :sci" />
 									<combo id="scm" pad.b="4"/>
-									<combo id="scs" />
+									<combo id="scs" visibility="!:ssplit" />
+									<combo id="sscs" visibility=":ssplit" />
 								</ui:with>
 							</vbox>
 							<hsep fill="true" pad.v="2" reduce="true" bg.color="bg"/>

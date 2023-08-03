@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -159,6 +159,7 @@ namespace lsp
                 bool                    bPause;         // Pause button
                 bool                    bClear;         // Clear button
                 bool                    bMSListen;      // Mid/Side listen
+                bool                    bStereoSplit;   // Stereo split
                 float                   fInGain;        // Input gain
                 bool                    bUISync;        // UI sync
                 core::IDBuffer         *pIDisplay;      // Inline display buffer
@@ -169,27 +170,32 @@ namespace lsp
                 plug::IPort            *pPause;         // Pause gain
                 plug::IPort            *pClear;         // Cleanup gain
                 plug::IPort            *pMSListen;      // Mid/Side listen
+                plug::IPort            *pStereoSplit;   // Stereo split mode
+                plug::IPort            *pScSpSource;    // Sidechain source for stereo split mode
 
                 uint8_t                *pData;          // Gate data
 
+            protected:
+                static dspu::sidechain_source_t     decode_sidechain_source(int source, bool split, size_t channel);
+
             public:
                 gate(const meta::plugin_t *metadata, bool sc, size_t mode);
-                virtual ~gate();
+                virtual ~gate() override;
+
+                virtual void        init(plug::IWrapper *wrapper, plug::IPort **ports) override;
+                virtual void        destroy() override;
 
             public:
-                virtual void        init(plug::IWrapper *wrapper, plug::IPort **ports);
-                virtual void        destroy();
+                virtual void        update_settings() override;
+                virtual void        update_sample_rate(long sr) override;
+                virtual void        ui_activated() override;
 
-                virtual void        update_settings();
-                virtual void        update_sample_rate(long sr);
-                virtual void        ui_activated();
+                virtual void        process(size_t samples) override;
+                virtual bool        inline_display(plug::ICanvas *cv, size_t width, size_t height) override;
 
-                virtual void        process(size_t samples);
-                virtual bool        inline_display(plug::ICanvas *cv, size_t width, size_t height);
-
-                virtual void        dump(dspu::IStateDumper *v) const;
+                virtual void        dump(dspu::IStateDumper *v) const override;
         };
-    } // namespace plugins
-} // namespace lsp
+    } /* namespace plugins */
+} /* namespace lsp */
 
 #endif /* PRIVATE_PLUGINS_GATE_H_ */

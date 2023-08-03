@@ -74,12 +74,11 @@
 					</graph>
 				</group>
 				<void bg.color="bg" vexpand="false" fill="false" pad.v="2"/>
-				<align halign="1" vexpand="false">
-					<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
-						<button id="pause" height="22" width="48" text="labels.pause" ui:inject="Button_green"/>
-						<button id="clear" height="22" width="48" text="labels.clear" ui:inject="Button_red"/>
-					</hbox>
-				</align>
+				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
+					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
+					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
+					<void hexpand="true" />
+				</hbox>
 			</vbox>
 
 			<grid rows="3" cols="3" hfill="false" hspacing="4" hexpand="false">

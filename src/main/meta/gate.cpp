@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -62,6 +62,17 @@ namespace lsp
             { NULL, NULL }
         };
 
+        static const port_item_t gate_sc_split_sources[] =
+        {
+            { "Left/Right",     "sidechain.left_right"      },
+            { "Right/Left",     "sidechain.right_left"      },
+            { "Mid/Side",       "sidechain.mid_side"        },
+            { "Side/Mid",       "sidechain.side_mid"        },
+            { "Min",            "sidechain.min"             },
+            { "Max",            "sidechain.max"             },
+            { NULL, NULL }
+        };
+
         static const port_item_t gate_sc_type[] =
         {
             { "Internal",   "sidechain.internal"        },
@@ -88,6 +99,10 @@ namespace lsp
         #define GATE_MS_COMMON  \
             GATE_COMMON,        \
             SWITCH("msl", "Mid/Side listen", 0.0f)
+
+        #define GATE_SPLIT_COMMON \
+            SWITCH("ssplit", "Stereo split", 0.0f), \
+            COMBO("sscs", "Split sidechain source", gate_metadata::SC_SPLIT_SOURCE_DFL, gate_sc_split_sources)
 
         #define GATE_MONO_CHANNEL \
             COMBO("scm", "Sidechain mode", gate_metadata::SC_MODE_DFL, gate_sc_modes), \
@@ -132,27 +147,27 @@ namespace lsp
             LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, gate_metadata::MAKEUP), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
-            SWITCH("slv" id, "Sidechain level visibility" label, 1.0f), \
-            SWITCH("elv" id, "Envelope level visibility" label, 1.0f), \
-            SWITCH("grv" id, "Gain reduction visibility" label, 1.0f), \
             METER_OUT_GAIN("gzs" id, "Zone start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hts" id, "Hysteresis threshold start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hzs" id, "Hysteresis zone start" label, GAIN_AMP_P_24_DB), \
             MESH("cg" id, "Curve graph" label, 2, gate_metadata::CURVE_MESH_SIZE), \
-            MESH("hg" id, "Hysteresis graph" label, 2, gate_metadata::CURVE_MESH_SIZE), \
+            MESH("hg" id, "Hysteresis graph" label, 2, gate_metadata::CURVE_MESH_SIZE)
+
+        #define GATE_AUDIO_METER(id, label) \
+            SWITCH("slv" id, "Sidechain level visibility" label, 1.0f), \
+            SWITCH("elv" id, "Envelope level visibility" label, 1.0f), \
+            SWITCH("grv" id, "Gain reduction visibility" label, 1.0f), \
+            SWITCH("ilv" id, "Input level visibility" label, 1.0f), \
+            SWITCH("olv" id, "Output level visibility" label, 1.0f), \
             MESH("scg" id, "Sidechain graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Envelope graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
             MESH("grg" id, "Gain reduciton graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
+            MESH("icg" id, "Gate input" label, 2, gate_metadata::TIME_MESH_SIZE), \
+            MESH("ocg" id, "Gate output" label, 2, gate_metadata::TIME_MESH_SIZE), \
             METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("elm" id, "Envelope level meter" label, GAIN_AMP_P_24_DB), \
-            METER_GAIN("rlm" id, "Reduction level meter" label, GAIN_AMP_0_DB)
-
-        #define GATE_AUDIO_METER(id, label) \
-            SWITCH("ilv" id, "Input level visibility" label, 1.0f), \
-            SWITCH("olv" id, "Output level visibility" label, 1.0f), \
-            MESH("icg" id, "Gate input" label, 2, gate_metadata::TIME_MESH_SIZE), \
-            MESH("ocg" id, "Gate output" label, 2, gate_metadata::TIME_MESH_SIZE), \
+            METER_GAIN("rlm" id, "Reduction level meter" label, GAIN_AMP_0_DB), \
             METER_GAIN("ilm" id, "Input level meter" label, GAIN_AMP_P_24_DB), \
             METER_GAIN("olm" id, "Output level meter" label, GAIN_AMP_P_24_DB)
 
@@ -171,6 +186,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             GATE_COMMON,
+            GATE_SPLIT_COMMON,
             GATE_STEREO_CHANNEL("", ""),
             GATE_CHANNEL("", ""),
             GATE_AUDIO_METER("_l", " Left"),
@@ -224,6 +240,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             GATE_COMMON,
+            GATE_SPLIT_COMMON,
             GATE_SC_STEREO_CHANNEL("", ""),
             GATE_CHANNEL("", ""),
             GATE_AUDIO_METER("_l", " Left"),
@@ -464,5 +481,5 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &gate_bundle
         };
-    } // namespace meta
-} // namespace lsp
+    } /* namespace meta */
+} /* namespace lsp */
