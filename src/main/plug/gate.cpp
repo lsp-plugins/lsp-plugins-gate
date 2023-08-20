@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -27,12 +27,17 @@
 #include <lsp-plug.in/shared/id_colors.h>
 
 #define GATE_BUF_SIZE           0x1000
-#define TRACE_PORT(p)           lsp_trace("  port id=%s", (p)->metadata()->id);
 
 namespace lsp
 {
     namespace plugins
     {
+        static plug::IPort *TRACE_PORT(plug::IPort *p)
+        {
+            lsp_trace("  port id=%s", (p)->metadata()->id);
+            return p;
+        }
+
         //-------------------------------------------------------------------------
         // Plugin factory
         typedef struct plugin_settings_t
@@ -89,6 +94,7 @@ namespace lsp
             bPause          = false;
             bClear          = false;
             bMSListen       = false;
+            bStereoSplit    = false;
             fInGain         = 1.0f;
             bUISync         = true;
 
@@ -98,6 +104,8 @@ namespace lsp
             pPause          = NULL;
             pClear          = NULL;
             pMSListen       = NULL;
+            pStereoSplit    = NULL;
+            pScSpSource     = NULL;
 
             pData           = NULL;
             pIDisplay       = NULL;
@@ -225,46 +233,34 @@ namespace lsp
             // Input ports
             lsp_trace("Binding input ports");
             for (size_t i=0; i<channels; ++i)
-            {
-                TRACE_PORT(ports[port_id]);
-                vChannels[i].pIn        =   ports[port_id++];
-            }
+                vChannels[i].pIn        =   TRACE_PORT(ports[port_id++]);
 
             // Input ports
             lsp_trace("Binding output ports");
             for (size_t i=0; i<channels; ++i)
-            {
-                TRACE_PORT(ports[port_id]);
-                vChannels[i].pOut       =   ports[port_id++];
-            }
+                vChannels[i].pOut       =   TRACE_PORT(ports[port_id++]);
 
             // Input ports
             if (bSidechain)
             {
                 lsp_trace("Binding sidechain ports");
                 for (size_t i=0; i<channels; ++i)
-                {
-                    TRACE_PORT(ports[port_id]);
-                    vChannels[i].pSC        =   ports[port_id++];
-                }
+                    vChannels[i].pSC        =   TRACE_PORT(ports[port_id++]);
             }
 
             // Common ports
             lsp_trace("Binding common ports");
-            TRACE_PORT(ports[port_id]);
-            pBypass                 =   ports[port_id++];
-            TRACE_PORT(ports[port_id]);
-            pInGain                 =   ports[port_id++];
-            TRACE_PORT(ports[port_id]);
-            pOutGain                =   ports[port_id++];
-            TRACE_PORT(ports[port_id]);
-            pPause                  =   ports[port_id++];
-            TRACE_PORT(ports[port_id]);
-            pClear                  =   ports[port_id++];
+            pBypass                 =   TRACE_PORT(ports[port_id++]);
+            pInGain                 =   TRACE_PORT(ports[port_id++]);
+            pOutGain                =   TRACE_PORT(ports[port_id++]);
+            pPause                  =   TRACE_PORT(ports[port_id++]);
+            pClear                  =   TRACE_PORT(ports[port_id++]);
             if (nMode == GM_MS)
+                pMSListen               =   TRACE_PORT(ports[port_id++]);
+            if (nMode == GM_STEREO)
             {
-                TRACE_PORT(ports[port_id]);
-                pMSListen               =   ports[port_id++];
+                pStereoSplit            =   TRACE_PORT(ports[port_id++]);
+                pScSpSource             =   TRACE_PORT(ports[port_id++]);
             }
 
             // Sidechain ports
@@ -291,33 +287,18 @@ namespace lsp
                 else
                 {
                     if (bSidechain)
-                    {
-                        TRACE_PORT(ports[port_id]);
-                        c->pScType          =   ports[port_id++];
-                    }
-                    TRACE_PORT(ports[port_id]);
-                    c->pScMode          =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pScLookahead     =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pScListen        =   ports[port_id++];
+                        c->pScType          =   TRACE_PORT(ports[port_id++]);
+                    c->pScMode          =   TRACE_PORT(ports[port_id++]);
+                    c->pScLookahead     =   TRACE_PORT(ports[port_id++]);
+                    c->pScListen        =   TRACE_PORT(ports[port_id++]);
                     if (nMode != GM_MONO)
-                    {
-                        TRACE_PORT(ports[port_id]);
-                        c->pScSource        =   ports[port_id++];
-                    }
-                    TRACE_PORT(ports[port_id]);
-                    c->pScReactivity    =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pScPreamp        =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pScHpfMode       =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pScHpfFreq       =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pScLpfMode       =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pScLpfFreq       =   ports[port_id++];
+                        c->pScSource        =   TRACE_PORT(ports[port_id++]);
+                    c->pScReactivity    =   TRACE_PORT(ports[port_id++]);
+                    c->pScPreamp        =   TRACE_PORT(ports[port_id++]);
+                    c->pScHpfMode       =   TRACE_PORT(ports[port_id++]);
+                    c->pScHpfFreq       =   TRACE_PORT(ports[port_id++]);
+                    c->pScLpfMode       =   TRACE_PORT(ports[port_id++]);
+                    c->pScLpfFreq       =   TRACE_PORT(ports[port_id++]);
                 }
             }
 
@@ -349,63 +330,26 @@ namespace lsp
                 }
                 else
                 {
-                    TRACE_PORT(ports[port_id]);
-                    c->pHyst            =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pThresh[0]       =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pZone[0]        =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pThresh[1]       =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pZone[1]        =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pAttack          =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pRelease         =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pReduction       =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pMakeup          =   ports[port_id++];
+                    c->pHyst            =   TRACE_PORT(ports[port_id++]);
+                    c->pThresh[0]       =   TRACE_PORT(ports[port_id++]);
+                    c->pZone[0]         =   TRACE_PORT(ports[port_id++]);
+                    c->pThresh[1]       =   TRACE_PORT(ports[port_id++]);
+                    c->pZone[1]         =   TRACE_PORT(ports[port_id++]);
+                    c->pAttack          =   TRACE_PORT(ports[port_id++]);
+                    c->pRelease         =   TRACE_PORT(ports[port_id++]);
+                    c->pReduction       =   TRACE_PORT(ports[port_id++]);
+                    c->pMakeup          =   TRACE_PORT(ports[port_id++]);
 
-                    TRACE_PORT(ports[port_id]);
-                    c->pDryGain         =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pWetGain         =   ports[port_id++];
+                    c->pDryGain         =   TRACE_PORT(ports[port_id++]);
+                    c->pWetGain         =   TRACE_PORT(ports[port_id++]);
 
                     // Skip meters visibility controls
-                    TRACE_PORT(ports[port_id]);
-                    port_id++;
-                    TRACE_PORT(ports[port_id]);
-                    port_id++;
-                    TRACE_PORT(ports[port_id]);
-                    port_id++;
+                    c->pZoneStart[0]    =   TRACE_PORT(ports[port_id++]);
+                    c->pHystStart       =   TRACE_PORT(ports[port_id++]);
+                    c->pZoneStart[1]    =   TRACE_PORT(ports[port_id++]);
 
-                    TRACE_PORT(ports[port_id]);
-                    c->pZoneStart[0]    =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pHystStart       =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pZoneStart[1]    =   ports[port_id++];
-
-                    TRACE_PORT(ports[port_id]);
-                    c->pCurve[0]        =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pCurve[1]        =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pGraph[G_SC]     =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pGraph[G_ENV]    =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pGraph[G_GAIN]   =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pMeter[M_SC]     =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pMeter[M_CURVE]  =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pMeter[M_ENV]    =   ports[port_id++];
-                    TRACE_PORT(ports[port_id]);
-                    c->pMeter[M_GAIN]   =   ports[port_id++];
+                    c->pCurve[0]        =   TRACE_PORT(ports[port_id++]);
+                    c->pCurve[1]        =   TRACE_PORT(ports[port_id++]);
                 }
             }
 
@@ -416,20 +360,24 @@ namespace lsp
                 channel_t *c = &vChannels[i];
 
                 // Skip meters visibility controls
-                TRACE_PORT(ports[port_id]);
-                port_id++;
-                TRACE_PORT(ports[port_id]);
-                port_id++;
+                TRACE_PORT(ports[port_id++]);
+                TRACE_PORT(ports[port_id++]);
+                TRACE_PORT(ports[port_id++]);
+                TRACE_PORT(ports[port_id++]);
+                TRACE_PORT(ports[port_id++]);
 
                 // Bind ports
-                TRACE_PORT(ports[port_id]);
-                c->pGraph[G_IN]     =   ports[port_id++];
-                TRACE_PORT(ports[port_id]);
-                c->pGraph[G_OUT]    =   ports[port_id++];
-                TRACE_PORT(ports[port_id]);
-                c->pMeter[M_IN]     =   ports[port_id++];
-                TRACE_PORT(ports[port_id]);
-                c->pMeter[M_OUT]    =   ports[port_id++];
+                c->pGraph[G_SC]     =   TRACE_PORT(ports[port_id++]);
+                c->pGraph[G_ENV]    =   TRACE_PORT(ports[port_id++]);
+                c->pGraph[G_GAIN]   =   TRACE_PORT(ports[port_id++]);
+                c->pGraph[G_IN]     =   TRACE_PORT(ports[port_id++]);
+                c->pGraph[G_OUT]    =   TRACE_PORT(ports[port_id++]);
+                c->pMeter[M_SC]     =   TRACE_PORT(ports[port_id++]);
+                c->pMeter[M_CURVE]  =   TRACE_PORT(ports[port_id++]);
+                c->pMeter[M_ENV]    =   TRACE_PORT(ports[port_id++]);
+                c->pMeter[M_GAIN]   =   TRACE_PORT(ports[port_id++]);
+                c->pMeter[M_IN]     =   TRACE_PORT(ports[port_id++]);
+                c->pMeter[M_OUT]    =   TRACE_PORT(ports[port_id++]);
             }
 
             // Initialize curve (logarithmic) in range of -72 .. +24 db
@@ -506,6 +454,52 @@ namespace lsp
             }
         }
 
+        dspu::sidechain_source_t gate::decode_sidechain_source(int source, bool split, size_t channel)
+        {
+            if (!split)
+            {
+                switch (source)
+                {
+                    case 0: return dspu::SCS_MIDDLE;
+                    case 1: return dspu::SCS_SIDE;
+                    case 2: return dspu::SCS_LEFT;
+                    case 3: return dspu::SCS_RIGHT;
+                    case 4: return dspu::SCS_AMIN;
+                    case 5: return dspu::SCS_AMAX;
+                    default: break;
+                }
+            }
+
+            if (channel == 0)
+            {
+                switch (source)
+                {
+                    case 0: return dspu::SCS_LEFT;
+                    case 1: return dspu::SCS_RIGHT;
+                    case 2: return dspu::SCS_MIDDLE;
+                    case 3: return dspu::SCS_SIDE;
+                    case 4: return dspu::SCS_AMIN;
+                    case 5: return dspu::SCS_AMAX;
+                    default: break;
+                }
+            }
+            else
+            {
+                switch (source)
+                {
+                    case 0: return dspu::SCS_RIGHT;
+                    case 1: return dspu::SCS_LEFT;
+                    case 2: return dspu::SCS_SIDE;
+                    case 3: return dspu::SCS_MIDDLE;
+                    case 4: return dspu::SCS_AMIN;
+                    case 5: return dspu::SCS_AMAX;
+                    default: break;
+                }
+            }
+
+            return dspu::SCS_MIDDLE;
+        }
+
         void gate::update_settings()
         {
             dspu::filter_params_t fp;
@@ -516,6 +510,7 @@ namespace lsp
             bPause          = pPause->value() >= 0.5f;
             bClear          = pClear->value() >= 0.5f;
             bMSListen       = (pMSListen != NULL) ? pMSListen->value() >= 0.5f : false;
+            bStereoSplit    = (pStereoSplit != NULL) ? pStereoSplit->value() >= 0.5f : false;
             fInGain         = pInGain->value();
             float out_gain  = pOutGain->value();
             size_t latency  = 0;
@@ -523,6 +518,8 @@ namespace lsp
             for (size_t i=0; i<channels; ++i)
             {
                 channel_t *c    = &vChannels[i];
+                plug::IPort *sc = (bStereoSplit) ? pScSpSource : c->pScSource;
+                size_t sc_src   = (sc != NULL) ? sc->value() : dspu::SCS_MIDDLE;
 
                 // Update bypass settings
                 c->sBypass.set_bypass(bypass);
@@ -533,7 +530,7 @@ namespace lsp
 
                 c->sSC.set_gain(c->pScPreamp->value());
                 c->sSC.set_mode((c->pScMode != NULL) ? c->pScMode->value() : dspu::SCM_RMS);
-                c->sSC.set_source((c->pScSource != NULL) ? c->pScSource->value() : dspu::SCS_MIDDLE);
+                c->sSC.set_source(decode_sidechain_source(sc_src, bStereoSplit, i));
                 c->sSC.set_reactivity(c->pScReactivity->value());
                 c->sSC.set_stereo_mode(((nMode == GM_MS) && (c->nScType != SCT_EXTERNAL)) ? dspu::SCSM_MIDSIDE : dspu::SCSM_STEREO);
 
@@ -700,17 +697,14 @@ namespace lsp
                     c->sOutDelay.process(c->vOut, c->vOut, to_process);
 
                     // Process graph outputs
-                    if ((i == 0) || (nMode != GM_STEREO))
-                    {
-                        c->sGraph[G_SC].process(c->vSc, to_process);                        // Sidechain signal
-                        c->pMeter[M_SC]->set_value(dsp::abs_max(c->vSc, to_process));
+                    c->sGraph[G_SC].process(c->vSc, to_process);                        // Sidechain signal
+                    c->pMeter[M_SC]->set_value(dsp::abs_max(c->vSc, to_process));
 
-                        c->sGraph[G_GAIN].process(c->vGain, to_process);                    // Gain reduction signal
-                        c->pMeter[M_GAIN]->set_value(dsp::abs_max(c->vGain, to_process));
+                    c->sGraph[G_GAIN].process(c->vGain, to_process);                    // Gain reduction signal
+                    c->pMeter[M_GAIN]->set_value(dsp::abs_max(c->vGain, to_process));
 
-                        c->sGraph[G_ENV].process(c->vEnv, to_process);                      // Envelope signal
-                        c->pMeter[M_ENV]->set_value(dsp::abs_max(c->vEnv, to_process));
-                    }
+                    c->sGraph[G_ENV].process(c->vEnv, to_process);                      // Envelope signal
+                    c->pMeter[M_ENV]->set_value(dsp::abs_max(c->vEnv, to_process));
                 }
 
                 // Form output signal
@@ -896,18 +890,22 @@ namespace lsp
             if (b == NULL)
                 return false;
 
-            size_t channels = ((nMode == GM_MONO) || (nMode == GM_STEREO)) ? 1 : 2;
-            static uint32_t c_colors[] = {
-                    CV_MIDDLE_CHANNEL, CV_MIDDLE_CHANNEL,
-                    CV_MIDDLE_CHANNEL, CV_MIDDLE_CHANNEL,
-                    CV_LEFT_CHANNEL, CV_RIGHT_CHANNEL,
-                    CV_MIDDLE_CHANNEL, CV_SIDE_CHANNEL
-                   };
+            static const uint32_t c_colors[] =
+            {
+                CV_MIDDLE_CHANNEL,
+                CV_LEFT_CHANNEL, CV_RIGHT_CHANNEL,
+                CV_MIDDLE_CHANNEL, CV_SIDE_CHANNEL
+            };
+            size_t curves       = ((nMode == GM_MONO) || (nMode == GM_STEREO)) ? 1 : 2;
+            const uint32_t *vc  = (curves == 1) ? &c_colors[0] :
+                                  (nMode == GM_MS) ? &c_colors[3] :
+                                  &c_colors[1];
 
             bool aa = cv->set_anti_aliasing(true);
+            lsp_finally { cv->set_anti_aliasing(aa); };
             cv->set_line_width(2);
 
-            for (size_t i=0; i<channels; ++i)
+            for (size_t i=0; i<curves; ++i)
             {
                 channel_t *c    = &vChannels[i];
 
@@ -928,7 +926,7 @@ namespace lsp
                     dsp::axis_apply_log1(b->v[3], b->v[1], zy, dy, width);
 
                     // Draw mesh
-                    uint32_t color = (bypassing || !(active())) ? CV_SILVER : c_colors[nMode*2 + i];
+                    uint32_t color = (bypassing || !(active())) ? CV_SILVER : vc[i];
                     cv->set_color_rgb(color);
                     cv->draw_lines(b->v[2], b->v[3], width);
                 }
@@ -937,11 +935,16 @@ namespace lsp
             // Draw dot
             if (active())
             {
+                size_t channels     = ((nMode == GM_MONO) || ((nMode == GM_STEREO) && (!bStereoSplit))) ? 1 : 2;
+                const uint32_t *vd  = (channels == 1) ? &c_colors[0] :
+                                      (nMode == GM_MS) ? &c_colors[3] :
+                                      &c_colors[1];
+
                 for (size_t i=0; i<channels; ++i)
                 {
                     channel_t *c    = &vChannels[i];
 
-                    uint32_t color = (bypassing) ? CV_SILVER : c_colors[nMode*2 + i];
+                    uint32_t color = (bypassing) ? CV_SILVER : vd[i];
                     Color c1(color), c2(color);
                     c2.alpha(0.9);
 
@@ -955,8 +958,6 @@ namespace lsp
                     cv->circle(ax, ay, 3);
                 }
             }
-
-            cv->set_anti_aliasing(aa);
 
             return true;
         }
@@ -1052,6 +1053,7 @@ namespace lsp
             v->write("bPause", bPause);
             v->write("bClear", bClear);
             v->write("bMSListen", bMSListen);
+            v->write("bStereoSplit", bStereoSplit);
             v->write("fInGain", fInGain);
             v->write("bUISync", bUISync);
             v->write("pIDisplay", pIDisplay);
@@ -1062,10 +1064,12 @@ namespace lsp
             v->write("pPause", pPause);
             v->write("pClear", pClear);
             v->write("pMSListen", pMSListen);
+            v->write("pStereoSplit", pStereoSplit);
+            v->write("pScSpSource", pScSpSource);
 
             v->write("pData", pData);
         }
-    } // namespace plugins
-} // namespace lsp
+    } /* namespace plugins */
+} /* namespace lsp */
 
 

@@ -23,6 +23,10 @@
 	?>provided. Additional <b>Hysteresis</b> curve is available to provide accurate control of the fading of the signal.
 	Also additional	dry/wet control allows to mix processed and unprocessed signal together. 
 </p>
+<?php if ($m == 's') { ?>
+<p>Additionally, <b>Stereo split mode</b> allows to apply processing to the left and right channels independently while
+keeping the same settings for the left and right channels.</p>
+<?php } ?>
 <p><b>Controls:</b></p>
 <ul>
 	<li>
@@ -30,7 +34,9 @@
 	</li>
 	<li><b>Pause</b> - pauses any updates of the gate graph.</li>
 	<li><b>Clear</b> - clears all graphs.</li>
-	<?php if ($m == 'ms') { ?>
+	<?php if ($m == 's') { ?>
+		<li><b>Stereo Split</b> - enables independent compression of left and right channels.</li>
+	<?php } elseif ($m == 'ms') { ?>
 		<li><b>MS Listen</b> - passes mid-side signal to the output of gate instead of stereo signal.</li>
 	<?php } ?>
 	<li><b>Gain<?= $sm ?></b> - enables drawing of gain amplification line and corresponding amplification meter.</li>
@@ -61,6 +67,12 @@
 			<li><b>Right</b> - only right channel is used for sidechain processing.</li>
 			<li><b>Min</b> - the absolute minimum value is taken from stereo input.</li>
 			<li><b>Max</b> - the absolute maximum value is taken from stereo input.</li>
+		<?php } ?>
+		<?php if ($m == 's') { ?>
+			<li><b>Left/Right</b> - left and right channels are being processed using respectively the left and right sidechain channels in stereo split mode.</li>
+			<li><b>Right/Left</b> - left and right channels are being processed using respectively the right and left sidechain channels in stereo split mode.</li>
+			<li><b>Mid/Side</b> - left and right channels are being processed using respectively the middle and side parts of sidechain signal in stereo split mode.</li>
+			<li><b>Side/Mid</b> - left and right channels are being processed using respectively the side and middle parts of sidechain signal in stereo split mode.</li>
 		<?php } ?>
 	</ul>
 	<li><b>Listen</b> - allows to listen the <b>processed</b> sidechain signal.</li>
