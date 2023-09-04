@@ -113,6 +113,7 @@ namespace lsp
 
         gate::~gate()
         {
+            do_destroy();
         }
 
         void gate::init(plug::IWrapper *wrapper, plug::IPort **ports)
@@ -392,6 +393,12 @@ namespace lsp
         }
 
         void gate::destroy()
+        {
+            Module::destroy();
+            do_destroy();
+        }
+
+        void gate::do_destroy()
         {
             if (vChannels != NULL)
             {

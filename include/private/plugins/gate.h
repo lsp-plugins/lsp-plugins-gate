@@ -178,6 +178,9 @@ namespace lsp
             protected:
                 static dspu::sidechain_source_t     decode_sidechain_source(int source, bool split, size_t channel);
 
+            protected:
+                void                do_destroy();
+
             public:
                 gate(const meta::plugin_t *metadata, bool sc, size_t mode);
                 virtual ~gate() override;
