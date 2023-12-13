@@ -293,6 +293,7 @@ namespace lsp
         {
             "Gate Mono",
             "Gate Mono",
+            "Gate Mono",
             "G1M",
             &developers::v_sadovnikov,
             "gate_mono",
@@ -315,6 +316,7 @@ namespace lsp
 
         const meta::plugin_t  gate_stereo =
         {
+            "Gate Stereo",
             "Gate Stereo",
             "Gate Stereo",
             "G1S",
@@ -341,6 +343,7 @@ namespace lsp
         {
             "Gate LeftRight",
             "Gate LeftRight",
+            "Gate L/R",
             "G1LR",
             &developers::v_sadovnikov,
             "gate_lr",
@@ -365,6 +368,7 @@ namespace lsp
         {
             "Gate MidSide",
             "Gate MidSide",
+            "Gate M/S",
             "G1MS",
             &developers::v_sadovnikov,
             "gate_ms",
@@ -390,6 +394,7 @@ namespace lsp
         {
             "Sidechain-Gate Mono",
             "Sidechain Gate Mono",
+            "SC Gate Mono",
             "SCG1M",
             &developers::v_sadovnikov,
             "sc_gate_mono",
@@ -414,6 +419,7 @@ namespace lsp
         {
             "Sidechain-Gate Stereo",
             "Sidechain Gate Stereo",
+            "SC Gate Stereo",
             "SCG1S",
             &developers::v_sadovnikov,
             "sc_gate_stereo",
@@ -438,6 +444,7 @@ namespace lsp
         {
             "Sidechain-Gate LeftRight",
             "Sidechain Gate LeftRight",
+            "SC Gate L/R",
             "SCG1LR",
             &developers::v_sadovnikov,
             "sc_gate_lr",
@@ -462,6 +469,7 @@ namespace lsp
         {
             "Sidechain-Gate MidSide",
             "Sidechain Gate MidSide",
+            "SC Gate M/S",
             "SCG1MS",
             &developers::v_sadovnikov,
             "sc_gate_ms",
