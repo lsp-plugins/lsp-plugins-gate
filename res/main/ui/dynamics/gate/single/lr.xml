@@ -58,8 +58,8 @@
 							<marker id="gzs_r" color="cyan"/>
 							<marker id="hzs_l" color="cyan" visibility=":gh_l"/>
 							<marker id="hzs_r" color="cyan" visibility=":gh_r"/>
-							<marker id="gt_l" color="attack_1"/>
-							<marker id="gt_r" color="attack_2"/>
+							<marker id="gt_l" editable="true" width="2" pointer="vsize" color="attack_1" hcolor="attack_1"/>
+							<marker id="gt_r" editable="true" width="2" pointer="vsize" color="attack_2" hcolor="attack_2"/>
 							<marker id="hts_l" color="attack_1" visibility=":gh_l"/>
 							<marker id="hts_r" color="attack_2" visibility=":gh_r"/>
 						</ui:with>
@@ -172,8 +172,8 @@
 					<marker id="gzs_r" color="right"/>
 					<marker id="hzs_l" color="left" visibility=":gh_l"/>
 					<marker id="hzs_r" color="right" visibility=":gh_r"/>
-					<marker id="gt_l" color="attack_1"/>
-					<marker id="gt_r" color="attack_2"/>
+					<marker id="gt_l" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_1"/>
+					<marker id="gt_r" editable="true" width="2" pointer="hsize" color="attack_2" hcolor="attack_2"/>
 					<marker id="hts_l" color="attack_1" visibility=":gh_l"/>
 					<marker id="hts_r" color="attack_2" visibility=":gh_r"/>
 

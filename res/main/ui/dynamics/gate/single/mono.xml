@@ -51,7 +51,7 @@
 						<ui:with ox="1" oy="0">
 							<marker id="gzs" color="kscale"/>
 							<marker id="hzs" color="kscale" visibility=":gh"/>
-							<marker id="gt" color="attack"/>
+							<marker id="gt" editable="true" width="2" pointer="vsize" color="attack" hcolor="attack"/>
 							<marker id="hts" color="attack" visibility=":gh"/>
 						</ui:with>
 
@@ -152,7 +152,7 @@
 					<!-- Markers -->
 					<marker id="gzs" color="kscale"/>
 					<marker id="hzs" color="kscale" visibility=":gh"/>
-					<marker id="gt" color="attack"/>
+					<marker id="gt" editable="true" width="2" pointer="hsize" color="attack" hcolor="attack"/>
 					<marker id="hts" color="attack" visibility=":gh"/>
 
 					<!-- Text -->
@@ -268,11 +268,11 @@
 							<button id="scl" height="22" pad.h="6" hfill="true" text="labels.listen" ui:inject="Button_cyan"/>
 						</vbox>
 					</cell>
-					<combo id="shpm" pad.h="6" bright="(:shpm_l igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-					<combo id="slpm" pad.h="6" bright="(:slpm_l igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+					<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+					<combo id="slpm" pad.h="6" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
 
 					<!-- row 4 -->
-					<knob id="shpf" size="20" scolor="(:shpm_l igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+					<knob id="shpf" size="20" scolor="(:shpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
 					<knob id="slpf" size="20" scolor="(:slpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
 
 					<!-- row 5 -->
