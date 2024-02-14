@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -300,6 +300,8 @@ namespace lsp
             LSP_LV2_URI("gate_mono"),
             LSP_LV2UI_URI("gate_mono"),
             "ur0e",
+            LSP_VST3_UID("g1m     ur0e"),
+            LSP_VST3UI_UID("g1m     ur0e"),
             LSP_LADSPA_GATE_BASE + 0,
             LSP_LADSPA_URI("gate_mono"),
             LSP_CLAP_URI("gate_mono"),
@@ -325,6 +327,8 @@ namespace lsp
             LSP_LV2_URI("gate_stereo"),
             LSP_LV2UI_URI("gate_stereo"),
             "wg4o",
+            LSP_VST3_UID("g1s     wg4o"),
+            LSP_VST3UI_UID("g1s     wg4o"),
             LSP_LADSPA_GATE_BASE + 1,
             LSP_LADSPA_URI("gate_stereo"),
             LSP_CLAP_URI("gate_stereo"),
@@ -350,6 +354,8 @@ namespace lsp
             LSP_LV2_URI("gate_lr"),
             LSP_LV2UI_URI("gate_lr"),
             "icmw",
+            LSP_VST3_UID("g1lr    icmw"),
+            LSP_VST3UI_UID("g1lr    icmw"),
             LSP_LADSPA_GATE_BASE + 2,
             LSP_LADSPA_URI("gate_lr"),
             LSP_CLAP_URI("gate_lr"),
@@ -375,6 +381,8 @@ namespace lsp
             LSP_LV2_URI("gate_ms"),
             LSP_LV2UI_URI("gate_ms"),
             "zci1",
+            LSP_VST3_UID("g1ms    zci1"),
+            LSP_VST3UI_UID("g1ms    zci1"),
             LSP_LADSPA_GATE_BASE + 3,
             LSP_LADSPA_URI("gate_ms"),
             LSP_CLAP_URI("gate_ms"),
@@ -401,6 +409,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_mono"),
             LSP_LV2UI_URI("sc_gate_mono"),
             "nnz2",
+            LSP_VST3_UID("scg1m   nnz2"),
+            LSP_VST3UI_UID("scg1m   nnz2"),
             LSP_LADSPA_GATE_BASE + 4,
             LSP_LADSPA_URI("sc_gate_mono"),
             LSP_CLAP_URI("sc_gate_mono"),
@@ -426,6 +436,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_stereo"),
             LSP_LV2UI_URI("sc_gate_stereo"),
             "fosg",
+            LSP_VST3_UID("scg1s   fosg"),
+            LSP_VST3UI_UID("scg1s   fosg"),
             LSP_LADSPA_GATE_BASE + 5,
             LSP_LADSPA_URI("sc_gate_stereo"),
             LSP_CLAP_URI("sc_gate_stereo"),
@@ -451,6 +463,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_lr"),
             LSP_LV2UI_URI("sc_gate_lr"),
             "fmxo",
+            LSP_VST3_UID("scg1lr  fmxo"),
+            LSP_VST3UI_UID("scg1lr  fmxo"),
             LSP_LADSPA_GATE_BASE + 6,
             LSP_LADSPA_URI("sc_gate_lr"),
             LSP_CLAP_URI("sc_gate_lr"),
@@ -476,6 +490,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_ms"),
             LSP_LV2UI_URI("sc_gate_ms"),
             "l6lc",
+            LSP_VST3_UID("scg1ms  l6lc"),
+            LSP_VST3UI_UID("scg1ms  l6lc"),
             LSP_LADSPA_GATE_BASE + 7,
             LSP_LADSPA_URI("sc_gate_ms"),
             LSP_CLAP_URI("sc_gate_ms"),
