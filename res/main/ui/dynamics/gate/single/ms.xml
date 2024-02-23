@@ -351,7 +351,7 @@
 
 			<group text="groups.plug.gate" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="9" cols="14" spacing="0" bg.color="bg_schema">
+				<grid rows="9" cols="17" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<ui:with pad.h="6" pad.v="4" vreduce="true">
 						<label text="labels.reduction"/>
@@ -367,7 +367,9 @@
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<cell cols="2"><label text="labels.hysteresis" pad.h="6" pad.v="4" vreduce="true"/></cell>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
+					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<cell cols="3"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
 
 					<!-- row 2 -->
 					<ui:with bg.color="bg" pad.v="2" vreduce="true">
@@ -375,7 +377,8 @@
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
-						<cell cols="2"><hsep/></cell>
+						<hsep />
+						<cell cols="3"><hsep/></cell>
 					</ui:with>
 
 					<!-- row 3 -->
@@ -397,8 +400,12 @@
 						<label text="labels.zone"/>
 						<label text="labels.thresh_old" bright="(:gh_m igt 0) ? 1 : 0.75" bg.bright="(:gh_m igt 0) ? 1 : :const_bg_darken"/>
 						<label text="labels.zone" bright="(:gh_m igt 0) ? 1 : 0.75" bg.bright="(:gh_m igt 0) ? 1 : :const_bg_darken"/>
+					</ui:with>
+					<cell rows="2"><knob id="hold_m" pad.h="6" /></cell>
+					<ui:with width.min="32" pad.t="4">
 						<label text="labels.signal.dry"/>
 						<label text="labels.signal.wet"/>
+						<button id="dwe_m" text="labels.signal.drywet"/>
 					</ui:with>
 
 					<!-- row 4 -->
@@ -409,6 +416,7 @@
 					<knob id="hz_m" scolor="(:gh_m igt 0) ? 'mid' : 'mid_inactive'" bg.bright="(:gh_m igt 0) ? 1 : :const_bg_darken" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cdr_m" scolor="dry" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cwt_m" scolor="wet" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdw_m" size="20" pad.h="6" pad.v="4"/>
 
 					<!-- row 5 -->
 					<ui:with width.min="32" pad.b="4">
@@ -418,8 +426,10 @@
 						<value id="gz_m"/>
 						<value id="ht_m" bright="(:gh_m igt 0) ? 1 : 0.75" bg.bright="(:gh_m igt 0) ? 1 : :const_bg_darken"/>
 						<value id="hz_m" bright="(:gh_m igt 0) ? 1 : 0.75" bg.bright="(:gh_m igt 0) ? 1 : :const_bg_darken"/>
+						<value id="hold_m"/>
 						<value id="cdr_m"/>
 						<value id="cwt_m"/>
+						<value id="cdw_m"/>
 					</ui:with>
 
 					<!-- row 6 -->
@@ -428,7 +438,8 @@
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
-						<cell cols="2"><hsep/></cell>
+						<hsep />
+						<cell cols="3"><hsep/></cell>
 					</ui:with>
 
 					<!-- row 7 -->
@@ -450,8 +461,12 @@
 						<label text="labels.zone"/>
 						<label text="labels.thresh_old" bright="(:gh_s igt 0) ? 1 : 0.75" bg.bright="(:gh_s igt 0) ? 1 : :const_bg_darken"/>
 						<label text="labels.zone" bright="(:gh_s igt 0) ? 1 : 0.75" bg.bright="(:gh_s igt 0) ? 1 : :const_bg_darken"/>
+					</ui:with>
+					<cell rows="2"><knob id="hold_s" pad.h="6" /></cell>
+					<ui:with width.min="32" pad.t="4">
 						<label text="labels.signal.dry"/>
 						<label text="labels.signal.wet"/>
+						<button id="dwe_s" text="labels.signal.drywet"/>
 					</ui:with>
 
 					<!-- row 8 -->
@@ -462,6 +477,7 @@
 					<knob id="hz_s" scolor="(:gh_s igt 0) ? 'side' : 'side_inactive'" bg.bright="(:gh_s igt 0) ? 1 : :const_bg_darken" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cdr_s" scolor="dry" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cwt_s" scolor="wet" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdw_s" size="20" pad.h="6" pad.v="4"/>
 
 					<!-- row 9 -->
 					<ui:with width.min="32" pad.b="4">
@@ -471,8 +487,10 @@
 						<value id="gz_s"/>
 						<value id="ht_s" bright="(:gh_s igt 0) ? 1 : 0.75" bg.bright="(:gh_s igt 0) ? 1 : :const_bg_darken"/>
 						<value id="hz_s" bright="(:gh_s igt 0) ? 1 : 0.75" bg.bright="(:gh_s igt 0) ? 1 : :const_bg_darken"/>
+						<value id="hold_s"/>
 						<value id="cdr_s"/>
 						<value id="cwt_s"/>
+						<value id="cdw_s"/>
 					</ui:with>
 				</grid>
 			</group>

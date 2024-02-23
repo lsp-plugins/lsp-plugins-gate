@@ -112,20 +112,20 @@
 
 				<!-- Sidechain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="slm_l" min="-72 db" max="24 db" log="true" type="peak" activity=":slv_l" value.color="sidechain"/>
-					<ledchannel id="slm_r" min="-72 db" max="24 db" log="true" type="peak" activity=":slv_r" value.color="sidechain"/>
+					<ledchannel id="slm_l" min="-72 db" max="24 db" log="true" type="peak" value.color="sidechain"/>
+					<ledchannel id="slm_r" min="-72 db" max="24 db" log="true" type="peak" value.color="sidechain"/>
 				</ledmeter>
 
 				<!-- Envelope signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="elm_l" min="-72 db" max="24 db" log="true" type="peak" activity=":elv_l" value.color="envelope"/>
-					<ledchannel id="elm_r" min="-72 db" max="24 db" log="true" type="peak" activity=":elv_r" value.color="envelope"/>
+					<ledchannel id="elm_l" min="-72 db" max="24 db" log="true" type="peak" value.color="envelope"/>
+					<ledchannel id="elm_r" min="-72 db" max="24 db" log="true" type="peak" value.color="envelope"/>
 				</ledmeter>
 
 				<!-- Gain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_l" value.color="blue"/>
-					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_r" value.color="blue"/>
+					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
+					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
 				</ledmeter>
 			</grid>
 
@@ -213,14 +213,14 @@
 
 				<!-- Input signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="ilm_l" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_l" value.color="left_in"/>
-					<ledchannel id="ilm_r" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_r" value.color="right_in"/>
+					<ledchannel id="ilm_l" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="left_in"/>
+					<ledchannel id="ilm_r" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="right_in"/>
 				</ledmeter>
 
 				<!-- Output signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="olm_l" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":olv_l" value.color="left"/>
-					<ledchannel id="olm_r" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":olv_r" value.color="right"/>
+					<ledchannel id="olm_l" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="left"/>
+					<ledchannel id="olm_r" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="right"/>
 				</ledmeter>
 			</grid>
 
@@ -308,7 +308,7 @@
 
 			<group text="groups.plug.gate" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="5" cols="14" spacing="0" bg.color="bg_schema">
+				<grid rows="5" cols="17" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<ui:with pad.h="6" pad.v="4" vreduce="true">
 						<label text="labels.reduction"/>
@@ -324,7 +324,9 @@
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<cell cols="2"><label text="labels.hysteresis" pad.h="6" pad.v="4" vreduce="true"/></cell>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
+					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<cell cols="3"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
 
 					<!-- row 2 -->
 					<ui:with bg.color="bg" pad.v="2" vreduce="true">
@@ -332,7 +334,8 @@
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
-						<cell cols="2"><hsep/></cell>
+						<hsep />
+						<cell cols="3"><hsep/></cell>
 					</ui:with>
 
 					<!-- row 3 -->
@@ -354,8 +357,12 @@
 						<label text="labels.zone"/>
 						<label text="labels.thresh_old" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
 						<label text="labels.zone" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
+					</ui:with>
+					<cell rows="2"><knob id="hold" pad.h="6" /></cell>
+					<ui:with width.min="32" pad.t="4">
 						<label text="labels.signal.dry"/>
 						<label text="labels.signal.wet"/>
+						<button id="dwe" text="labels.signal.drywet"/>
 					</ui:with>
 
 					<!-- row 4 -->
@@ -366,6 +373,7 @@
 					<knob id="hz" scolor="(:gh igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cdr" scolor="dry" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cwt" scolor="wet" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdw" size="20" pad.h="6" pad.v="4"/>
 
 					<!-- row 5 -->
 					<ui:with width.min="32" pad.b="4">
@@ -375,8 +383,10 @@
 						<value id="gz"/>
 						<value id="ht" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
 						<value id="hz" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
+						<value id="hold"/>
 						<value id="cdr"/>
 						<value id="cwt"/>
+						<value id="cdw"/>
 					</ui:with>
 				</grid>
 			</group>

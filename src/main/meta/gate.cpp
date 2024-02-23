@@ -143,10 +143,13 @@ namespace lsp
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, U_GAIN_AMP, gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack" label, U_MSEC, gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release" label, U_MSEC, gate_metadata::RELEASE_TIME), \
+            CONTROL("hold" id, "Hold time" label, U_MSEC, gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, U_GAIN_AMP, gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, gate_metadata::MAKEUP), \
+            SWITCH("dwe" id, "Dry/Wet balance enable", 0), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
+            PERCENTS("cdw" id, "Dry/Wet balance" label, 100.0f, 0.1f), \
             METER_OUT_GAIN("gzs" id, "Zone start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hts" id, "Hysteresis threshold start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hzs" id, "Hysteresis zone start" label, GAIN_AMP_P_24_DB), \

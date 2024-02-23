@@ -57,6 +57,11 @@ namespace lsp
             static constexpr float  RELEASE_TIME_DFL        = 100.0f;
             static constexpr float  RELEASE_TIME_STEP       = 0.0025f;
 
+            static constexpr float  HOLD_TIME_MIN           = 0.0f;
+            static constexpr float  HOLD_TIME_MAX           = 1000.0f;
+            static constexpr float  HOLD_TIME_DFL           = 0.0f;
+            static constexpr float  HOLD_TIME_STEP          = 0.1f;
+
             static constexpr float  MAKEUP_MIN              = GAIN_AMP_M_60_DB;
             static constexpr float  MAKEUP_MAX              = GAIN_AMP_P_60_DB;
             static constexpr float  MAKEUP_DFL              = GAIN_AMP_0_DB;
