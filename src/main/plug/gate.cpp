@@ -205,7 +205,6 @@ namespace lsp
                 c->pReduction       = NULL;
                 c->pMakeup          = NULL;
 
-                c->pDryWetOn        = NULL;
                 c->pDryGain         = NULL;
                 c->pWetGain         = NULL;
                 c->pDryWet          = NULL;
@@ -314,7 +313,6 @@ namespace lsp
                     c->pReduction       = sc->pReduction;
                     c->pMakeup          = sc->pMakeup;
 
-                    c->pDryWetOn        = sc->pDryWetOn;
                     c->pDryGain         = sc->pDryGain;
                     c->pWetGain         = sc->pWetGain;
                     c->pDryWet          = sc->pDryWet;
@@ -335,7 +333,6 @@ namespace lsp
                     BIND_PORT(c->pReduction);
                     BIND_PORT(c->pMakeup);
 
-                    BIND_PORT(c->pDryWetOn);
                     BIND_PORT(c->pDryGain);
                     BIND_PORT(c->pWetGain);
                     BIND_PORT(c->pDryWet);
@@ -567,7 +564,6 @@ namespace lsp
                 float hthresh   = (hyst) ? (thresh * c->pThresh[1]->value()) : thresh;
                 float zone      = c->pZone[0]->value();
                 float hzone     = (hyst) ? (c->pZone[1]->value()) : zone;
-                float makeup    = c->pMakeup->value();
 
                 c->sGate.set_threshold(thresh, hthresh);
                 c->sGate.set_zone(zone, hzone);
@@ -590,21 +586,18 @@ namespace lsp
                 }
 
                 // Update gains
-                if (c->pDryWetOn->value() >= 0.5f)
-                {
-                    const float drywet  = c->pDryWet->value() * 0.01f;
-                    c->fDryGain         = (1.0f - drywet) * out_gain;
-                    c->fWetGain         = drywet * out_gain;
-                }
-                else
-                {
-                    c->fDryGain         = c->pDryGain->value() * out_gain;
-                    c->fWetGain         = c->pWetGain->value() * out_gain;
-                }
+                float makeup            = c->pMakeup->value();
+                const float dry_gain    = c->pDryGain->value();
+                const float wet_gain    = c->pWetGain->value() * makeup;
+                const float drywet      = c->pDryWet->value() * 0.01f;
+
+                c->fDryGain         = (dry_gain * drywet + 1.0f - drywet) * out_gain;
+                c->fWetGain         = wet_gain * drywet * out_gain;
+
                 if (c->fMakeup != makeup)
                 {
                     c->fMakeup          = makeup;
-                    c->nSync           |= S_ALL;
+                    c->nSync           |= S_CURVE;
                 }
             }
 
@@ -725,8 +718,8 @@ namespace lsp
                     channel_t *cm       = &vChannels[0];
                     channel_t *cs       = &vChannels[1];
 
-                    dsp::mix2(cm->vOut, cm->vIn, cm->fMakeup * cm->fWetGain, cm->fDryGain, to_process);
-                    dsp::mix2(cs->vOut, cs->vIn, cs->fMakeup * cs->fWetGain, cs->fDryGain, to_process);
+                    dsp::mix2(cm->vOut, cm->vIn, cm->fWetGain, cm->fDryGain, to_process);
+                    dsp::mix2(cs->vOut, cs->vIn, cs->fWetGain, cs->fDryGain, to_process);
 
                     cm->sGraph[G_OUT].process(cm->vOut, to_process);
                     cm->pMeter[M_OUT]->set_value(dsp::abs_max(cm->vOut, to_process));
@@ -749,7 +742,7 @@ namespace lsp
                         if (c->bScListen)
                             dsp::copy(c->vOut, c->vSc, to_process);
                         else
-                            dsp::mix2(c->vOut, c->vIn, c->fMakeup * c->fWetGain, c->fDryGain, to_process);
+                            dsp::mix2(c->vOut, c->vIn, c->fWetGain, c->fDryGain, to_process);
 
                         c->sGraph[G_OUT].process(c->vOut, to_process);                      // Output signal
                         c->pMeter[M_OUT]->set_value(dsp::abs_max(c->vOut, to_process));
@@ -1051,7 +1044,6 @@ namespace lsp
                     v->write("pReduction", c->pReduction);
                     v->write("pMakeup", c->pMakeup);
 
-                    v->write("pDryWetOn", c->pDryWetOn);
                     v->write("pDryGain", c->pDryGain);
                     v->write("pWetGain", c->pWetGain);
                     v->write("pDryWet", c->pDryWet);
