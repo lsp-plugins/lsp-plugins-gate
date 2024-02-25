@@ -788,9 +788,52 @@ namespace lsp
                         if ((mesh != NULL) && (mesh->isEmpty()))
                         {
                             // Fill mesh with new values
-                            dsp::copy(mesh->pvData[0], vTime, meta::gate_metadata::TIME_MESH_SIZE);
-                            dsp::copy(mesh->pvData[1], c->sGraph[j].data(), meta::gate_metadata::TIME_MESH_SIZE);
-                            mesh->data(2, meta::gate_metadata::TIME_MESH_SIZE);
+                            if (j == G_IN)
+                            {
+                                float *x = mesh->pvData[0];
+                                float *y = mesh->pvData[1];
+
+                                dsp::copy(&x[1], vTime, meta::gate_metadata::TIME_MESH_SIZE);
+                                dsp::copy(&y[1], c->sGraph[j].data(), meta::gate_metadata::TIME_MESH_SIZE);
+
+                                x[0] = x[1];
+                                y[0] = 0.0f;
+
+                                x += meta::gate_metadata::TIME_MESH_SIZE + 1;
+                                y += meta::gate_metadata::TIME_MESH_SIZE + 1;
+                                x[0] = x[-1];
+                                y[0] = 0.0f;
+
+                                mesh->data(2, meta::gate_metadata::TIME_MESH_SIZE + 2);
+                            }
+                            else if (j == G_GAIN)
+                            {
+                                float *x = mesh->pvData[0];
+                                float *y = mesh->pvData[1];
+
+                                dsp::copy(&x[2], vTime, meta::gate_metadata::TIME_MESH_SIZE);
+                                dsp::copy(&y[2], c->sGraph[j].data(), meta::gate_metadata::TIME_MESH_SIZE);
+
+                                x[0] = x[2] + 0.5f;
+                                x[1] = x[0];
+                                y[0] = 1.0f;
+                                y[1] = y[2];
+
+                                x += meta::gate_metadata::TIME_MESH_SIZE + 2;
+                                y += meta::gate_metadata::TIME_MESH_SIZE + 2;
+                                x[0] = x[-1] - 0.5f;
+                                y[0] = y[-1];
+                                x[1] = x[0];
+                                y[1] = 1.0f;
+
+                                mesh->data(2, meta::gate_metadata::TIME_MESH_SIZE + 4);
+                            }
+                            else
+                            {
+                                dsp::copy(mesh->pvData[0], vTime, meta::gate_metadata::TIME_MESH_SIZE);
+                                dsp::copy(mesh->pvData[1], c->sGraph[j].data(), meta::gate_metadata::TIME_MESH_SIZE);
+                                mesh->data(2, meta::gate_metadata::TIME_MESH_SIZE);
+                            }
                         }
                     } // for j
                 }

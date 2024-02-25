@@ -163,8 +163,8 @@ namespace lsp
             SWITCH("olv" id, "Output level visibility" label, 1.0f), \
             MESH("scg" id, "Sidechain graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Envelope graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
-            MESH("grg" id, "Gain reduciton graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
-            MESH("icg" id, "Gate input" label, 2, gate_metadata::TIME_MESH_SIZE), \
+            MESH("grg" id, "Gain reduciton graph" label, 2, gate_metadata::TIME_MESH_SIZE + 4), \
+            MESH("icg" id, "Gate input" label, 2, gate_metadata::TIME_MESH_SIZE + 2), \
             MESH("ocg" id, "Gate output" label, 2, gate_metadata::TIME_MESH_SIZE), \
             METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_24_DB), \

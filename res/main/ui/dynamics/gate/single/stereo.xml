@@ -33,16 +33,16 @@
 						</ui:attributes>
 
 						<!-- Meshes -->
-						<mesh id="icg_l" width="2" color="left_in" visibility=":ilv_l"/>
-						<mesh id="icg_r" width="2" color="right_in" visibility=":ilv_r"/>
+						<mesh id="icg_l" width="0" color="left_in" fcolor="left_in" fcolor.a="0.8" fill="true" visibility=":ilv_l"/>
+						<mesh id="icg_r" width="0" color="right_in" fcolor="right_in" fcolor.a="0.8" fill="true" visibility=":ilv_r"/>
 						<mesh id="ocg_l" width="2" color="left" visibility=":olv_l"/>
 						<mesh id="ocg_r" width="2" color="right" visibility=":olv_r"/>
 						<mesh id="scg_l" width="2" color="sidechain_1" visibility=":slv_l"/>
 						<mesh id="scg_r" width="2" color="sidechain_2" visibility=":slv_r"/>
 						<mesh id="evg_l" width="2" color="envelope_1" visibility=":elv_l"/>
 						<mesh id="evg_r" width="2" color="envelope_2" visibility=":elv_r"/>
-						<mesh id="grg_l" width="2" color="bright_blue" visibility=":grv_l"/>
-						<mesh id="grg_r" width="2" color="bright_blue" visibility=":grv_r"/>
+						<mesh id="grg_l" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_l"/>
+						<mesh id="grg_r" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_r"/>
 
 						<!-- Boundaries -->
 						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
@@ -54,10 +54,10 @@
 
 						<!-- Markers -->
 						<ui:with ox="1" oy="0">
-							<marker id="gzs" color="kscale"/>
-							<marker id="hzs" color="kscale" visibility=":gh"/>
-							<marker id="gt" editable="true" width="2" pointer="vsize" color="attack" hcolor="attack"/>
-							<marker id="hts" color="attack" visibility=":gh"/>
+							<marker id="gzs" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8"/>
+							<marker id="hzs" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh"/>
+							<marker id="gt" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="0.8" hlcolor.a="0.6"/>
+							<marker id="hts_l" width="2" color="threshold" lcolor="threshold" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh"/>
 						</ui:with>
 
 						<!-- Text -->
@@ -167,8 +167,8 @@
 					<!-- Markers -->
 					<marker id="gzs" color="kscale"/>
 					<marker id="hzs" color="kscale" visibility=":gh"/>
-					<marker id="gt" editable="true" width="2" pointer="hsize" color="attack" hcolor="attack"/>
-					<marker id="hts" color="attack" visibility=":gh"/>
+					<marker id="gt" editable="true" width="2" pointer="hsize" color="threshold" hcolor="threshold"/>
+					<marker id="hts" color="threshold" visibility=":gh"/>
 
 					<!-- Text -->
 					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
@@ -308,7 +308,7 @@
 
 			<group text="groups.plug.gate" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="5" cols="17" spacing="0" bg.color="bg_schema">
+				<grid rows="5" cols="18" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<ui:with pad.h="6" pad.v="4" vreduce="true">
 						<label text="labels.reduction"/>
@@ -326,7 +326,7 @@
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="3"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
+					<cell cols="4"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
 
 					<!-- row 2 -->
 					<ui:with bg.color="bg" pad.v="2" vreduce="true">
@@ -335,7 +335,7 @@
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<hsep />
-						<cell cols="3"><hsep/></cell>
+						<cell cols="4"><hsep/></cell>
 					</ui:with>
 
 					<!-- row 3 -->
@@ -362,8 +362,9 @@
 					<ui:with width.min="32" pad.t="4">
 						<label text="labels.signal.dry"/>
 						<label text="labels.signal.wet"/>
-						<button id="dwe" text="labels.signal.drywet"/>
 					</ui:with>
+					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.signal.drywet" pad.t="4" pad.h="6"/>
 
 					<!-- row 4 -->
 
@@ -373,7 +374,7 @@
 					<knob id="hz" scolor="(:gh igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cdr" scolor="dry" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cwt" scolor="wet" size="20" pad.h="6" pad.v="4"/>
-					<knob id="cdw" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdw" scolor="drywet" size="20" pad.h="6" pad.v="4"/>
 
 					<!-- row 5 -->
 					<ui:with width.min="32" pad.b="4">
