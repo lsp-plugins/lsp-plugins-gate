@@ -95,8 +95,10 @@ keeping the same settings for the left and right channels.</p>
 		<li><b>Thresh</b> - threshold (relative to basic curve), the level of input signal at which the gate starts to close.</li>
 		<li><b>Zone</b> - the size of the transition zone below the hysteresis threshold.</li>
 	</ul>
+	<li><b>Hold</b> - the time period the envelope holds it's maximum value before starting the release.</li>
 	<li><b>Mix Dry</b> - the amount of dry (unprocessed) signal.</li>
 	<li><b>Mix Wet</b> - the amount of wet (processed) signal.</li>
+	<li><b>Mix Dry/Wet</b> - the knob that controls this balance between mixed dry and wet signal (see <b>Mix Dry</b> and <b>Mix Wet</b>) and the dry (unprocessed) signal.</li>
 </ul>
 
 <p><b>'Signal' section:</b></p>

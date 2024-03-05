@@ -33,11 +33,11 @@
 						</ui:attributes>
 
 						<!-- Meshes -->
-						<mesh id="icg" width="2" color="mono_in" visibility=":ilv"/>
-						<mesh id="ocg" width="2" color="mono" visibility=":olv"/>
+						<mesh id="icg" width="0" color="mono_in" fcolor="mono_in" fcolor.a="0.8" fill="true" visibility=":ilv"/>
+						<mesh id="ocg" width="2" color="left" visibility=":olv"/>
 						<mesh id="scg" width="2" color="sidechain_1" visibility=":slv"/>
 						<mesh id="evg" width="2" color="envelope_1" visibility=":elv"/>
-						<mesh id="grg" width="2" color="bright_blue" visibility=":grv"/>
+						<mesh id="grg" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv"/>
 
 						<!-- Boundaries -->
 						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
@@ -49,10 +49,10 @@
 
 						<!-- Markers -->
 						<ui:with ox="1" oy="0">
-							<marker id="gzs" color="kscale"/>
-							<marker id="hzs" color="kscale" visibility=":gh"/>
-							<marker id="gt" editable="true" width="2" pointer="vsize" color="attack" hcolor="attack"/>
-							<marker id="hts" color="attack" visibility=":gh"/>
+							<marker id="gzs" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8"/>
+							<marker id="hzs" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh"/>
+							<marker id="gt" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="0.8" hlcolor.a="0.6"/>
+							<marker id="hts_l" width="2" color="threshold" lcolor="threshold" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh"/>
 						</ui:with>
 
 						<!-- Text -->
@@ -102,17 +102,17 @@
 
 				<!-- Sidechain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="slm" min="-72 db" max="24 db" log="true" type="peak" activity=":slv" value.color="sidechain"/>
+					<ledchannel id="slm" min="-72 db" max="24 db" log="true" type="peak" value.color="sidechain"/>
 				</ledmeter>
 
 				<!-- Envelope signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="elm" min="-72 db" max="24 db" log="true" type="peak" activity=":elv" value.color="envelope"/>
+					<ledchannel id="elm" min="-72 db" max="24 db" log="true" type="peak" value.color="envelope"/>
 				</ledmeter>
 
 				<!-- Gain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="rlm" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv" value.color="blue"/>
+					<ledchannel id="rlm" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
 				</ledmeter>
 			</grid>
 
@@ -152,8 +152,8 @@
 					<!-- Markers -->
 					<marker id="gzs" color="kscale"/>
 					<marker id="hzs" color="kscale" visibility=":gh"/>
-					<marker id="gt" editable="true" width="2" pointer="hsize" color="attack" hcolor="attack"/>
-					<marker id="hts" color="attack" visibility=":gh"/>
+					<marker id="gt" editable="true" width="2" pointer="hsize" color="threshold" hcolor="threshold"/>
+					<marker id="hts" color="threshold" visibility=":gh"/>
 
 					<!-- Text -->
 					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
@@ -196,12 +196,12 @@
 
 				<!-- Input signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="ilm" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":ilv" value.color="mono_in"/>
+					<ledchannel id="ilm" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="mono_in"/>
 				</ledmeter>
 
 				<!-- Output signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="olm" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":olv" value.color="mono"/>
+					<ledchannel id="olm" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="mono"/>
 				</ledmeter>
 			</grid>
 
@@ -287,7 +287,7 @@
 
 			<group text="groups.plug.gate" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="5" cols="14" spacing="0" bg.color="bg_schema">
+				<grid rows="5" cols="18" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<ui:with pad.h="6" pad.v="4" vreduce="true">
 						<label text="labels.reduction"/>
@@ -303,7 +303,9 @@
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<cell cols="2"><label text="labels.hysteresis" pad.h="6" pad.v="4" vreduce="true"/></cell>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
+					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<cell cols="4"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
 
 					<!-- row 2 -->
 					<ui:with bg.color="bg" pad.v="2" vreduce="true">
@@ -311,7 +313,8 @@
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
-						<cell cols="2"><hsep/></cell>
+						<hsep />
+						<cell cols="4"><hsep/></cell>
 					</ui:with>
 
 					<!-- row 3 -->
@@ -333,9 +336,14 @@
 						<label text="labels.zone"/>
 						<label text="labels.thresh_old" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
 						<label text="labels.zone" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
+					</ui:with>
+					<cell rows="2"><knob id="hold" pad.h="6" /></cell>
+					<ui:with width.min="32" pad.t="4">
 						<label text="labels.signal.dry"/>
 						<label text="labels.signal.wet"/>
 					</ui:with>
+					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.signal.drywet" pad.t="4" pad.h="6"/>
 
 					<!-- row 4 -->
 
@@ -345,6 +353,7 @@
 					<knob id="hz" scolor="(:gh igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cdr" scolor="dry" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cwt" scolor="wet" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdw" scolor="drywet" size="20" pad.h="6" pad.v="4"/>
 
 					<!-- row 5 -->
 					<ui:with width.min="32" pad.b="4">
@@ -354,8 +363,10 @@
 						<value id="gz"/>
 						<value id="ht" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
 						<value id="hz" bright="(:gh igt 0) ? 1 : 0.75" bg.bright="(:gh igt 0) ? 1 : :const_bg_darken"/>
+						<value id="hold"/>
 						<value id="cdr"/>
 						<value id="cwt"/>
+						<value id="cdw"/>
 					</ui:with>
 				</grid>
 			</group>

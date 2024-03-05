@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_GATE_VERSION_MAJOR       1
 #define LSP_PLUGINS_GATE_VERSION_MINOR       0
-#define LSP_PLUGINS_GATE_VERSION_MICRO       20
+#define LSP_PLUGINS_GATE_VERSION_MICRO       21
 
 #define LSP_PLUGINS_GATE_VERSION  \
     LSP_MODULE_VERSION( \
@@ -143,10 +143,12 @@ namespace lsp
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, U_GAIN_AMP, gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack" label, U_MSEC, gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release" label, U_MSEC, gate_metadata::RELEASE_TIME), \
+            CONTROL("hold" id, "Hold time" label, U_MSEC, gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, U_GAIN_AMP, gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, gate_metadata::MAKEUP), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
+            PERCENTS("cdw" id, "Dry/Wet balance" label, 100.0f, 0.1f), \
             METER_OUT_GAIN("gzs" id, "Zone start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hts" id, "Hysteresis threshold start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hzs" id, "Hysteresis zone start" label, GAIN_AMP_P_24_DB), \
@@ -161,8 +163,8 @@ namespace lsp
             SWITCH("olv" id, "Output level visibility" label, 1.0f), \
             MESH("scg" id, "Sidechain graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Envelope graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
-            MESH("grg" id, "Gain reduciton graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
-            MESH("icg" id, "Gate input" label, 2, gate_metadata::TIME_MESH_SIZE), \
+            MESH("grg" id, "Gain reduciton graph" label, 2, gate_metadata::TIME_MESH_SIZE + 4), \
+            MESH("icg" id, "Gate input" label, 2, gate_metadata::TIME_MESH_SIZE + 2), \
             MESH("ocg" id, "Gate output" label, 2, gate_metadata::TIME_MESH_SIZE), \
             METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_24_DB), \
@@ -300,6 +302,8 @@ namespace lsp
             LSP_LV2_URI("gate_mono"),
             LSP_LV2UI_URI("gate_mono"),
             "ur0e",
+            LSP_VST3_UID("g1m     ur0e"),
+            LSP_VST3UI_UID("g1m     ur0e"),
             LSP_LADSPA_GATE_BASE + 0,
             LSP_LADSPA_URI("gate_mono"),
             LSP_CLAP_URI("gate_mono"),
@@ -325,6 +329,8 @@ namespace lsp
             LSP_LV2_URI("gate_stereo"),
             LSP_LV2UI_URI("gate_stereo"),
             "wg4o",
+            LSP_VST3_UID("g1s     wg4o"),
+            LSP_VST3UI_UID("g1s     wg4o"),
             LSP_LADSPA_GATE_BASE + 1,
             LSP_LADSPA_URI("gate_stereo"),
             LSP_CLAP_URI("gate_stereo"),
@@ -350,6 +356,8 @@ namespace lsp
             LSP_LV2_URI("gate_lr"),
             LSP_LV2UI_URI("gate_lr"),
             "icmw",
+            LSP_VST3_UID("g1lr    icmw"),
+            LSP_VST3UI_UID("g1lr    icmw"),
             LSP_LADSPA_GATE_BASE + 2,
             LSP_LADSPA_URI("gate_lr"),
             LSP_CLAP_URI("gate_lr"),
@@ -375,6 +383,8 @@ namespace lsp
             LSP_LV2_URI("gate_ms"),
             LSP_LV2UI_URI("gate_ms"),
             "zci1",
+            LSP_VST3_UID("g1ms    zci1"),
+            LSP_VST3UI_UID("g1ms    zci1"),
             LSP_LADSPA_GATE_BASE + 3,
             LSP_LADSPA_URI("gate_ms"),
             LSP_CLAP_URI("gate_ms"),
@@ -401,6 +411,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_mono"),
             LSP_LV2UI_URI("sc_gate_mono"),
             "nnz2",
+            LSP_VST3_UID("scg1m   nnz2"),
+            LSP_VST3UI_UID("scg1m   nnz2"),
             LSP_LADSPA_GATE_BASE + 4,
             LSP_LADSPA_URI("sc_gate_mono"),
             LSP_CLAP_URI("sc_gate_mono"),
@@ -426,6 +438,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_stereo"),
             LSP_LV2UI_URI("sc_gate_stereo"),
             "fosg",
+            LSP_VST3_UID("scg1s   fosg"),
+            LSP_VST3UI_UID("scg1s   fosg"),
             LSP_LADSPA_GATE_BASE + 5,
             LSP_LADSPA_URI("sc_gate_stereo"),
             LSP_CLAP_URI("sc_gate_stereo"),
@@ -451,6 +465,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_lr"),
             LSP_LV2UI_URI("sc_gate_lr"),
             "fmxo",
+            LSP_VST3_UID("scg1lr  fmxo"),
+            LSP_VST3UI_UID("scg1lr  fmxo"),
             LSP_LADSPA_GATE_BASE + 6,
             LSP_LADSPA_URI("sc_gate_lr"),
             LSP_CLAP_URI("sc_gate_lr"),
@@ -476,6 +492,8 @@ namespace lsp
             LSP_LV2_URI("sc_gate_ms"),
             LSP_LV2UI_URI("sc_gate_ms"),
             "l6lc",
+            LSP_VST3_UID("scg1ms  l6lc"),
+            LSP_VST3UI_UID("scg1ms  l6lc"),
             LSP_LADSPA_GATE_BASE + 7,
             LSP_LADSPA_URI("sc_gate_ms"),
             LSP_CLAP_URI("sc_gate_ms"),

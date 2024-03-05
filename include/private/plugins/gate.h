@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -140,11 +140,13 @@ namespace lsp
                     plug::IPort            *pZone[2];           // Reduction zone
                     plug::IPort            *pAttack;            // Attack time
                     plug::IPort            *pRelease;           // Release time
+                    plug::IPort            *pHold;              // Hold time
                     plug::IPort            *pReduction;         // Reduction
                     plug::IPort            *pMakeup;            // Makeup
 
                     plug::IPort            *pDryGain;           // Dry gain
                     plug::IPort            *pWetGain;           // Wet gain
+                    plug::IPort            *pDryWet;            // Dry/Wet balance
                     plug::IPort            *pCurve[2];          // Curve graphs
                     plug::IPort            *pZoneStart[2];      // Zone start
                     plug::IPort            *pHystStart;         // Hysteresis start
