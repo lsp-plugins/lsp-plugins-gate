@@ -78,6 +78,7 @@
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
 					<void hexpand="true" />
+					<shmlink id="link" />
 				</hbox>
 			</vbox>
 
@@ -260,7 +261,7 @@
 						<vbox>
 							<vbox vfill="false">
 								<ui:with pad.h="6" pad.b="4" hfill="true">
-									<combo id="sci" visibility="ex :sci" />
+									<combo id="sci" />
 									<combo id="scm" />
 								</ui:with>
 							</vbox>

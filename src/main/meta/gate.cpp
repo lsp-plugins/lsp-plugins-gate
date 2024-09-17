@@ -76,7 +76,15 @@ namespace lsp
         static const port_item_t gate_sc_type[] =
         {
             { "Internal",   "sidechain.internal"        },
+            { "Link",       "sidechain.link"            },
+            { NULL, NULL }
+        };
+
+        static const port_item_t gate_extsc_type[] =
+        {
+            { "Internal",   "sidechain.internal"        },
             { "External",   "sidechain.external"        },
+            { "Link",       "sidechain.link"            },
             { NULL, NULL }
         };
 
@@ -104,7 +112,14 @@ namespace lsp
             SWITCH("ssplit", "Stereo split", 0.0f), \
             COMBO("sscs", "Split sidechain source", gate_metadata::SC_SPLIT_SOURCE_DFL, gate_sc_split_sources)
 
-        #define GATE_MONO_CHANNEL \
+        #define GATE_SHM_LINK_MONO \
+            OPT_RETURN_MONO("link", "shml", "Side-chain shared memory link")
+
+        #define GATE_SHM_LINK_STEREO \
+            OPT_RETURN_STEREO("link", "shml_", "Side-chain shared memory link")
+
+        #define GATE_MONO_CHANNEL(sc_type) \
+            COMBO("sci", "Sidechain input", gate_metadata::SC_TYPE_DFL, sc_type), \
             COMBO("scm", "Sidechain mode", gate_metadata::SC_MODE_DFL, gate_sc_modes), \
             CONTROL("sla", "Sidechain lookahead", U_MSEC, gate_metadata::LOOKAHEAD), \
             SWITCH("scl", "Sidechain listen", 0.0f), \
@@ -115,11 +130,8 @@ namespace lsp
             COMBO("slpm", "Low-pass filter mode", 0, gate_filter_slope),      \
             LOG_CONTROL("slpf", "Low-pass filter frequency", U_HZ, gate_metadata::LPF)
 
-        #define GATE_SC_MONO_CHANNEL \
-            COMBO("sci", "Sidechain input", gate_metadata::SC_TYPE_DFL, gate_sc_type), \
-            GATE_MONO_CHANNEL
-
-        #define GATE_STEREO_CHANNEL(id, label) \
+        #define GATE_STEREO_CHANNEL(id, label, sc_type) \
+            COMBO("sci" id, "Sidechain input" label, gate_metadata::SC_TYPE_DFL, sc_type), \
             COMBO("scm" id, "Sidechain mode" label, gate_metadata::SC_MODE_DFL, gate_sc_modes), \
             CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, gate_metadata::LOOKAHEAD), \
             SWITCH("scl" id, "Sidechain listen" label, 0.0f), \
@@ -130,10 +142,6 @@ namespace lsp
             LOG_CONTROL("shpf" id, "High-pass filter frequency" label, U_HZ, gate_metadata::HPF),   \
             COMBO("slpm" id, "Low-pass filter mode" label, 0, gate_filter_slope),      \
             LOG_CONTROL("slpf" id, "Low-pass filter frequency" label, U_HZ, gate_metadata::LPF)
-
-        #define GATE_SC_STEREO_CHANNEL(id, label) \
-            COMBO("sci" id, "Sidechain input" label, gate_metadata::SC_TYPE_DFL, gate_sc_type), \
-            GATE_STEREO_CHANNEL(id, label)
 
         #define GATE_CHANNEL(id, label) \
             SWITCH("gh" id, "Hysteresis" label, 0.0f), \
@@ -176,8 +184,9 @@ namespace lsp
         static const port_t gate_mono_ports[] =
         {
             PORTS_MONO_PLUGIN,
+            GATE_SHM_LINK_MONO,
             GATE_COMMON,
-            GATE_MONO_CHANNEL,
+            GATE_MONO_CHANNEL(gate_sc_type),
             GATE_CHANNEL("", ""),
             GATE_AUDIO_METER("", ""),
 
@@ -187,9 +196,10 @@ namespace lsp
         static const port_t gate_stereo_ports[] =
         {
             PORTS_STEREO_PLUGIN,
+            GATE_SHM_LINK_STEREO,
             GATE_COMMON,
             GATE_SPLIT_COMMON,
-            GATE_STEREO_CHANNEL("", ""),
+            GATE_STEREO_CHANNEL("", "", gate_sc_type),
             GATE_CHANNEL("", ""),
             GATE_AUDIO_METER("_l", " Left"),
             GATE_AUDIO_METER("_r", " Right"),
@@ -200,9 +210,10 @@ namespace lsp
         static const port_t gate_lr_ports[] =
         {
             PORTS_STEREO_PLUGIN,
+            GATE_SHM_LINK_STEREO,
             GATE_COMMON,
-            GATE_STEREO_CHANNEL("_l", " Left"),
-            GATE_STEREO_CHANNEL("_r", " Right"),
+            GATE_STEREO_CHANNEL("_l", " Left", gate_sc_type),
+            GATE_STEREO_CHANNEL("_r", " Right", gate_sc_type),
             GATE_CHANNEL("_l", " Left"),
             GATE_CHANNEL("_r", " Right"),
             GATE_AUDIO_METER("_l", " Left"),
@@ -214,9 +225,10 @@ namespace lsp
         static const port_t gate_ms_ports[] =
         {
             PORTS_STEREO_PLUGIN,
+            GATE_SHM_LINK_STEREO,
             GATE_MS_COMMON,
-            GATE_STEREO_CHANNEL("_m", " Mid"),
-            GATE_STEREO_CHANNEL("_s", " Side"),
+            GATE_STEREO_CHANNEL("_m", " Mid", gate_sc_type),
+            GATE_STEREO_CHANNEL("_s", " Side", gate_sc_type),
             GATE_CHANNEL("_m", " Mid"),
             GATE_CHANNEL("_s", " Side"),
             GATE_AUDIO_METER("_m", " Mid"),
@@ -229,8 +241,9 @@ namespace lsp
         {
             PORTS_MONO_PLUGIN,
             PORTS_MONO_SIDECHAIN,
+            GATE_SHM_LINK_MONO,
             GATE_COMMON,
-            GATE_SC_MONO_CHANNEL,
+            GATE_MONO_CHANNEL(gate_extsc_type),
             GATE_CHANNEL("", ""),
             GATE_AUDIO_METER("", ""),
 
@@ -241,9 +254,10 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
+            GATE_SHM_LINK_STEREO,
             GATE_COMMON,
             GATE_SPLIT_COMMON,
-            GATE_SC_STEREO_CHANNEL("", ""),
+            GATE_STEREO_CHANNEL("", "", gate_extsc_type),
             GATE_CHANNEL("", ""),
             GATE_AUDIO_METER("_l", " Left"),
             GATE_AUDIO_METER("_r", " Right"),
@@ -255,9 +269,10 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
+            GATE_SHM_LINK_STEREO,
             GATE_COMMON,
-            GATE_SC_STEREO_CHANNEL("_l", " Left"),
-            GATE_SC_STEREO_CHANNEL("_r", " Right"),
+            GATE_STEREO_CHANNEL("_l", " Left", gate_extsc_type),
+            GATE_STEREO_CHANNEL("_r", " Right", gate_extsc_type),
             GATE_CHANNEL("_l", " Left"),
             GATE_CHANNEL("_r", " Right"),
             GATE_AUDIO_METER("_l", " Left"),
@@ -270,9 +285,10 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
+            GATE_SHM_LINK_STEREO,
             GATE_MS_COMMON,
-            GATE_SC_STEREO_CHANNEL("_m", " Mid"),
-            GATE_SC_STEREO_CHANNEL("_s", " Side"),
+            GATE_STEREO_CHANNEL("_m", " Mid", gate_extsc_type),
+            GATE_STEREO_CHANNEL("_s", " Side", gate_extsc_type),
             GATE_CHANNEL("_m", " Mid"),
             GATE_CHANNEL("_s", " Side"),
             GATE_AUDIO_METER("_m", " Mid"),

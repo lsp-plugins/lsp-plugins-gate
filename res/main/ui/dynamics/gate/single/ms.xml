@@ -87,6 +87,7 @@
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
 					<void hexpand="true"/>
+					<shmlink id="link" />
 					<vsep pad.h="2" bg.color="bg" reduce="true"/>
 					<button id="msl" height="22" width="48" text="labels.ms_listen" pad.v="4" ui:inject="Button_yellow"/>
 				</hbox>
@@ -287,7 +288,7 @@
 					<cell rows="3">
 						<vbox fill="false" spacing="1" pad.t="4">
 							<ui:with pad.h="6" pad.b="4" hfill="true">
-								<combo id="sci_m" visibility="ex :sci_m"/>
+								<combo id="sci_m" />
 								<combo id="scm_m"/>
 								<combo id="scs_m"/>
 								<button id="scl_m" height="22" text="labels.listen" ui:inject="Button_mid"/>
@@ -323,7 +324,7 @@
 					<cell rows="3">
 						<vbox fill="false" spacing="1" pad.t="4">
 							<ui:with pad.h="6" pad.b="4" hfill="true">
-								<combo id="sci_s" visibility="ex :sci_s"/>
+								<combo id="sci_s" />
 								<combo id="scm_s"/>
 								<combo id="scs_s"/>
 								<button id="scl_s" height="22" text="labels.listen" ui:inject="Button_side"/>
