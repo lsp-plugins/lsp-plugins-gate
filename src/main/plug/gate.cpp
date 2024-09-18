@@ -553,8 +553,8 @@ namespace lsp
         {
             switch (c.nScType)
             {
-                case SCT_EXTERNAL: return sc;
-                case SCT_LINK: return shm;
+                case SCT_EXTERNAL: return (sc != NULL) ? sc : vEmptyBuffer;
+                case SCT_LINK: return (shm != NULL) ? shm : vEmptyBuffer;
                 default: break;
             }
 
@@ -703,7 +703,7 @@ namespace lsp
                 in_buf[i]           = c->pIn->buffer<float>();
                 out_buf[i]          = c->pOut->buffer<float>();
                 sc_buf[i]           = (c->pSC != NULL) ? c->pSC->buffer<float>() : in_buf[i];
-                shm_buf[i]          = vEmptyBuffer;
+                shm_buf[i]          = NULL;
 
                 core::AudioBuffer *buf = (c->pShmIn != NULL) ? c->pShmIn->buffer<core::AudioBuffer>() : NULL;
                 if ((buf != NULL) && (buf->active()))
@@ -828,7 +828,10 @@ namespace lsp
 
                     in_buf[i]          += to_process;
                     out_buf[i]         += to_process;
-                    sc_buf[i]          += to_process;
+                    if (sc_buf[i] != NULL)
+                        sc_buf[i]          += to_process;
+                    if (shm_buf[i] != NULL)
+                        shm_buf[i]         += to_process;
                 }
 
                 left       -= to_process;
