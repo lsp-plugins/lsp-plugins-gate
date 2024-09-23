@@ -44,7 +44,7 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>Env<?= $sm ?></b> - enables drawing of gate's envelope graph and corresponding level meter.</li>
 	<li><b>In<?= $sm ?></b> - enables drawing of gate's input signal graph and corresponding level meter.</li>
 	<li><b>Out<?= $sm ?></b> - enables drawing of gate's output signal graph and corresponding level meter.</li>
-	<li><b>Link</b> - the name of the shared memory link to pass control/match signal.</li>
+	<li><b>Link</b> - the name of the shared memory link to pass sidechain signal.</li>
 </ul>
 <p><b>'Sidechain' section:</b></p>
 <ul>
