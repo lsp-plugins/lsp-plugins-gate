@@ -83,14 +83,14 @@
 					</graph>
 				</group>
 				<void bg.color="bg" vexpand="false" fill="false" pad.v="2"/>
-				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="4">
+				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
 					<void hexpand="true"/>
 					<vsep pad.h="2" bg.color="bg" reduce="true"/>
-					<button id="msl" height="22" width="48" text="labels.ms_listen" pad.v="4" ui:inject="Button_yellow"/>
+					<button id="msl" height="22" width="48" text="labels.ms_listen" pad.v="4" ui:inject="Button_yellow" pad.h="6"/>
 					<vsep pad.h="2" bg.color="bg" reduce="true"/>
-					<shmlink id="link"/>
+					<shmlink id="link" pad.l="2"/>
 				</hbox>
 			</vbox>
 
