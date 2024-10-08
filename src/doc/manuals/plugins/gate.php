@@ -44,6 +44,7 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>Env<?= $sm ?></b> - enables drawing of gate's envelope graph and corresponding level meter.</li>
 	<li><b>In<?= $sm ?></b> - enables drawing of gate's input signal graph and corresponding level meter.</li>
 	<li><b>Out<?= $sm ?></b> - enables drawing of gate's output signal graph and corresponding level meter.</li>
+	<li><b>Link</b> - the name of the shared memory link to pass sidechain signal.</li>
 </ul>
 <p><b>'Sidechain' section:</b></p>
 <ul>
@@ -52,10 +53,11 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>Lookahead</b> - look-ahead time of the sidechain relative to the input signal.</li>
 	<li><b>Setup</b> - Sidechain configuration, available values:</li>
 	<ul>
+		<li><b>Internal</b> - sidechain input is connected to gate's input.</li>
 		<?php if ($sc) { ?>
-			<li><b>Internal</b> - sidechain input is connected to gate's input.</li>
 			<li><b>External</b> - sidechain signal is taken from additional (external) sidechain inputs of plugin.</li>
 		<?php }?>
+		<li><b>Link</b> - sidechain input is passed by shared memory link.</li>
 		<li><b>Peak</b> - peak mode.</li>
 		<li><b>RMS</b> - Root Mean Square (SMA) of the input signal.</li>
 		<li><b>LPF</b> - input signal processed by recursive 1-pole Low-Pass Filter (LPF).</li>

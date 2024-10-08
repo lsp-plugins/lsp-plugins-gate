@@ -24,6 +24,7 @@
 #include <lsp-plug.in/common/debug.h>
 #include <lsp-plug.in/dsp/dsp.h>
 #include <lsp-plug.in/dsp-units/units.h>
+#include <lsp-plug.in/plug-fw/core/AudioBuffer.h>
 #include <lsp-plug.in/shared/debug.h>
 #include <lsp-plug.in/shared/id_colors.h>
 
@@ -86,6 +87,7 @@ namespace lsp
             vChannels       = NULL;
             vCurve          = NULL;
             vTime           = NULL;
+            vEmptyBuffer    = NULL;
             bPause          = false;
             bClear          = false;
             bMSListen       = false;
@@ -122,6 +124,7 @@ namespace lsp
             size_t curve_size       = (meta::gate_metadata::CURVE_MESH_SIZE) * sizeof(float);
             size_t history_size     = (meta::gate_metadata::TIME_MESH_SIZE) * sizeof(float);
             size_t allocate         = channel_size +
+                                      buf_size +
                                       buf_size * channels * 5 +
                                       curve_size +
                                       history_size;
@@ -133,6 +136,7 @@ namespace lsp
             vChannels               = advance_ptr_bytes<channel_t>(ptr, channel_size);
             vCurve                  = advance_ptr_bytes<float>(ptr, curve_size);
             vTime                   = advance_ptr_bytes<float>(ptr, history_size);
+            vEmptyBuffer            = advance_ptr_bytes<float>(ptr, buf_size);
 
             // Initialize channels
             for (size_t i=0; i<channels; ++i)
@@ -175,6 +179,7 @@ namespace lsp
                 c->pIn              = NULL;
                 c->pOut             = NULL;
                 c->pSC              = NULL;
+                c->pShmIn           = NULL;
 
                 for (size_t j=0; j<G_TOTAL; ++j)
                     c->pGraph[j]        = NULL;
@@ -225,18 +230,24 @@ namespace lsp
             for (size_t i=0; i<channels; ++i)
                 BIND_PORT(vChannels[i].pIn);
 
-            // Input ports
+            // Output ports
             lsp_trace("Binding output ports");
             for (size_t i=0; i<channels; ++i)
                 BIND_PORT(vChannels[i].pOut);
 
-            // Input ports
+            // Sidechain ports
             if (bSidechain)
             {
                 lsp_trace("Binding sidechain ports");
                 for (size_t i=0; i<channels; ++i)
                     BIND_PORT(vChannels[i].pSC);
             }
+
+            // Shared memory link
+            lsp_trace("Binding shared memory link");
+            SKIP_PORT("Shared memory link name");
+            for (size_t i=0; i<channels; ++i)
+                BIND_PORT(vChannels[i].pShmIn);
 
             // Common ports
             lsp_trace("Binding common ports");
@@ -276,8 +287,7 @@ namespace lsp
                 }
                 else
                 {
-                    if (bSidechain)
-                        BIND_PORT(c->pScType);
+                    BIND_PORT(c->pScType);
                     BIND_PORT(c->pScMode);
                     BIND_PORT(c->pScLookahead);
                     BIND_PORT(c->pScListen);
@@ -372,6 +382,8 @@ namespace lsp
                 BIND_PORT(c->pMeter[M_IN]);
                 BIND_PORT(c->pMeter[M_OUT]);
             }
+
+            dsp::fill_zero(vEmptyBuffer, GATE_BUF_SIZE);
 
             // Initialize curve (logarithmic) in range of -72 .. +24 db
             float delta = (meta::gate_metadata::CURVE_DB_MAX - meta::gate_metadata::CURVE_DB_MIN) / (meta::gate_metadata::CURVE_MESH_SIZE-1);
@@ -499,6 +511,56 @@ namespace lsp
             return dspu::SCS_MIDDLE;
         }
 
+        uint32_t gate::decode_sidechain_type(uint32_t sc) const
+        {
+            if (bSidechain)
+            {
+                switch (sc)
+                {
+                    case 0: return SCT_INTERNAL;
+                    case 1: return SCT_EXTERNAL;
+                    case 2: return SCT_LINK;
+                    default: break;
+                }
+            }
+            else
+            {
+                switch (sc)
+                {
+                    case 0: return SCT_INTERNAL;
+                    case 1: return SCT_LINK;
+                    default: break;
+                }
+            }
+
+            return SCT_INTERNAL;
+        }
+
+        inline bool gate::use_sidechain(const channel_t & c)
+        {
+            switch (c.nScType)
+            {
+                case SCT_EXTERNAL:
+                case SCT_LINK:
+                    return true;
+                default:
+                    break;
+            }
+            return false;
+        }
+
+        inline float *gate::select_buffer(const channel_t & c, float *in, float *sc, float *shm)
+        {
+            switch (c.nScType)
+            {
+                case SCT_EXTERNAL: return (sc != NULL) ? sc : vEmptyBuffer;
+                case SCT_LINK: return (shm != NULL) ? shm : vEmptyBuffer;
+                default: break;
+            }
+
+            return in;
+        }
+
         void gate::update_settings()
         {
             dspu::filter_params_t fp;
@@ -524,14 +586,14 @@ namespace lsp
                 c->sBypass.set_bypass(bypass);
 
                 // Update sidechain settings
-                c->nScType      = (c->pScType != NULL) ? c->pScType->value() : SCT_INTERNAL;
+                c->nScType      = decode_sidechain_type(c->pScType->value());
                 c->bScListen    = c->pScListen->value() >= 0.5f;
 
                 c->sSC.set_gain(c->pScPreamp->value());
                 c->sSC.set_mode((c->pScMode != NULL) ? c->pScMode->value() : dspu::SCM_RMS);
                 c->sSC.set_source(decode_sidechain_source(sc_src, bStereoSplit, i));
                 c->sSC.set_reactivity(c->pScReactivity->value());
-                c->sSC.set_stereo_mode(((nMode == GM_MS) && (c->nScType != SCT_EXTERNAL)) ? dspu::SCSM_MIDSIDE : dspu::SCSM_STEREO);
+                c->sSC.set_stereo_mode(((nMode == GM_MS) && (!use_sidechain(*c))) ? dspu::SCSM_MIDSIDE : dspu::SCSM_STEREO);
 
                 // Setup hi-pass filter for sidechain
                 size_t hp_slope = c->pScHpfMode->value() * 2;
@@ -629,6 +691,7 @@ namespace lsp
             float *in_buf[2];   // Input buffer
             float *out_buf[2];  // Output buffer
             float *sc_buf[2];   // Sidechain source
+            float *shm_buf[2];  // Shared memory source
             const float *in[2]; // Buffet to pass to sidechain
 
             // Prepare audio channels
@@ -640,6 +703,12 @@ namespace lsp
                 in_buf[i]           = c->pIn->buffer<float>();
                 out_buf[i]          = c->pOut->buffer<float>();
                 sc_buf[i]           = (c->pSC != NULL) ? c->pSC->buffer<float>() : in_buf[i];
+                shm_buf[i]          = NULL;
+
+                core::AudioBuffer *buf = (c->pShmIn != NULL) ? c->pShmIn->buffer<core::AudioBuffer>() : NULL;
+                if ((buf != NULL) && (buf->active()))
+                    shm_buf[i]          = buf->buffer();
+
                 c->fDotIn           = 0.0f;
                 c->fDotOut          = 0.0f;
             }
@@ -676,9 +745,9 @@ namespace lsp
                     c->pMeter[M_IN]->set_value(dsp::abs_max(c->vIn, to_process));
 
                     // Do gating
-                    in[0]   = (c->nScType == SCT_EXTERNAL) ? sc_buf[0] : vChannels[0].vIn;
+                    in[0]   = select_buffer(*c, vChannels[0].vIn, sc_buf[0], shm_buf[0]);
                     if (channels > 1)
-                        in[1]   = (c->nScType == SCT_EXTERNAL) ? sc_buf[1] : vChannels[1].vIn;
+                        in[1]   = select_buffer(*c, vChannels[1].vIn, sc_buf[1], shm_buf[1]);
                     c->sSC.process(c->vSc, in, to_process);
                     c->sGate.process(c->vGain, c->vEnv, c->vSc, to_process);
 
@@ -759,7 +828,10 @@ namespace lsp
 
                     in_buf[i]          += to_process;
                     out_buf[i]         += to_process;
-                    sc_buf[i]          += to_process;
+                    if (sc_buf[i] != NULL)
+                        sc_buf[i]          += to_process;
+                    if (shm_buf[i] != NULL)
+                        shm_buf[i]         += to_process;
                 }
 
                 left       -= to_process;
@@ -1057,6 +1129,7 @@ namespace lsp
                     v->write("pIn", c->pIn);
                     v->write("pOut", c->pOut);
                     v->write("pSC", c->pSC);
+                    v->write("pShmIn", c->pShmIn);
                     v->begin_array("pGraph", c->pGraph, G_TOTAL);
                     for (size_t j=0; j<G_TOTAL; ++j)
                         v->write(c->pGraph[j]);

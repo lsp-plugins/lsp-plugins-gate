@@ -86,7 +86,9 @@
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
-					<void hexpand="true" />
+					<void hexpand="true"/>
+					<vsep pad.h="2" bg.color="bg" reduce="true"/>
+					<shmlink id="link" pad.l="2"/>
 				</hbox>
 			</vbox>
 
@@ -285,7 +287,7 @@
 					<cell rows="3">
 						<vbox fill="false" spacing="1" pad.t="4">
 							<ui:with pad.h="6" pad.b="4" hfill="true">
-								<combo id="sci_l" visibility="ex :sci_l" />
+								<combo id="sci_l" />
 								<combo id="scm_l" />
 								<combo id="scs_l" />
 								<button id="scl_l" height="22" text="labels.listen" ui:inject="Button_left"/>
@@ -321,7 +323,7 @@
 					<cell rows="3">
 						<vbox fill="false" spacing="1" pad.t="4">
 							<ui:with pad.h="6" pad.b="4" hfill="true" >
-								<combo id="sci_r" visibility="ex :sci_r" />
+								<combo id="sci_r" />
 								<combo id="scm_r" />
 								<combo id="scs_r" />
 								<button id="scl_r" height="22" text="labels.listen" ui:inject="Button_right"/>
