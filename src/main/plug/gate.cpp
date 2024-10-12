@@ -36,48 +36,51 @@ namespace lsp
     {
         //-------------------------------------------------------------------------
         // Plugin factory
-        typedef struct plugin_settings_t
+        inline namespace
         {
-            const meta::plugin_t   *metadata;
-            bool                    sc;
-            uint8_t                 mode;
-        } plugin_settings_t;
+            typedef struct plugin_settings_t
+            {
+                const meta::plugin_t   *metadata;
+                bool                    sc;
+                uint8_t                 mode;
+            } plugin_settings_t;
 
-        static const meta::plugin_t *plugins[] =
-        {
-            &meta::gate_mono,
-            &meta::gate_stereo,
-            &meta::gate_lr,
-            &meta::gate_ms,
-            &meta::sc_gate_mono,
-            &meta::sc_gate_stereo,
-            &meta::sc_gate_lr,
-            &meta::sc_gate_ms
-        };
+            static const meta::plugin_t *plugins[] =
+            {
+                &meta::gate_mono,
+                &meta::gate_stereo,
+                &meta::gate_lr,
+                &meta::gate_ms,
+                &meta::sc_gate_mono,
+                &meta::sc_gate_stereo,
+                &meta::sc_gate_lr,
+                &meta::sc_gate_ms
+            };
 
-        static const plugin_settings_t plugin_settings[] =
-        {
-            { &meta::gate_mono,       false, gate::GM_MONO          },
-            { &meta::gate_stereo,     false, gate::GM_STEREO        },
-            { &meta::gate_lr,         false, gate::GM_LR            },
-            { &meta::gate_ms,         false, gate::GM_MS            },
-            { &meta::sc_gate_mono,    true,  gate::GM_MONO          },
-            { &meta::sc_gate_stereo,  true,  gate::GM_STEREO        },
-            { &meta::sc_gate_lr,      true,  gate::GM_LR            },
-            { &meta::sc_gate_ms,      true,  gate::GM_MS            },
+            static const plugin_settings_t plugin_settings[] =
+            {
+                { &meta::gate_mono,       false, gate::GM_MONO          },
+                { &meta::gate_stereo,     false, gate::GM_STEREO        },
+                { &meta::gate_lr,         false, gate::GM_LR            },
+                { &meta::gate_ms,         false, gate::GM_MS            },
+                { &meta::sc_gate_mono,    true,  gate::GM_MONO          },
+                { &meta::sc_gate_stereo,  true,  gate::GM_STEREO        },
+                { &meta::sc_gate_lr,      true,  gate::GM_LR            },
+                { &meta::sc_gate_ms,      true,  gate::GM_MS            },
 
-            { NULL, 0, false }
-        };
+                { NULL, 0, false }
+            };
 
-        static plug::Module *plugin_factory(const meta::plugin_t *meta)
-        {
-            for (const plugin_settings_t *s = plugin_settings; s->metadata != NULL; ++s)
-                if (s->metadata == meta)
-                    return new gate(s->metadata, s->sc, s->mode);
-            return NULL;
-        }
+            static plug::Module *plugin_factory(const meta::plugin_t *meta)
+            {
+                for (const plugin_settings_t *s = plugin_settings; s->metadata != NULL; ++s)
+                    if (s->metadata == meta)
+                        return new gate(s->metadata, s->sc, s->mode);
+                return NULL;
+            }
 
-        static plug::Factory factory(plugin_factory, plugins, 8);
+            static plug::Factory factory(plugin_factory, plugins, 8);
+        } /* inline namespace */
 
         //-------------------------------------------------------------------------
         gate::gate(const meta::plugin_t *metadata, bool sc, size_t mode): plug::Module(metadata)
