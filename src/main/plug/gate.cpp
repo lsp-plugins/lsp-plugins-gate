@@ -464,7 +464,7 @@ namespace lsp
                     c->sGraph[j].init(meta::gate_metadata::TIME_MESH_SIZE, samples_per_dot);
 
                 c->sGraph[G_GAIN].fill(meta::gate_metadata::REDUCTION_DFL);
-                c->sGraph[G_GAIN].set_method(dspu::MM_MINIMUM);
+                c->sGraph[G_GAIN].set_method(dspu::MM_ABS_MINIMUM);
             }
         }
 
