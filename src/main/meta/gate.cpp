@@ -333,7 +333,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY,
             gate_mono_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             mono_plugin_port_groups,
             &gate_bundle
@@ -363,7 +363,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             gate_stereo_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
             &gate_bundle
@@ -393,7 +393,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             gate_lr_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
             &gate_bundle
@@ -423,7 +423,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             gate_ms_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
             &gate_bundle
@@ -454,7 +454,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY,
             sc_gate_mono_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             mono_plugin_sidechain_port_groups,
             &gate_bundle
@@ -484,7 +484,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             sc_gate_stereo_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
             &gate_bundle
@@ -514,7 +514,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             sc_gate_lr_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
             &gate_bundle
@@ -544,7 +544,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             sc_gate_ms_ports,
-            "dynamics/gate/single/gate.xml",
+            "dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
             &gate_bundle

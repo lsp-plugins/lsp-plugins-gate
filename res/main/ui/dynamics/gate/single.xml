@@ -605,7 +605,7 @@
 	</vbox>
 
 	<!-- Sidechain overlay -->
-	<overlay id="showsc" trigger="sidechain_trigger" hpos="1" vpos="1" halign="-1" valign="1">
+	<overlay id="showsc" trigger="sidechain_trigger" hpos="0" vpos="0" halign="-1" valign="1" ipadding.r="4">
 		<group text="groups.sidechain" vexpand="false" ipadding="0">
 			<!-- For Stereo and Mono version-->
 			<ui:if test=":mono or :stereo">
@@ -757,7 +757,7 @@
 	</overlay>
 
 	<!-- Mix overlay -->
-	<overlay id="showmx" trigger="mix_trigger" hpos="1" vpos="1" halign="-1" valign="1">
+	<overlay id="showmx" trigger="mix_trigger" hpos="0" vpos="0" halign="-1" valign="1" ipadding.r="4">
 		<group text="groups.mix" vexpand="false" ipadding="0">
 
 			<!-- For Stereo and Mono version-->
