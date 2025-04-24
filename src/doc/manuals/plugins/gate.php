@@ -45,8 +45,35 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>In<?= $sm ?></b> - enables drawing of gate's input signal graph and corresponding level meter.</li>
 	<li><b>Out<?= $sm ?></b> - enables drawing of gate's output signal graph and corresponding level meter.</li>
 	<li><b>Link</b> - the name of the shared memory link to pass sidechain signal.</li>
+	<li><b>Sidechain</b> - shows the sidechain control overlay.</li>
+	<li><b>Mix</b> - shows the Dry/Wet control overlay.</li>
 </ul>
-<p><b>'Sidechain' section:</b></p>
+
+<p><b>'Gate' section:</b></p>
+<ul>
+	<li><b>Reduction</b> - the amount of gain applied to the input signal when the gate is closed (if negative) or open (if positive).</li>
+	<li><b>Makeup</b> - additional amplification gain after processing stage.</li>
+	<li><b>Attack</b> - attack time of the gate.</li>
+	<li><b>Release</b> - release time of the gate.</li>
+	<li><b>Curve</b> - Basic gate curve characteristics:</li>
+	<ul>
+		<li><b>Thresh</b> - threshold, the level of input signal at which the gate becomes open.</li>
+		<li><b>Zone</b> - the size of the transition zone below the threshold.</li>
+	</ul>
+	<li><b>Hysteresis <?= $sm ?></b> - enables additional hysteresis curve:</li>
+	<ul>
+		<li><b>Thresh</b> - threshold (relative to basic curve), the level of input signal at which the gate starts to close.</li>
+		<li><b>Zone</b> - the size of the transition zone below the hysteresis threshold.</li>
+	</ul>
+	<li><b>Hold</b> - the time period the envelope holds it's maximum value before starting the release.</li>
+</ul>
+<p><b>'Signal' section:</b></p>
+<ul>
+	<li><b>Input</b> - overall input gain.</li>
+	<li><b>Output</b> - overall output gain.</li>
+</ul>
+
+<p><b>Sidechain control overlay:</b></p>
 <ul>
 	<li><b>Preamp</b> - pre-amplification of the sidechain signal.</li>
 	<li><b>Reactivity</b> - reactivity of the sidechain signal.</li>
@@ -81,30 +108,9 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>LPF</b> - allows to set up slope and cut-off frequency for the low-pass filter applied to sidechain signal.</li>
 	<li><b>HPF</b> - allows to set up slope and cut-off frequency for the high-pass filter applied to sidechain signal.</li>
 </ul>
-<p><b>'Gate' section:</b></p>
+<p><b>Dry/Wet mix control overlay:</b></p>
 <ul>
-	<li><b>Reduction</b> - the amount of gain applied to the input signal when the gate is closed (if negative) or open (if positive).</li>
-	<li><b>Makeup</b> - additional amplification gain after processing stage.</li>
-	<li><b>Attack</b> - attack time of the gate.</li>
-	<li><b>Release</b> - release time of the gate.</li>
-	<li><b>Curve</b> - Basic gate curve characteristics:</li>
-	<ul>
-		<li><b>Thresh</b> - threshold, the level of input signal at which the gate becomes open.</li>
-		<li><b>Zone</b> - the size of the transition zone below the threshold.</li>
-	</ul>
-	<li><b>Hysteresis <?= $sm ?></b> - enables additional hysteresis curve:</li>
-	<ul>
-		<li><b>Thresh</b> - threshold (relative to basic curve), the level of input signal at which the gate starts to close.</li>
-		<li><b>Zone</b> - the size of the transition zone below the hysteresis threshold.</li>
-	</ul>
-	<li><b>Hold</b> - the time period the envelope holds it's maximum value before starting the release.</li>
 	<li><b>Mix Dry</b> - the amount of dry (unprocessed) signal.</li>
 	<li><b>Mix Wet</b> - the amount of wet (processed) signal.</li>
 	<li><b>Mix Dry/Wet</b> - the knob that controls this balance between mixed dry and wet signal (see <b>Mix Dry</b> and <b>Mix Wet</b>) and the dry (unprocessed) signal.</li>
-</ul>
-
-<p><b>'Signal' section:</b></p>
-<ul>
-	<li><b>Input</b> - overall input gain.</li>
-	<li><b>Output</b> - overall output gain.</li>
 </ul>
