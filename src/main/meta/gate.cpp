@@ -125,37 +125,37 @@ namespace lsp
             COMBO("scm", "Sidechain mode", gate_metadata::SC_MODE_DFL, gate_sc_modes), \
             CONTROL("sla", "Sidechain lookahead", U_MSEC, gate_metadata::LOOKAHEAD), \
             SWITCH("scl", "Sidechain listen", 0.0f), \
-            LOG_CONTROL("scr", "Sidechain reactivity", U_MSEC, gate_metadata::REACTIVITY), \
+            LOG_CONTROL("scr", "Sidechain reactivity", "SC react", U_MSEC, gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp", "Sidechain preamp", GAIN_AMP_0_DB), \
             COMBO("shpm", "High-pass filter mode", 0, gate_filter_slope),      \
-            LOG_CONTROL("shpf", "High-pass filter frequency", U_HZ, gate_metadata::HPF),   \
+            LOG_CONTROL("shpf", "High-pass filter frequency", "HPF freq", U_HZ, gate_metadata::HPF),   \
             COMBO("slpm", "Low-pass filter mode", 0, gate_filter_slope),      \
-            LOG_CONTROL("slpf", "Low-pass filter frequency", U_HZ, gate_metadata::LPF)
+            LOG_CONTROL("slpf", "Low-pass filter frequency", "LPF freq", U_HZ, gate_metadata::LPF)
 
-        #define GATE_STEREO_CHANNEL(id, label, sc_type) \
+        #define GATE_STEREO_CHANNEL(id, label, alias, sc_type) \
             COMBO("sci" id, "Sidechain input" label, gate_metadata::SC_TYPE_DFL, sc_type), \
             COMBO("scm" id, "Sidechain mode" label, gate_metadata::SC_MODE_DFL, gate_sc_modes), \
             CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, gate_metadata::LOOKAHEAD), \
             SWITCH("scl" id, "Sidechain listen" label, 0.0f), \
             COMBO("scs" id, "Sidechain source" label, gate_metadata::SC_SOURCE_DFL, gate_sc_sources), \
-            LOG_CONTROL("scr" id, "Sidechain reactivity" label, U_MSEC, gate_metadata::REACTIVITY), \
+            LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias , U_MSEC, gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
             COMBO("shpm" id, "High-pass filter mode" label, 0, gate_filter_slope),      \
-            LOG_CONTROL("shpf" id, "High-pass filter frequency" label, U_HZ, gate_metadata::HPF),   \
+            LOG_CONTROL("shpf" id, "High-pass filter frequency" label, "HPF freq" alias, U_HZ, gate_metadata::HPF),   \
             COMBO("slpm" id, "Low-pass filter mode" label, 0, gate_filter_slope),      \
-            LOG_CONTROL("slpf" id, "Low-pass filter frequency" label, U_HZ, gate_metadata::LPF)
+            LOG_CONTROL("slpf" id, "Low-pass filter frequency" label, "LPF freq" alias, U_HZ, gate_metadata::LPF)
 
-        #define GATE_CHANNEL(id, label) \
+        #define GATE_CHANNEL(id, label, alias) \
             SWITCH("gh" id, "Hysteresis" label, 0.0f), \
-            LOG_CONTROL("gt" id, "Curve threshold" label, U_GAIN_AMP, gate_metadata::THRESHOLD), \
-            LOG_CONTROL("gz" id, "Curve zone size" label, U_GAIN_AMP, gate_metadata::ZONE), \
-            LOG_CONTROL("ht" id, "Hysteresis threshold" label, U_GAIN_AMP, gate_metadata::H_THRESHOLD), \
-            LOG_CONTROL("hz" id, "Hysteresis zone size" label, U_GAIN_AMP, gate_metadata::ZONE), \
-            LOG_CONTROL("at" id, "Attack" label, U_MSEC, gate_metadata::ATTACK_TIME), \
-            LOG_CONTROL("rt" id, "Release" label, U_MSEC, gate_metadata::RELEASE_TIME), \
+            LOG_CONTROL("gt" id, "Curve threshold" label, "Thresh" alias, U_GAIN_AMP, gate_metadata::THRESHOLD), \
+            LOG_CONTROL("gz" id, "Curve zone size" label, "Zone" alias, U_GAIN_AMP, gate_metadata::ZONE), \
+            LOG_CONTROL("ht" id, "Hysteresis threshold" label, "Hyst thresh" alias, U_GAIN_AMP, gate_metadata::H_THRESHOLD), \
+            LOG_CONTROL("hz" id, "Hysteresis zone size" label, "Hyst zone" alias, U_GAIN_AMP, gate_metadata::ZONE), \
+            LOG_CONTROL("at" id, "Attack" label, "Att time" alias, U_MSEC, gate_metadata::ATTACK_TIME), \
+            LOG_CONTROL("rt" id, "Release" label, "Rel time" alias, U_MSEC, gate_metadata::RELEASE_TIME), \
             CONTROL("hold" id, "Hold time" label, U_MSEC, gate_metadata::HOLD_TIME), \
-            LOG_CONTROL("gr" id, "Reduction" label, U_GAIN_AMP, gate_metadata::REDUCTION), \
-            LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, gate_metadata::MAKEUP), \
+            LOG_CONTROL("gr" id, "Reduction" label, "Reduction" alias, U_GAIN_AMP, gate_metadata::REDUCTION), \
+            LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup" alias, U_GAIN_AMP, gate_metadata::MAKEUP), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
             PERCENTS("cdw" id, "Dry/Wet balance" label, 100.0f, 0.1f), \
@@ -189,7 +189,7 @@ namespace lsp
             GATE_SHM_LINK_MONO,
             GATE_COMMON,
             GATE_MONO_CHANNEL(gate_sc_type),
-            GATE_CHANNEL("", ""),
+            GATE_CHANNEL("", "", ""),
             GATE_AUDIO_METER("", ""),
 
             PORTS_END
@@ -201,8 +201,8 @@ namespace lsp
             GATE_SHM_LINK_STEREO,
             GATE_COMMON,
             GATE_SPLIT_COMMON,
-            GATE_STEREO_CHANNEL("", "", gate_sc_type),
-            GATE_CHANNEL("", ""),
+            GATE_STEREO_CHANNEL("", "", "", gate_sc_type),
+            GATE_CHANNEL("", "", ""),
             GATE_AUDIO_METER("_l", " Left"),
             GATE_AUDIO_METER("_r", " Right"),
 
@@ -214,10 +214,10 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             GATE_SHM_LINK_STEREO,
             GATE_COMMON,
-            GATE_STEREO_CHANNEL("_l", " Left", gate_sc_type),
-            GATE_STEREO_CHANNEL("_r", " Right", gate_sc_type),
-            GATE_CHANNEL("_l", " Left"),
-            GATE_CHANNEL("_r", " Right"),
+            GATE_STEREO_CHANNEL("_l", " Left", " L", gate_sc_type),
+            GATE_STEREO_CHANNEL("_r", " Right", " R", gate_sc_type),
+            GATE_CHANNEL("_l", " Left", " L"),
+            GATE_CHANNEL("_r", " Right", " R"),
             GATE_AUDIO_METER("_l", " Left"),
             GATE_AUDIO_METER("_r", " Right"),
 
@@ -229,10 +229,10 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             GATE_SHM_LINK_STEREO,
             GATE_MS_COMMON,
-            GATE_STEREO_CHANNEL("_m", " Mid", gate_sc_type),
-            GATE_STEREO_CHANNEL("_s", " Side", gate_sc_type),
-            GATE_CHANNEL("_m", " Mid"),
-            GATE_CHANNEL("_s", " Side"),
+            GATE_STEREO_CHANNEL("_m", " Mid", " M", gate_sc_type),
+            GATE_STEREO_CHANNEL("_s", " Side", " S", gate_sc_type),
+            GATE_CHANNEL("_m", " Mid", " M"),
+            GATE_CHANNEL("_s", " Side", " S"),
             GATE_AUDIO_METER("_m", " Mid"),
             GATE_AUDIO_METER("_s", " Side"),
 
@@ -246,7 +246,7 @@ namespace lsp
             GATE_SHM_LINK_MONO,
             GATE_COMMON,
             GATE_MONO_CHANNEL(gate_extsc_type),
-            GATE_CHANNEL("", ""),
+            GATE_CHANNEL("", "", ""),
             GATE_AUDIO_METER("", ""),
 
             PORTS_END
@@ -259,8 +259,8 @@ namespace lsp
             GATE_SHM_LINK_STEREO,
             GATE_COMMON,
             GATE_SPLIT_COMMON,
-            GATE_STEREO_CHANNEL("", "", gate_extsc_type),
-            GATE_CHANNEL("", ""),
+            GATE_STEREO_CHANNEL("", "", "", gate_extsc_type),
+            GATE_CHANNEL("", "", ""),
             GATE_AUDIO_METER("_l", " Left"),
             GATE_AUDIO_METER("_r", " Right"),
 
@@ -273,10 +273,10 @@ namespace lsp
             PORTS_STEREO_SIDECHAIN,
             GATE_SHM_LINK_STEREO,
             GATE_COMMON,
-            GATE_STEREO_CHANNEL("_l", " Left", gate_extsc_type),
-            GATE_STEREO_CHANNEL("_r", " Right", gate_extsc_type),
-            GATE_CHANNEL("_l", " Left"),
-            GATE_CHANNEL("_r", " Right"),
+            GATE_STEREO_CHANNEL("_l", " Left", " L", gate_extsc_type),
+            GATE_STEREO_CHANNEL("_r", " Right", " R", gate_extsc_type),
+            GATE_CHANNEL("_l", " Left", " L"),
+            GATE_CHANNEL("_r", " Right", " R"),
             GATE_AUDIO_METER("_l", " Left"),
             GATE_AUDIO_METER("_r", " Right"),
 
@@ -289,10 +289,10 @@ namespace lsp
             PORTS_STEREO_SIDECHAIN,
             GATE_SHM_LINK_STEREO,
             GATE_MS_COMMON,
-            GATE_STEREO_CHANNEL("_m", " Mid", gate_extsc_type),
-            GATE_STEREO_CHANNEL("_s", " Side", gate_extsc_type),
-            GATE_CHANNEL("_m", " Mid"),
-            GATE_CHANNEL("_s", " Side"),
+            GATE_STEREO_CHANNEL("_m", " Mid", " M", gate_extsc_type),
+            GATE_STEREO_CHANNEL("_s", " Side", " S", gate_extsc_type),
+            GATE_CHANNEL("_m", " Mid", " M"),
+            GATE_CHANNEL("_s", " Side", " S"),
             GATE_AUDIO_METER("_m", " Mid"),
             GATE_AUDIO_METER("_s", " Side"),
 
