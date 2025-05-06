@@ -101,18 +101,18 @@ namespace lsp
             BYPASS,             \
             IN_GAIN,            \
             OUT_GAIN,           \
-            SWITCH("showmx", "Show mix overlay", 0.0f), \
-            SWITCH("showsc", "Show sidechain overlay", 0.0f), \
-            SWITCH("pause", "Pause graph analysis", 0.0f), \
-            TRIGGER("clear", "Clear graph analysis")
+            SWITCH("showmx", "Show mix overlay", "Show mix bar", 0.0f), \
+            SWITCH("showsc", "Show sidechain overlay", "Show SC bar", 0.0f), \
+            SWITCH("pause", "Pause graph analysis", "Pause", 0.0f), \
+            TRIGGER("clear", "Clear graph analysis", "Clear")
 
         #define GATE_MS_COMMON  \
             GATE_COMMON,        \
-            SWITCH("msl", "Mid/Side listen", 0.0f)
+            SWITCH("msl", "Mid/Side listen", "M/S listen", 0.0f)
 
         #define GATE_SPLIT_COMMON \
-            SWITCH("ssplit", "Stereo split", 0.0f), \
-            COMBO("sscs", "Split sidechain source", gate_metadata::SC_SPLIT_SOURCE_DFL, gate_sc_split_sources)
+            SWITCH("ssplit", "Stereo split", "Stereo split", 0.0f), \
+            COMBO("sscs", "Split sidechain source", "Split SC source", gate_metadata::SC_SPLIT_SOURCE_DFL, gate_sc_split_sources)
 
         #define GATE_SHM_LINK_MONO \
             OPT_RETURN_MONO("link", "shml", "Side-chain shared memory link")
@@ -121,32 +121,32 @@ namespace lsp
             OPT_RETURN_STEREO("link", "shml_", "Side-chain shared memory link")
 
         #define GATE_MONO_CHANNEL(sc_type) \
-            COMBO("sci", "Sidechain input", gate_metadata::SC_TYPE_DFL, sc_type), \
-            COMBO("scm", "Sidechain mode", gate_metadata::SC_MODE_DFL, gate_sc_modes), \
+            COMBO("sci", "Sidechain input", "SC input", gate_metadata::SC_TYPE_DFL, sc_type), \
+            COMBO("scm", "Sidechain mode", "SC mode", gate_metadata::SC_MODE_DFL, gate_sc_modes), \
             CONTROL("sla", "Sidechain lookahead", U_MSEC, gate_metadata::LOOKAHEAD), \
-            SWITCH("scl", "Sidechain listen", 0.0f), \
+            SWITCH("scl", "Sidechain listen", "SC listen", 0.0f), \
             LOG_CONTROL("scr", "Sidechain reactivity", "SC react", U_MSEC, gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp", "Sidechain preamp", GAIN_AMP_0_DB), \
-            COMBO("shpm", "High-pass filter mode", 0, gate_filter_slope),      \
+            COMBO("shpm", "High-pass filter mode", "HPF mode", 0, gate_filter_slope),      \
             LOG_CONTROL("shpf", "High-pass filter frequency", "HPF freq", U_HZ, gate_metadata::HPF),   \
-            COMBO("slpm", "Low-pass filter mode", 0, gate_filter_slope),      \
+            COMBO("slpm", "Low-pass filter mode", "LPF mode", 0, gate_filter_slope),      \
             LOG_CONTROL("slpf", "Low-pass filter frequency", "LPF freq", U_HZ, gate_metadata::LPF)
 
         #define GATE_STEREO_CHANNEL(id, label, alias, sc_type) \
-            COMBO("sci" id, "Sidechain input" label, gate_metadata::SC_TYPE_DFL, sc_type), \
-            COMBO("scm" id, "Sidechain mode" label, gate_metadata::SC_MODE_DFL, gate_sc_modes), \
+            COMBO("sci" id, "Sidechain input" label, "SC input" alias, gate_metadata::SC_TYPE_DFL, sc_type), \
+            COMBO("scm" id, "Sidechain mode" label, "SC mode" alias, gate_metadata::SC_MODE_DFL, gate_sc_modes), \
             CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, gate_metadata::LOOKAHEAD), \
-            SWITCH("scl" id, "Sidechain listen" label, 0.0f), \
-            COMBO("scs" id, "Sidechain source" label, gate_metadata::SC_SOURCE_DFL, gate_sc_sources), \
+            SWITCH("scl" id, "Sidechain listen" label, "SC listen" alias, 0.0f), \
+            COMBO("scs" id, "Sidechain source" label, "SC source" alias, gate_metadata::SC_SOURCE_DFL, gate_sc_sources), \
             LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias , U_MSEC, gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
-            COMBO("shpm" id, "High-pass filter mode" label, 0, gate_filter_slope),      \
+            COMBO("shpm" id, "High-pass filter mode" label, "HPF mode " alias, 0, gate_filter_slope),      \
             LOG_CONTROL("shpf" id, "High-pass filter frequency" label, "HPF freq" alias, U_HZ, gate_metadata::HPF),   \
-            COMBO("slpm" id, "Low-pass filter mode" label, 0, gate_filter_slope),      \
+            COMBO("slpm" id, "Low-pass filter mode" label, "LPF mode" alias, 0, gate_filter_slope),      \
             LOG_CONTROL("slpf" id, "Low-pass filter frequency" label, "LPF freq" alias, U_HZ, gate_metadata::LPF)
 
         #define GATE_CHANNEL(id, label, alias) \
-            SWITCH("gh" id, "Hysteresis" label, 0.0f), \
+            SWITCH("gh" id, "Hysteresis" label, "Hysteresis" alias, 0.0f), \
             LOG_CONTROL("gt" id, "Curve threshold" label, "Thresh" alias, U_GAIN_AMP, gate_metadata::THRESHOLD), \
             LOG_CONTROL("gz" id, "Curve zone size" label, "Zone" alias, U_GAIN_AMP, gate_metadata::ZONE), \
             LOG_CONTROL("ht" id, "Hysteresis threshold" label, "Hyst thresh" alias, U_GAIN_AMP, gate_metadata::H_THRESHOLD), \
@@ -165,12 +165,12 @@ namespace lsp
             MESH("cg" id, "Curve graph" label, 2, gate_metadata::CURVE_MESH_SIZE), \
             MESH("hg" id, "Hysteresis graph" label, 2, gate_metadata::CURVE_MESH_SIZE)
 
-        #define GATE_AUDIO_METER(id, label) \
-            SWITCH("slv" id, "Sidechain level visibility" label, 1.0f), \
-            SWITCH("elv" id, "Envelope level visibility" label, 1.0f), \
-            SWITCH("grv" id, "Gain reduction visibility" label, 1.0f), \
-            SWITCH("ilv" id, "Input level visibility" label, 1.0f), \
-            SWITCH("olv" id, "Output level visibility" label, 1.0f), \
+        #define GATE_AUDIO_METER(id, label, alias) \
+            SWITCH("slv" id, "Sidechain level visibility" label, "Show SC" alias, 1.0f), \
+            SWITCH("elv" id, "Envelope level visibility" label, "Show Env" alias, 1.0f), \
+            SWITCH("grv" id, "Gain reduction visibility" label, "Show Gain" alias, 1.0f), \
+            SWITCH("ilv" id, "Input level visibility" label, "Show In" alias, 1.0f), \
+            SWITCH("olv" id, "Output level visibility" label, "Show Out" alias, 1.0f), \
             MESH("scg" id, "Sidechain graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Envelope graph" label, 2, gate_metadata::TIME_MESH_SIZE), \
             MESH("grg" id, "Gain reduciton graph" label, 2, gate_metadata::TIME_MESH_SIZE + 4), \
@@ -190,7 +190,7 @@ namespace lsp
             GATE_COMMON,
             GATE_MONO_CHANNEL(gate_sc_type),
             GATE_CHANNEL("", "", ""),
-            GATE_AUDIO_METER("", ""),
+            GATE_AUDIO_METER("", "", ""),
 
             PORTS_END
         };
@@ -203,8 +203,8 @@ namespace lsp
             GATE_SPLIT_COMMON,
             GATE_STEREO_CHANNEL("", "", "", gate_sc_type),
             GATE_CHANNEL("", "", ""),
-            GATE_AUDIO_METER("_l", " Left"),
-            GATE_AUDIO_METER("_r", " Right"),
+            GATE_AUDIO_METER("_l", " Left", " L"),
+            GATE_AUDIO_METER("_r", " Right", " R"),
 
             PORTS_END
         };
@@ -218,8 +218,8 @@ namespace lsp
             GATE_STEREO_CHANNEL("_r", " Right", " R", gate_sc_type),
             GATE_CHANNEL("_l", " Left", " L"),
             GATE_CHANNEL("_r", " Right", " R"),
-            GATE_AUDIO_METER("_l", " Left"),
-            GATE_AUDIO_METER("_r", " Right"),
+            GATE_AUDIO_METER("_l", " Left", " L"),
+            GATE_AUDIO_METER("_r", " Right", " R"),
 
             PORTS_END
         };
@@ -233,8 +233,8 @@ namespace lsp
             GATE_STEREO_CHANNEL("_s", " Side", " S", gate_sc_type),
             GATE_CHANNEL("_m", " Mid", " M"),
             GATE_CHANNEL("_s", " Side", " S"),
-            GATE_AUDIO_METER("_m", " Mid"),
-            GATE_AUDIO_METER("_s", " Side"),
+            GATE_AUDIO_METER("_m", " Mid", " M"),
+            GATE_AUDIO_METER("_s", " Side", " S"),
 
             PORTS_END
         };
@@ -247,7 +247,7 @@ namespace lsp
             GATE_COMMON,
             GATE_MONO_CHANNEL(gate_extsc_type),
             GATE_CHANNEL("", "", ""),
-            GATE_AUDIO_METER("", ""),
+            GATE_AUDIO_METER("", "", ""),
 
             PORTS_END
         };
@@ -261,8 +261,8 @@ namespace lsp
             GATE_SPLIT_COMMON,
             GATE_STEREO_CHANNEL("", "", "", gate_extsc_type),
             GATE_CHANNEL("", "", ""),
-            GATE_AUDIO_METER("_l", " Left"),
-            GATE_AUDIO_METER("_r", " Right"),
+            GATE_AUDIO_METER("_l", " Left", " L"),
+            GATE_AUDIO_METER("_r", " Right", " R"),
 
             PORTS_END
         };
@@ -277,8 +277,8 @@ namespace lsp
             GATE_STEREO_CHANNEL("_r", " Right", " R", gate_extsc_type),
             GATE_CHANNEL("_l", " Left", " L"),
             GATE_CHANNEL("_r", " Right", " R"),
-            GATE_AUDIO_METER("_l", " Left"),
-            GATE_AUDIO_METER("_r", " Right"),
+            GATE_AUDIO_METER("_l", " Left", " L"),
+            GATE_AUDIO_METER("_r", " Right", " R"),
 
             PORTS_END
         };
@@ -293,8 +293,8 @@ namespace lsp
             GATE_STEREO_CHANNEL("_s", " Side", " S", gate_extsc_type),
             GATE_CHANNEL("_m", " Mid", " M"),
             GATE_CHANNEL("_s", " Side", " S"),
-            GATE_AUDIO_METER("_m", " Mid"),
-            GATE_AUDIO_METER("_s", " Side"),
+            GATE_AUDIO_METER("_m", " Mid", " M"),
+            GATE_AUDIO_METER("_s", " Side", " S"),
 
             PORTS_END
         };
