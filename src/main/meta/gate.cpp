@@ -123,7 +123,7 @@ namespace lsp
         #define GATE_MONO_CHANNEL(sc_type) \
             COMBO("sci", "Sidechain input", "SC input", gate_metadata::SC_TYPE_DFL, sc_type), \
             COMBO("scm", "Sidechain mode", "SC mode", gate_metadata::SC_MODE_DFL, gate_sc_modes), \
-            CONTROL("sla", "Sidechain lookahead", U_MSEC, gate_metadata::LOOKAHEAD), \
+            CONTROL("sla", "Sidechain lookahead", "SC look", U_MSEC, gate_metadata::LOOKAHEAD), \
             SWITCH("scl", "Sidechain listen", "SC listen", 0.0f), \
             LOG_CONTROL("scr", "Sidechain reactivity", "SC react", U_MSEC, gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp", "Sidechain preamp", GAIN_AMP_0_DB), \
@@ -135,10 +135,10 @@ namespace lsp
         #define GATE_STEREO_CHANNEL(id, label, alias, sc_type) \
             COMBO("sci" id, "Sidechain input" label, "SC input" alias, gate_metadata::SC_TYPE_DFL, sc_type), \
             COMBO("scm" id, "Sidechain mode" label, "SC mode" alias, gate_metadata::SC_MODE_DFL, gate_sc_modes), \
-            CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, gate_metadata::LOOKAHEAD), \
+            CONTROL("sla" id, "Sidechain lookahead" label, "SC look" alias, U_MSEC, gate_metadata::LOOKAHEAD), \
             SWITCH("scl" id, "Sidechain listen" label, "SC listen" alias, 0.0f), \
             COMBO("scs" id, "Sidechain source" label, "SC source" alias, gate_metadata::SC_SOURCE_DFL, gate_sc_sources), \
-            LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias , U_MSEC, gate_metadata::REACTIVITY), \
+            LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias, U_MSEC, gate_metadata::REACTIVITY), \
             AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
             COMBO("shpm" id, "High-pass filter mode" label, "HPF mode " alias, 0, gate_filter_slope),      \
             LOG_CONTROL("shpf" id, "High-pass filter frequency" label, "HPF freq" alias, U_HZ, gate_metadata::HPF),   \
@@ -153,7 +153,7 @@ namespace lsp
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, "Hyst zone" alias, U_GAIN_AMP, gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack" label, "Att time" alias, U_MSEC, gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release" label, "Rel time" alias, U_MSEC, gate_metadata::RELEASE_TIME), \
-            CONTROL("hold" id, "Hold time" label, U_MSEC, gate_metadata::HOLD_TIME), \
+            CONTROL("hold" id, "Hold time" label, "Hold time" alias, U_MSEC, gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, "Reduction" alias, U_GAIN_AMP, gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup" alias, U_GAIN_AMP, gate_metadata::MAKEUP), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
