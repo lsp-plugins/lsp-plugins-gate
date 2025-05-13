@@ -126,7 +126,7 @@ namespace lsp
             CONTROL("sla", "Sidechain lookahead", "SC look", U_MSEC, gate_metadata::LOOKAHEAD), \
             SWITCH("scl", "Sidechain listen", "SC listen", 0.0f), \
             LOG_CONTROL("scr", "Sidechain reactivity", "SC react", U_MSEC, gate_metadata::REACTIVITY), \
-            AMP_GAIN100("scp", "Sidechain preamp", GAIN_AMP_0_DB), \
+            AMP_GAIN100("scp", "Sidechain preamp", "SC preamp", GAIN_AMP_0_DB), \
             COMBO("shpm", "High-pass filter mode", "HPF mode", 0, gate_filter_slope),      \
             LOG_CONTROL("shpf", "High-pass filter frequency", "HPF freq", U_HZ, gate_metadata::HPF),   \
             COMBO("slpm", "Low-pass filter mode", "LPF mode", 0, gate_filter_slope),      \
@@ -139,7 +139,7 @@ namespace lsp
             SWITCH("scl" id, "Sidechain listen" label, "SC listen" alias, 0.0f), \
             COMBO("scs" id, "Sidechain source" label, "SC source" alias, gate_metadata::SC_SOURCE_DFL, gate_sc_sources), \
             LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias, U_MSEC, gate_metadata::REACTIVITY), \
-            AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
+            AMP_GAIN100("scp" id, "Sidechain preamp" label, "SC preamp" alias, GAIN_AMP_0_DB), \
             COMBO("shpm" id, "High-pass filter mode" label, "HPF mode " alias, 0, gate_filter_slope),      \
             LOG_CONTROL("shpf" id, "High-pass filter frequency" label, "HPF freq" alias, U_HZ, gate_metadata::HPF),   \
             COMBO("slpm" id, "Low-pass filter mode" label, "LPF mode" alias, 0, gate_filter_slope),      \
@@ -156,9 +156,9 @@ namespace lsp
             CONTROL("hold" id, "Hold time" label, "Hold time" alias, U_MSEC, gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, "Reduction" alias, U_GAIN_AMP, gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup" alias, U_GAIN_AMP, gate_metadata::MAKEUP), \
-            AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
-            AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
-            PERCENTS("cdw" id, "Dry/Wet balance" label, 100.0f, 0.1f), \
+            AMP_GAIN10("cdr" id, "Dry gain" label, "Dry" alias, GAIN_AMP_M_INF_DB),     \
+            AMP_GAIN10("cwt" id, "Wet gain" label, "Wet" alias, GAIN_AMP_0_DB), \
+            PERCENTS("cdw" id, "Dry/Wet balance" label, "Dry/Wet" alias, 100.0f, 0.1f), \
             METER_OUT_GAIN("gzs" id, "Zone start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hts" id, "Hysteresis threshold start" label, GAIN_AMP_P_24_DB), \
             METER_OUT_GAIN("hzs" id, "Hysteresis zone start" label, GAIN_AMP_P_24_DB), \
