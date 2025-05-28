@@ -1,5 +1,6 @@
 <plugin resizable="true">
 	<!-- Evaluate what kind of plugin we have -->
+	<ui:eval id="is_sidechain" value="(ex :sc) or (ex :sc_l) or (ex :sc_r)"/>
 	<ui:eval id="mono" value="(ex :gh) and (ex :ilm)"/>
 	<ui:eval id="stereo" value="(ex :gh) and !(ex :ilm)"/>
 	<ui:eval id="left_right" value="(ex :gh_l)"/>
@@ -309,6 +310,7 @@
 				</group>
 				<void bg.color="bg" vexpand="false" fill="false" pad.v="2"/>
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
+					<button ui:id="premix_trigger" id="showpmx" text="labels.premix" size="22" pad.v="4"/>
 					<button ui:id="sidechain_trigger" id="showsc" text="labels.sidechain" size="22" pad.v="4"/>
 					<void hexpand="true"/>
 					<button ui:id="mix_trigger" id="showmx" text="labels.mix" size="22" pad.v="4"/>
@@ -603,6 +605,45 @@
 		</hbox>
 
 	</vbox>
+	
+	<!-- Premix overlay -->
+	<overlay id="showpmx" trigger="premix_trigger" hpos="0" vpos="0" halign="-1" valign="1" ipadding.r="4">
+		<group text="groups.premix" vexpand="false" ipadding="0">
+			<grid rows="3" cols="${(:is_sidechain) ? 8 : 5}" spacing="0" bg.color="bg_schema" transpose="true" height="139">
+				<ui:if test=":is_sidechain">
+					<label text="labels.premix.in_to_sc" pad.h="6" pad.v="4" />
+					<knob id="in2sc" />
+					<value id="in2sc" pad.h="6" pad.v="4" />
+				</ui:if>
+				
+				<label text="labels.premix.in_to_link" pad.h="6" pad.v="4" />
+				<knob id="in2lk" />
+				<value id="in2lk" />
+				
+				<cell rows="3"><vsep pad.h="2" bg.color="bg" reduce="true" /></cell>
+				
+				<ui:if test=":is_sidechain">
+					<label text="labels.premix.sc_to_in" pad.h="6" pad.v="4" />
+					<knob id="sc2in" />
+					<value id="sc2in" pad.h="6" pad.v="4" />
+					
+					<label text="labels.premix.sc_to_link" pad.h="6" pad.v="4" />
+					<knob id="sc2lk" />
+					<value id="sc2lk" pad.h="6" pad.v="4" />
+					
+					<cell rows="3"><vsep pad.h="2" bg.color="bg" reduce="true" /></cell>
+				</ui:if>
+				
+				<label text="labels.premix.link_to_in" pad.h="6" pad.v="4" />
+				<knob id="lk2in" />
+				<value id="lk2in" pad.h="6" pad.v="4" />
+				
+				<label text="labels.premix.link_to_sc" pad.h="6" pad.v="4" />
+				<knob id="lk2sc" />
+				<value id="lk2sc" pad.h="6" pad.v="4" />
+			</grid>
+		</group>
+	</overlay>
 
 	<!-- Sidechain overlay -->
 	<overlay id="showsc" trigger="sidechain_trigger" hpos="0" vpos="0" halign="-1" valign="1" ipadding.r="4">

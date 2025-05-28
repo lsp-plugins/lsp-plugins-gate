@@ -45,6 +45,7 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>In<?= $sm ?></b> - enables drawing of gate's input signal graph and corresponding level meter.</li>
 	<li><b>Out<?= $sm ?></b> - enables drawing of gate's output signal graph and corresponding level meter.</li>
 	<li><b>Link</b> - the name of the shared memory link to pass sidechain signal.</li>
+	<li><b>Pre-mix</b> - shows pre-mix control overlay.</li>
 	<li><b>Sidechain</b> - shows the sidechain control overlay.</li>
 	<li><b>Mix</b> - shows the Dry/Wet control overlay.</li>
 </ul>
@@ -71,6 +72,20 @@ keeping the same settings for the left and right channels.</p>
 <ul>
 	<li><b>Input</b> - overall input gain.</li>
 	<li><b>Output</b> - overall output gain.</li>
+</ul>
+
+<p><b>Pre-mix control overlay:</b></p>
+<ul>
+	<?php if ($sc) { ?>
+	<li><b>In -> SC</b> - the amount of signal from input channel added to the Sidechain.</li>
+	<?php } ?>
+	<li><b>In -> Link</b> - the amount of signal from input channel added to the shared memory link.</li>
+	<?php if ($sc) { ?>
+	<li><b>SC -> In</b> - the amount of signal from sidechain input channel added to the input channel.</li>
+	<li><b>SC -> Link</b> - the amount of signal from sidechain input channel added to the shared memory link.</li>
+	<?php } ?>
+	<li><b>Link -> In</b> - the amount of signal from shared memory link added to the input channel.</li>
+	<li><b>Link -> SC</b> - the amount of signal from shared memory link added to the sidechain channel.</li>
 </ul>
 
 <p><b>Sidechain control overlay:</b></p>

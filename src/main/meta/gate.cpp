@@ -97,6 +97,18 @@ namespace lsp
             { NULL, NULL }
         };
 
+        #define GATE_PREMIX \
+            SWITCH("showpmx", "Show pre-mix overlay", "Show premix bar", 0.0f), \
+            AMP_GAIN10("in2lk", "Input to Link mix", "In to Link mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("lk2in", "Link to Input mix", "Link to In mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("lk2sc", "Link to Sidechain mix", "Link to SC mix", GAIN_AMP_M_INF_DB)
+
+        #define GATE_SC_PREMIX \
+            GATE_PREMIX, \
+            AMP_GAIN10("in2sc", "Input to Sidechain mix", "In to SC mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("sc2in", "Sidechain to Input mix", "SC to In mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("sc2lk", "Sidechain to Link mix", "SC to Link mix", GAIN_AMP_M_INF_DB)
+
         #define GATE_COMMON     \
             BYPASS,             \
             IN_GAIN,            \
@@ -187,6 +199,7 @@ namespace lsp
         {
             PORTS_MONO_PLUGIN,
             GATE_SHM_LINK_MONO,
+            GATE_PREMIX,
             GATE_COMMON,
             GATE_MONO_CHANNEL(gate_sc_type, 0),
             GATE_CHANNEL("", "", ""),
@@ -199,6 +212,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             GATE_SHM_LINK_STEREO,
+            GATE_PREMIX,
             GATE_COMMON,
             GATE_SPLIT_COMMON,
             GATE_STEREO_CHANNEL("", "", "", gate_sc_type, 0),
@@ -213,6 +227,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             GATE_SHM_LINK_STEREO,
+            GATE_PREMIX,
             GATE_COMMON,
             GATE_STEREO_CHANNEL("_l", " Left", " L", gate_sc_type, 0),
             GATE_STEREO_CHANNEL("_r", " Right", " R", gate_sc_type, 0),
@@ -228,6 +243,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             GATE_SHM_LINK_STEREO,
+            GATE_PREMIX,
             GATE_MS_COMMON,
             GATE_STEREO_CHANNEL("_m", " Mid", " M", gate_sc_type, 0),
             GATE_STEREO_CHANNEL("_s", " Side", " S", gate_sc_type, 0),
@@ -244,6 +260,7 @@ namespace lsp
             PORTS_MONO_PLUGIN,
             PORTS_MONO_SIDECHAIN,
             GATE_SHM_LINK_MONO,
+            GATE_SC_PREMIX,
             GATE_COMMON,
             GATE_MONO_CHANNEL(gate_extsc_type, 1),
             GATE_CHANNEL("", "", ""),
@@ -257,6 +274,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             GATE_SHM_LINK_STEREO,
+            GATE_SC_PREMIX,
             GATE_COMMON,
             GATE_SPLIT_COMMON,
             GATE_STEREO_CHANNEL("", "", "", gate_extsc_type, 1),
@@ -272,6 +290,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             GATE_SHM_LINK_STEREO,
+            GATE_SC_PREMIX,
             GATE_COMMON,
             GATE_STEREO_CHANNEL("_l", " Left", " L", gate_extsc_type, 1),
             GATE_STEREO_CHANNEL("_r", " Right", " R", gate_extsc_type, 1),
@@ -288,6 +307,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             GATE_SHM_LINK_STEREO,
+            GATE_SC_PREMIX,
             GATE_MS_COMMON,
             GATE_STEREO_CHANNEL("_m", " Mid", " M", gate_extsc_type, 1),
             GATE_STEREO_CHANNEL("_s", " Side", " S", gate_extsc_type, 1),
