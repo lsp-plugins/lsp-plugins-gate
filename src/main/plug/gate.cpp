@@ -817,7 +817,7 @@ namespace lsp
                     else
                         dsp::mul_k3(link, in_buf, sPremix.fInToLink, count);
 
-                    if ((sc != NULL) && (sPremix.fScToLink > GAIN_AMP_M_INF_DB))
+                    if ((sc_buf != NULL) && (sPremix.fScToLink > GAIN_AMP_M_INF_DB))
                         dsp::fmadd_k3(link, sc_buf, sPremix.fScToLink, count);
                 }
                 else if ((sc_buf != NULL) && (sPremix.fScToLink > GAIN_AMP_M_INF_DB))
