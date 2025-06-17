@@ -12,6 +12,18 @@
 	<ui:eval id="clr_a" value="(:mid_side) ? 'mid' : 'left'"/>
 	<ui:eval id="clr_b" value="(:mid_side) ? 'side' : 'right'"/>
 
+	<!-- Control linking -->
+	<ui:if test=":left_right or :mid_side">
+		<ui:for id="port"
+			list="'sci'; 'scm'; 'sla'; 'scl'; 'scs'; 'scr'; 'scp'; 'shpm'; 'shpf'; 'slpm'; 'slpf';
+				'gh'; 'gt'; 'gz'; 'ht'; 'hz'; 'at'; 'rt'; 'hold'; 'gr'; 'mk'; 'cdr'; 'cwt'; 'cdw'">
+			<ctl:link
+				id.1="${port}_${xa}" value.1=":${port}_${xb}"
+				id.2="${port}_${xb}" value.2=":${port}_${xa}"
+				activity=":clink" />
+		</ui:for>
+	</ui:if>
+
 	<vbox>
 		<!-- Top part -->
 		<grid rows="1" cols="4" hspacing="4" expand="true">
@@ -120,6 +132,12 @@
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
+					<ui:if test=":left_right">
+						<button id="clink" ui:inject="Button_green" text="labels.chan.lr_link" />
+					</ui:if>
+					<ui:if test=":mid_side">
+						<button id="clink" ui:inject="Button_green" text="labels.chan.ms_link" />
+					</ui:if>
 					<void hexpand="true"/>
 
 					<ui:if test=":mid_side">
@@ -257,10 +275,10 @@
 						</ui:if>
 
 						<ui:if test=":left_right or :mid_side">
-							<mesh id="hg_${xa}" width="3" color="${clr_a}" smooth="true"/>
-							<mesh id="cg_${xa}" width="3" color="${clr_a}" smooth="true"/>
-							<mesh id="hg_${xb}" width="3" color="${clr_b}" smooth="true"/>
-							<mesh id="cg_${xb}" width="3" color="${clr_b}" smooth="true"/>
+							<mesh id="hg_${xa}" width="3" color="${clr_a}" smooth="true" visibility=":gh_${xa}"/>
+							<mesh id="cg_${xa}" width="3" color="${clr_a}" smooth="true" />
+							<mesh id="hg_${xb}" width="3" color="${clr_b}" smooth="true" visibility=":gh_${xb}"/>
+							<mesh id="cg_${xb}" width="3" color="${clr_b}" smooth="true" />
 							<dot x.id="elm_${xa}" y.id="clm_${xa}" color="${clr_a}" bcolor="${clr_a}"/>
 							<dot x.id="elm_${xb}" y.id="clm_${xb}" color="${clr_b}" bcolor="${clr_b}"/>
 						</ui:if>
