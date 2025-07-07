@@ -504,7 +504,7 @@
 								<knob id="mk_${xa}" scolor="${clr_a}"/>
 								<value id="gr_${xa}" sline="true" width="48"/>
 								<value id="mk_${xa}" sline="true" width="48"/>
-								<cell cols="2"><button id="gh_${xa}" height="22" hfill="true" pad.h="6" text="labels.hysteresis" ui:inject="Button_left"/></cell>
+								<cell cols="2"><button id="gh_${xa}" height="22" hfill="true" pad.h="6" text="labels.hysteresis" ui:inject="Button_${clr_a}"/></cell>
 							</grid>
 						</cell>
 
@@ -553,7 +553,7 @@
 								<knob id="mk_${xb}" scolor="${clr_b}"/>
 								<value id="gr_${xb}" sline="true" width="48"/>
 								<value id="mk_${xb}" sline="true" width="48"/>
-								<cell cols="2"><button id="gh_${xb}" height="22" hfill="true" pad.h="6" text="labels.hysteresis" ui:inject="Button_right"/></cell>
+								<cell cols="2"><button id="gh_${xb}" height="22" hfill="true" pad.h="6" text="labels.hysteresis" ui:inject="Button_${clr_b}"/></cell>
 							</grid>
 						</cell>
 
@@ -623,7 +623,7 @@
 		</hbox>
 
 	</vbox>
-	
+
 	<!-- Premix overlay -->
 	<overlay id="showpmx" trigger="premix_trigger" hpos="0" vpos="0" halign="-1" valign="1" ipadding.r="4">
 		<group text="groups.premix" vexpand="false" ipadding="0">
@@ -633,29 +633,29 @@
 					<knob id="in2sc" />
 					<value id="in2sc" pad.h="6" pad.v="4" />
 				</ui:if>
-				
+
 				<label text="labels.premix.in_to_link" pad.h="6" pad.v="4" />
 				<knob id="in2lk" />
 				<value id="in2lk" />
-				
+
 				<cell rows="3"><vsep pad.h="2" bg.color="bg" reduce="true" /></cell>
-				
+
 				<ui:if test=":is_sidechain">
 					<label text="labels.premix.sc_to_in" pad.h="6" pad.v="4" />
 					<knob id="sc2in" />
 					<value id="sc2in" pad.h="6" pad.v="4" />
-					
+
 					<label text="labels.premix.sc_to_link" pad.h="6" pad.v="4" />
 					<knob id="sc2lk" />
 					<value id="sc2lk" pad.h="6" pad.v="4" />
-					
+
 					<cell rows="3"><vsep pad.h="2" bg.color="bg" reduce="true" /></cell>
 				</ui:if>
-				
+
 				<label text="labels.premix.link_to_in" pad.h="6" pad.v="4" />
 				<knob id="lk2in" />
 				<value id="lk2in" pad.h="6" pad.v="4" />
-				
+
 				<label text="labels.premix.link_to_sc" pad.h="6" pad.v="4" />
 				<knob id="lk2sc" />
 				<value id="lk2sc" pad.h="6" pad.v="4" />
