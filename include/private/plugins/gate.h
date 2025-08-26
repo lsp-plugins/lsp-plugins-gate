@@ -91,6 +91,32 @@ namespace lsp
                     S_ALL       = S_CURVE | S_HYST
                 };
 
+                typedef struct premix_t
+                {
+                    float                   fInToSc;            // Input -> Sidechain mix
+                    float                   fInToLink;          // Input -> Link mix
+                    float                   fLinkToIn;          // Link -> Input mix
+                    float                   fLinkToSc;          // Link -> Sidechain mix
+                    float                   fScToIn;            // Sidechain -> Input mix
+                    float                   fScToLink;          // Sidechain -> Link mix
+
+                    float                  *vIn[2];             // Input buffer
+                    float                  *vOut[2];            // Output buffer
+                    float                  *vSc[2];             // Sidechain buffer
+                    float                  *vLink[2];           // Link buffer
+
+                    float                  *vTmpIn[2];          // Replacement buffer for input
+                    float                  *vTmpLink[2];        // Replacement buffer for link
+                    float                  *vTmpSc[2];          // Replacement buffer for sidechain
+
+                    plug::IPort            *pInToSc;            // Input -> Sidechain mix
+                    plug::IPort            *pInToLink;          // Input -> Link mix
+                    plug::IPort            *pLinkToIn;          // Link -> Input mix
+                    plug::IPort            *pLinkToSc;          // Link -> Sidechain mix
+                    plug::IPort            *pScToIn;            // Sidechain -> Input mix
+                    plug::IPort            *pScToLink;          // Sidechain -> Link mix
+                } premix_t;
+
                 typedef struct channel_t
                 {
                     dspu::Bypass            sBypass;            // Bypass
@@ -169,6 +195,8 @@ namespace lsp
                 bool                    bUISync;        // UI sync
                 core::IDBuffer         *pIDisplay;      // Inline display buffer
 
+                premix_t                sPremix;        // Pre-mix settings
+
                 plug::IPort            *pBypass;        // Bypass port
                 plug::IPort            *pInGain;        // Input gain
                 plug::IPort            *pOutGain;       // Output gain
@@ -186,6 +214,8 @@ namespace lsp
 
             protected:
                 void                do_destroy();
+                void                update_premix();
+                void                premix_channel(uint32_t channel, float * & in, float * & out, float * & sc, float * & link, size_t count);
                 uint32_t            decode_sidechain_type(uint32_t sc) const;
                 inline float       *select_buffer(const channel_t & c, float *in, float *sc, float *shm);
 

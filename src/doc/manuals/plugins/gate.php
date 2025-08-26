@@ -35,9 +35,12 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>Pause</b> - pauses any updates of the gate graph.</li>
 	<li><b>Clear</b> - clears all graphs.</li>
 	<?php if ($m == 's') { ?>
-		<li><b>Stereo Split</b> - enables independent compression of left and right channels.</li>
+		<li><b>Stereo Split</b> - enables independent processing of left and right channels.</li>
+	<?php } else if ($m == 'lr') { ?>
+		<li><b>L/R Link</b> - enables linking between Left and Right channel controls so change of one forces the sibling to become the same value.</li>
 	<?php } elseif ($m == 'ms') { ?>
 		<li><b>MS Listen</b> - passes mid-side signal to the output of gate instead of stereo signal.</li>
+		<li><b>M/S Link</b> - enables linking between Mid and Side channel controls so change of one forces the sibling to become the same value.</li>
 	<?php } ?>
 	<li><b>Gain<?= $sm ?></b> - enables drawing of gain amplification line and corresponding amplification meter.</li>
 	<li><b>SC<?= $sm ?></b> - enables drawing of sidechain input graph and corresponding level meter.</li>
@@ -45,6 +48,7 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>In<?= $sm ?></b> - enables drawing of gate's input signal graph and corresponding level meter.</li>
 	<li><b>Out<?= $sm ?></b> - enables drawing of gate's output signal graph and corresponding level meter.</li>
 	<li><b>Link</b> - the name of the shared memory link to pass sidechain signal.</li>
+	<li><b>Pre-mix</b> - shows pre-mix control overlay.</li>
 	<li><b>Sidechain</b> - shows the sidechain control overlay.</li>
 	<li><b>Mix</b> - shows the Dry/Wet control overlay.</li>
 </ul>
@@ -71,6 +75,20 @@ keeping the same settings for the left and right channels.</p>
 <ul>
 	<li><b>Input</b> - overall input gain.</li>
 	<li><b>Output</b> - overall output gain.</li>
+</ul>
+
+<p><b>Pre-mix control overlay:</b></p>
+<ul>
+	<?php if ($sc) { ?>
+	<li><b>In -> SC</b> - the amount of signal from input channel added to the Sidechain.</li>
+	<?php } ?>
+	<li><b>In -> Link</b> - the amount of signal from input channel added to the shared memory link.</li>
+	<?php if ($sc) { ?>
+	<li><b>SC -> In</b> - the amount of signal from sidechain input channel added to the input channel.</li>
+	<li><b>SC -> Link</b> - the amount of signal from sidechain input channel added to the shared memory link.</li>
+	<?php } ?>
+	<li><b>Link -> In</b> - the amount of signal from shared memory link added to the input channel.</li>
+	<li><b>Link -> SC</b> - the amount of signal from shared memory link added to the sidechain channel.</li>
 </ul>
 
 <p><b>Sidechain control overlay:</b></p>

@@ -2,6 +2,11 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.30 ===
+* Added audio pre-mixing controls.
+* Added left/right and mid/side linking in the UI.
+* Updated build scripts and dependencies.
+
 === 1.0.29 ===
 * Added overlay support for Sidechain and Mix.
 * Updated build scripts and dependencies.
