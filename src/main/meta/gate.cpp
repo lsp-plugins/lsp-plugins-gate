@@ -364,7 +364,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             mono_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            3
         };
         LSP_REGISTER_METADATA(gate_mono);
 
@@ -395,7 +396,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            1
         };
         LSP_REGISTER_METADATA(gate_stereo);
 
@@ -426,7 +428,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            5
         };
         LSP_REGISTER_METADATA(gate_lr);
 
@@ -457,7 +460,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            7
         };
         LSP_REGISTER_METADATA(gate_ms);
 
@@ -489,7 +493,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             mono_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            4
         };
         LSP_REGISTER_METADATA(sc_gate_mono);
 
@@ -520,7 +525,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            2
         };
         LSP_REGISTER_METADATA(sc_gate_stereo);
 
@@ -551,7 +557,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            6
         };
         LSP_REGISTER_METADATA(sc_gate_lr);
 
@@ -582,7 +589,8 @@ namespace lsp
             "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            8
         };
         LSP_REGISTER_METADATA(sc_gate_ms);
 

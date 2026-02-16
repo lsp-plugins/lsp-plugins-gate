@@ -4,14 +4,13 @@
 		"name": "Гейт"
 	},
 	"launcher": {
-		"gate_lr": "Раздельный ЛП",
+		"gate_lr": "ЛП",
 		"gate_mono": "Моно",
-		"gate_ms": "Раздельный ЦС",
+		"gate_ms": "ЦС",
 		"gate_stereo": "Стерео",
-		"sc_gate_lr": "БЦ Раздельный ЛП",
+		"sc_gate_lr": "БЦ ЛП",
 		"sc_gate_mono": "БЦ Моно",
-		"sc_gate_ms": "БЦ Раздельный ЦС",
+		"sc_gate_ms": "БЦ ЦС",
 		"sc_gate_stereo": "БЦ Стерео"
 	}
 }
-

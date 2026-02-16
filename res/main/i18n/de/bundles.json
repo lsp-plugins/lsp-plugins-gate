@@ -4,14 +4,13 @@
 		"name": "Gate"
 	},
 	"launcher": {
-		"gate_lr": "Split LR",
+		"gate_lr": "LR",
 		"gate_mono": "Mono",
-		"gate_ms": "Split MS",
+		"gate_ms": "MS",
 		"gate_stereo": "Stereo",
-		"sc_gate_lr": "SC Split LR",
+		"sc_gate_lr": "SC LR",
 		"sc_gate_mono": "SC Mono",
-		"sc_gate_ms": "SC Split MS",
+		"sc_gate_ms": "SC MS",
 		"sc_gate_stereo": "SC Stereo"
 	}
 }
-
