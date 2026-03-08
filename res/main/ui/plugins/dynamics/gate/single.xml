@@ -59,24 +59,24 @@
 
 						<!-- Meshes -->
 						<ui:if test=":mono">
-							<mesh id="icg" width="0" color="mono_in" fcolor="mono_in" fcolor.a="0.8" fill="true" visibility=":ilv"/>
-							<mesh id="ocg" width="2" color="mono" visibility=":olv"/>
-							<mesh id="scg" width="2" color="sidechain_1" visibility=":slv"/>
-							<mesh id="evg" width="2" color="envelope_1" visibility=":elv"/>
-							<mesh id="grg" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv"/>
+							<mesh id="icg" width="0" color="mono_in" fcolor="mono_in" fcolor.a="0.9" fill="true" visibility=":ilv"/>
+							<mesh id="ocg" width="1" color="mono" color.a="0.7" visibility=":olv"/>
+							<mesh id="scg" width="2" color="sidechain" color.a="0.5" visibility=":slv"/>
+							<mesh id="evg" width="2" color="envelope" visibility=":elv"/>
+							<mesh id="grg" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.85" fill="true" visibility=":grv"/>
 						</ui:if>
 
 						<ui:if test="!(:mono)">
-							<mesh id="icg_${xa}" width="0" color="${clr_a}_in" fcolor="${clr_a}_in" fcolor.a="0.8" fill="true" visibility=":ilv_${xa}"/>
-							<mesh id="icg_${xb}" width="0" color="${clr_b}_in" fcolor="${clr_b}_in" fcolor.a="0.8" fill="true" visibility=":ilv_${xb}"/>
-							<mesh id="ocg_${xa}" width="2" color="${clr_a}" visibility=":olv_${xa}"/>
-							<mesh id="ocg_${xb}" width="2" color="${clr_b}" visibility=":olv_${xb}"/>
-							<mesh id="scg_${xa}" width="2" color="sidechain_1" visibility=":slv_${xa}"/>
-							<mesh id="scg_${xb}" width="2" color="sidechain_2" visibility=":slv_${xb}"/>
-							<mesh id="evg_${xa}" width="2" color="envelope_1" visibility=":elv_${xa}"/>
-							<mesh id="evg_${xb}" width="2" color="envelope_2" visibility=":elv_${xb}"/>
-							<mesh id="grg_${xa}" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_${xa}"/>
-							<mesh id="grg_${xb}" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_${xb}"/>
+							<mesh id="icg_${xa}" width="0" color="${clr_a}_in" fcolor="${clr_a}_in" fcolor.a="0.9" fill="true" visibility=":ilv_${xa}"/>
+							<mesh id="icg_${xb}" width="0" color="${clr_b}_in" fcolor="${clr_b}_in" fcolor.a="0.9" fill="true" visibility=":ilv_${xb}"/>
+							<mesh id="ocg_${xa}" width="1" color="${clr_a}" color.a="0.5" visibility=":olv_${xa}"/>
+							<mesh id="ocg_${xb}" width="1" color="${clr_b}" color.a="0.5" visibility=":olv_${xb}"/>
+							<mesh id="scg_${xa}" width="2" color="sidechain" color.a="0.7" visibility=":slv_${xa}"/>
+							<mesh id="scg_${xb}" width="2" color="sidechain" color.a="0.7" visibility=":slv_${xb}"/>
+							<mesh id="evg_${xa}" width="2" color="envelope" color.a="0.3" visibility=":elv_${xa}"/>
+							<mesh id="evg_${xb}" width="2" color="envelope" color.a="0.3" visibility=":elv_${xb}"/>
+							<mesh id="grg_${xa}" width="2" color="bright_blue" color.a="0.5" fcolor="bright_blue" fcolor.a="0.9" fill="true" visibility=":grv_${xa}"/>
+							<mesh id="grg_${xb}" width="2" color="bright_blue" color.a="0.5" fcolor="bright_blue" fcolor.a="0.9" fill="true" visibility=":grv_${xb}"/>
 						</ui:if>
 
 						<!-- Markers -->
@@ -84,7 +84,7 @@
 							<ui:attributes ox="1" oy="0">
 								<marker id="gzs" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8"/>
 								<marker id="hzs" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh"/>
-								<marker id="gt" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="0.8" hlcolor.a="0.6"/>
+								<marker id="gt" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="1.0" hlcolor.a="0.7"/>
 								<marker id="hts_l" width="2" color="threshold" lcolor="threshold" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh"/>
 							</ui:attributes>
 						</ui:if>
@@ -95,8 +95,8 @@
 								<marker id="gzs_${xb}" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8"/>
 								<marker id="hzs_${xa}" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh_${xa}"/>
 								<marker id="hzs_${xb}" width="2" color="cyan" lcolor="cyan" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh_${xb}"/>
-								<marker id="gt_${xa}" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="0.8" hlcolor.a="0.6"/>
-								<marker id="gt_${xb}" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="0.8" hlcolor.a="0.6"/>
+								<marker id="gt_${xa}" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="1.0" hlcolor.a="0.7"/>
+								<marker id="gt_${xb}" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="1.0" hlcolor.a="0.7"/>
 								<marker id="hts_${xa}" width="2" color="threshold" lcolor="threshold" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh_${xa}"/>
 								<marker id="hts_${xb}" width="2" color="threshold" lcolor="threshold" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8" visibility=":gh_${xb}"/>
 							</ui:attributes>
