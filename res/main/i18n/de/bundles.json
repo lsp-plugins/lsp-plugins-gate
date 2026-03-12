@@ -1,7 +1,16 @@
 {
 	"gate": {
-		"name": "Gate",
-		"description": "Dieses Plugin dient als Gate für das Eingangssignal. Eine flexible Konfiguration \nder Sidechain ist verfügbar. Mithilfe einer Hysteresischen Kurve ist \ndie genaue Kontrolle des Fadens des Signals möglich. Zusätzliche Dry-/Wet-Steuerung erlaubt das \nMixen von bearbeiteten und unbearbeiteten Signalen gleichzeitig."
+		"description": "Dieses Plugin dient als Gate für das Eingangssignal. Eine flexible Konfiguration\nder Sidechain ist verfügbar. Mithilfe einer Hysteresischen Kurve ist \ndie genaue Kontrolle des Fadens des Signals möglich. Zusätzliche Dry-/Wet-Steuerung\nerlaubt dasMixen von bearbeiteten und unbearbeiteten Signalen gleichzeitig.",
+		"name": "Gate"
+	},
+	"launcher": {
+		"gate_lr": "LR",
+		"gate_mono": "Mono",
+		"gate_ms": "MS",
+		"gate_stereo": "Stereo",
+		"sc_gate_lr": "SC LR",
+		"sc_gate_mono": "SC Mono",
+		"sc_gate_ms": "SC MS",
+		"sc_gate_stereo": "SC Stereo"
 	}
 }
-

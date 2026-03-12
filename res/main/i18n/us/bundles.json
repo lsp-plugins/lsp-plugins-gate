@@ -1,7 +1,16 @@
 {
 	"gate": {
-		"name": "Gate",
-		"description": "This plugin performs gating of input signal. Flexible sidechain-control\nconfiguration provided. Additional Hysteresis curve is available to provide\naccurate control of the fading of the signal. Also additional dry/wet control\nallows to mix processed and unprocessed signal together."
+		"description": "This plugin performs gating of input signal. Flexible sidechain-control\nconfiguration provided. Additional Hysteresis curve is available to provide\naccurate control of the fading of the signal. Also additional dry/wet control\nallows to mix processed and unprocessed signal together.",
+		"name": "Gate"
+	},
+	"launcher": {
+		"gate_lr": "LR",
+		"gate_mono": "Mono",
+		"gate_ms": "MS",
+		"gate_stereo": "Stereo",
+		"sc_gate_lr": "SC LR",
+		"sc_gate_mono": "SC Mono",
+		"sc_gate_ms": "SC MS",
+		"sc_gate_stereo": "SC Stereo"
 	}
 }
-

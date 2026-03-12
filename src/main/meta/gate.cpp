@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -20,12 +20,13 @@
  */
 
 #include <lsp-plug.in/plug-fw/meta/ports.h>
+#include <lsp-plug.in/plug-fw/meta/registry.h>
 #include <lsp-plug.in/shared/meta/developers.h>
 #include <private/meta/gate.h>
 
 #define LSP_PLUGINS_GATE_VERSION_MAJOR       1
 #define LSP_PLUGINS_GATE_VERSION_MINOR       0
-#define LSP_PLUGINS_GATE_VERSION_MICRO       33
+#define LSP_PLUGINS_GATE_VERSION_MICRO       34
 
 #define LSP_PLUGINS_GATE_VERSION  \
     LSP_MODULE_VERSION( \
@@ -360,11 +361,13 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY,
             gate_mono_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             mono_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            3
         };
+        LSP_REGISTER_METADATA(gate_mono);
 
         const meta::plugin_t  gate_stereo =
         {
@@ -390,11 +393,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             gate_stereo_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            1
         };
+        LSP_REGISTER_METADATA(gate_stereo);
 
         const meta::plugin_t  gate_lr =
         {
@@ -420,11 +425,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             gate_lr_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            5
         };
+        LSP_REGISTER_METADATA(gate_lr);
 
         const meta::plugin_t  gate_ms =
         {
@@ -450,11 +457,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             gate_ms_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            7
         };
+        LSP_REGISTER_METADATA(gate_ms);
 
         // Sidechain gate
         const meta::plugin_t  sc_gate_mono =
@@ -481,11 +490,13 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY,
             sc_gate_mono_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             mono_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            4
         };
+        LSP_REGISTER_METADATA(sc_gate_mono);
 
         const meta::plugin_t  sc_gate_stereo =
         {
@@ -511,11 +522,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             sc_gate_stereo_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            2
         };
+        LSP_REGISTER_METADATA(sc_gate_stereo);
 
         const meta::plugin_t  sc_gate_lr =
         {
@@ -541,11 +554,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             sc_gate_lr_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            6
         };
+        LSP_REGISTER_METADATA(sc_gate_lr);
 
         const meta::plugin_t  sc_gate_ms =
         {
@@ -571,10 +586,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY,
             sc_gate_ms_ports,
-            "dynamics/gate/single.xml",
+            "plugins/dynamics/gate/single.xml",
             NULL,
             stereo_plugin_sidechain_port_groups,
-            &gate_bundle
+            &gate_bundle,
+            8
         };
+        LSP_REGISTER_METADATA(sc_gate_ms);
+
     } /* namespace meta */
 } /* namespace lsp */
