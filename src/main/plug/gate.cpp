@@ -649,7 +649,7 @@ namespace lsp
             {
                 channel_t *c    = &vChannels[i];
                 plug::IPort *sc = (bStereoSplit) ? pScSpSource : c->pScSource;
-                size_t sc_src   = (sc != NULL) ? sc->value() : dspu::SCS_MIDDLE;
+                size_t sc_src   = (sc != NULL) ? size_t(sc->value()) : size_t(dspu::SCS_MIDDLE);
 
                 // Update bypass settings
                 c->sBypass.set_bypass(bypass);
@@ -659,7 +659,7 @@ namespace lsp
                 c->bScListen    = c->pScListen->value() >= 0.5f;
 
                 c->sSC.set_gain(c->pScPreamp->value());
-                c->sSC.set_mode((c->pScMode != NULL) ? c->pScMode->value() : dspu::SCM_RMS);
+                c->sSC.set_mode((c->pScMode != NULL) ? size_t(c->pScMode->value()) : size_t(dspu::SCM_RMS));
                 c->sSC.set_source(decode_sidechain_source(sc_src, bStereoSplit, i));
                 c->sSC.set_reactivity(c->pScReactivity->value());
                 c->sSC.set_stereo_mode(((nMode == GM_MS) && (!use_sidechain(*c))) ? dspu::SCSM_MIDSIDE : dspu::SCSM_STEREO);
