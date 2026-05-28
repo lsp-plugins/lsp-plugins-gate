@@ -170,6 +170,7 @@ namespace lsp
                     plug::IPort            *pHold;              // Hold time
                     plug::IPort            *pReduction;         // Reduction
                     plug::IPort            *pMakeup;            // Makeup
+                    plug::IPort            *pPhase;             // Phase invert
 
                     plug::IPort            *pDryGain;           // Dry gain
                     plug::IPort            *pWetGain;           // Wet gain

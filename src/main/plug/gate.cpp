@@ -246,6 +246,7 @@ namespace lsp
                 c->pRelease         = NULL;
                 c->pReduction       = NULL;
                 c->pMakeup          = NULL;
+                c->pPhase           = NULL;
 
                 c->pDryGain         = NULL;
                 c->pWetGain         = NULL;
@@ -376,6 +377,7 @@ namespace lsp
                     c->pHold            = sc->pHold;
                     c->pReduction       = sc->pReduction;
                     c->pMakeup          = sc->pMakeup;
+                    c->pPhase           = sc->pPhase;
 
                     c->pDryGain         = sc->pDryGain;
                     c->pWetGain         = sc->pWetGain;
@@ -396,6 +398,7 @@ namespace lsp
                     BIND_PORT(c->pHold);
                     BIND_PORT(c->pReduction);
                     BIND_PORT(c->pMakeup);
+                    BIND_PORT(c->pPhase);
 
                     BIND_PORT(c->pDryGain);
                     BIND_PORT(c->pWetGain);
@@ -724,6 +727,10 @@ namespace lsp
 
                 c->fDryGain         = (dry_gain * drywet + 1.0f - drywet) * out_gain;
                 c->fWetGain         = wet_gain * drywet * out_gain;
+
+                // Invert phase
+                const bool phase    = c->pPhase->value() >= 0.5f;
+                c->fWetGain   = phase ? -c->fWetGain : c->fWetGain;
 
                 if (c->fMakeup != makeup)
                 {
@@ -1339,6 +1346,7 @@ namespace lsp
                     v->write("pHold", c->pHold);
                     v->write("pReduction", c->pReduction);
                     v->write("pMakeup", c->pMakeup);
+                    v->write("pPhase", c->pPhase);
 
                     v->write("pDryGain", c->pDryGain);
                     v->write("pWetGain", c->pWetGain);

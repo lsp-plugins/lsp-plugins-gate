@@ -172,6 +172,7 @@ namespace lsp
             CONTROL("hold" id, "Hold time" label, "Hold time" alias, U_MSEC, gate_metadata::HOLD_TIME), \
             LOG_CONTROL("gr" id, "Reduction" label, "Reduction" alias, U_GAIN_AMP, gate_metadata::REDUCTION), \
             LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup" alias, U_GAIN_AMP, gate_metadata::MAKEUP), \
+            SWITCH("ph" id, "Phase invert" label, "Phase" alias, 0.0f), \
             AMP_GAIN10("cdr" id, "Dry gain" label, "Dry" alias, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, "Wet" alias, GAIN_AMP_0_DB), \
             PERCENTS("cdw" id, "Dry/Wet balance" label, "Dry/Wet" alias, 100.0f, 0.1f), \

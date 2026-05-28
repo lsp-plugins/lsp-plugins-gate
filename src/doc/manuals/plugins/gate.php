@@ -21,7 +21,8 @@
 		else
 			echo " is";
 	?>provided. Additional <b>Hysteresis</b> curve is available to provide accurate control of the fading of the signal.
-	Also additional	dry/wet control allows to mix processed and unprocessed signal together. 
+	Also additional	dry/wet control allows to mix processed and unprocessed signal together.
+	When <b>Phase</b> inversion is enabled, it allows to create "ducking" effect.
 </p>
 <?php if ($m == 's') { ?>
 <p>Additionally, <b>Stereo split mode</b> allows to apply processing to the left and right channels independently while
@@ -57,6 +58,7 @@ keeping the same settings for the left and right channels.</p>
 <ul>
 	<li><b>Reduction</b> - the amount of gain applied to the input signal when the gate is closed (if negative) or open (if positive).</li>
 	<li><b>Makeup</b> - additional amplification gain after processing stage.</li>
+	<li><b>Phase</b> - invert the phase.</li>
 	<li><b>Attack</b> - attack time of the gate.</li>
 	<li><b>Release</b> - release time of the gate.</li>
 	<li><b>Curve</b> - Basic gate curve characteristics:</li>
