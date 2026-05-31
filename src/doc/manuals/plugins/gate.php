@@ -26,6 +26,13 @@
 <?php if ($m == 's') { ?>
 <p>Additionally, <b>Stereo split mode</b> allows to apply processing to the left and right channels independently while
 keeping the same settings for the left and right channels.</p>
+<p>The gate can operate in two modes:</p>
+<ul>
+	<li><b>Normal mode</b>: when the <b>Reduction</b> parameter is set to some negative value (in decibels), the gain reduction is
+	applied below the specified threshold making the gate to apply the gain reduction to silent sounds.</li>
+	<li><b>Ducking mode</b>: when the <b>Reduction</b> parameter is set to some positive value (in decibels), the gain reduction is
+	applied above the specified threshold making the gate to apply the reduction to loud sounds.</li> 
+</ul>
 <?php } ?>
 <p><b>Controls:</b></p>
 <ul>
