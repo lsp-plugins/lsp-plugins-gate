@@ -3,6 +3,7 @@
 *******************************************************************************
 
 === 1.0.36 ===
+* Extended dynamics range for the gain curve setup.
 * Updated build scripts and dependencies.
 
 === 1.0.35 ===
