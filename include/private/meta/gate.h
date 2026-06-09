@@ -99,7 +99,7 @@ namespace lsp
 
             static constexpr size_t CURVE_MESH_SIZE         = 256;
             static constexpr float  CURVE_DB_MIN            = -108;
-            static constexpr float  CURVE_DB_MAX            = +24;
+            static constexpr float  CURVE_DB_MAX            = +12;
 
             static constexpr size_t TIME_MESH_SIZE          = 400;
             static constexpr float  TIME_HISTORY_MAX        = 5.0f;
