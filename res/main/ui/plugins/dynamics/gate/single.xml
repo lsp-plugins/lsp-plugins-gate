@@ -41,10 +41,10 @@
 							</ui:attributes>
 						</ui:for>
 						<ui:attributes ox="1" oy="0" color="graph_alt_1">
-							<marker v="+12 db"/>
 							<marker v="-12 db"/>
 							<marker v="-36 db"/>
 							<marker v="-60 db"/>
+							<marker v="-84 db"/>
 						</ui:attributes>
 
 						<!-- Yellow grid -->
@@ -55,6 +55,8 @@
 							<marker v="0 db"/>
 							<marker v="-24 db"/>
 							<marker v="-48 db"/>
+							<marker v="-72 db"/>
+							<marker v="-96 db"/>
 						</ui:attributes>
 
 						<!-- Meshes -->
@@ -102,29 +104,27 @@
 							</ui:attributes>
 						</ui:if>
 
-						<!-- Boundaries -->
-						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
-						<marker v="5" ox="0" oy="1" color="graph_prim" visibility="false"/>
-
 						<!-- Axis -->
 						<axis min="0" max="5" angle="1.0" log="false" color="graph_prim" visibility="false"/>
-						<axis min="-72 db" max="24 db" angle="0.5" log="true" color="graph_prim" visibility="false"/>
+						<axis min="-108 db" max="12 db" angle="0.5" log="true" color="graph_prim" visibility="false"/>
 
 						<!-- Text -->
-						<text x="5" y="-72 db" text="graph.units.s" halign="1" valign="1" color="graph_prim"/>
+						<text x="5" y="-108 db" text="graph.units.s" halign="1" valign="1" color="graph_prim"/>
 						<ui:for id="t" first="0" last="4" step="1">
-							<text x="${t}" y="-72 db" text="${t}" halign="-1" valign="1" color="graph_prim"/>
-							<text x="${t}.5" y="-72 db" text="${t}.5" halign="-1" valign="1" color="graph_prim"/>
+							<text x="${t}" y="-108 db" text="${t}" halign="-1" valign="1" color="graph_prim"/>
+							<text x="${t}.5" y="-108 db" text="${t}.5" halign="-1" valign="1" color="graph_prim"/>
 						</ui:for>
-						<ui:attributes x="5" halign="1" valign="1" color="graph_prim">
-							<text y="12 db" text="+12"/>
+						<ui:attributes x="5" halign="1" valign="1" color="graph_prim" pgroup="0" priority="10">
 							<text y="0 db" text="0"/>
 							<text y="-12 db" text="-12"/>
 							<text y="-24 db" text="-24"/>
 							<text y="-36 db" text="-36"/>
 							<text y="-48 db" text="-48"/>
 							<text y="-60 db" text="-60"/>
-							<text x="5" y="24 db" text="graph.units.db" valign="-1"/>
+							<text y="-72 db" text="-72"/>
+							<text y="-84 db" text="-84"/>
+							<text y="-96 db" text="-96"/>
+							<text x="5" y="12 db" text="graph.units.db" valign="-1" priority="0" />
 						</ui:attributes>
 					</graph>
 				</group>
@@ -193,17 +193,17 @@
 				<ui:if test=":mono">
 					<!-- Sidechain signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="slm" min="-72 db" max="24 db" log="true" type="peak" value.color="sidechain"/>
+						<ledchannel id="slm" min="-108 db" max="12 db" log="true" type="peak" value.color="sidechain"/>
 					</ledmeter>
 
 					<!-- Envelope signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="elm" min="-72 db" max="24 db" log="true" type="peak" value.color="envelope"/>
+						<ledchannel id="elm" min="-108 db" max="12 db" log="true" type="peak" value.color="envelope"/>
 					</ledmeter>
 
 					<!-- Gain signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="rlm" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
+						<ledchannel id="rlm" min="-108 db" max="0 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
 					</ledmeter>
 				</ui:if>
 
@@ -211,20 +211,20 @@
 				<ui:if test="!(:mono)">
 					<!-- Sidechain signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="slm_${xa}" min="-72 db" max="24 db" log="true" type="peak" value.color="sidechain"/>
-						<ledchannel id="slm_${xb}" min="-72 db" max="24 db" log="true" type="peak" value.color="sidechain"/>
+						<ledchannel id="slm_${xa}" min="-108 db" max="12 db" log="true" type="peak" value.color="sidechain"/>
+						<ledchannel id="slm_${xb}" min="-108 db" max="12 db" log="true" type="peak" value.color="sidechain"/>
 					</ledmeter>
 
 					<!-- Envelope signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="elm_${xa}" min="-72 db" max="24 db" log="true" type="peak" value.color="envelope"/>
-						<ledchannel id="elm_${xb}" min="-72 db" max="24 db" log="true" type="peak" value.color="envelope"/>
+						<ledchannel id="elm_${xa}" min="-108 db" max="12 db" log="true" type="peak" value.color="envelope"/>
+						<ledchannel id="elm_${xb}" min="-108 db" max="12 db" log="true" type="peak" value.color="envelope"/>
 					</ledmeter>
 
 					<!-- Gain signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="rlm_${xa}" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
-						<ledchannel id="rlm_${xb}" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
+						<ledchannel id="rlm_${xa}" min="-108 db" max="0 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
+						<ledchannel id="rlm_${xb}" min="-108 db" max="0 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
 					</ledmeter>
 				</ui:if>
 
@@ -237,23 +237,21 @@
 						<origin hpos="-1" vpos="-1" visible="false"/>
 
 						<!-- Gray grid -->
-						<ui:for id="g" first="-60" last="12" step="24">
+						<ui:for id="g" first="-84" last="12" step="24">
 							<marker v="${g} db" color="graph_alt_1"/>
 							<marker v="${g} db" ox="1" oy="0" color="graph_alt_1"/>
 						</ui:for>
 
 						<!-- Yellow grid -->
-						<ui:for id="g" first="-48" last="-24" step="24">
+						<ui:for id="g" first="-96" last="-24" step="24">
 							<marker v="${g} db" color="graph_sec"/>
 							<marker v="${g} db" ox="1" oy="0" color="graph_sec"/>
 						</ui:for>
 
 						<!-- Axes and boundaries -->
 						<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true"/>
-						<marker v="24 db" color="graph_alt_1" visibility="false"/>
-						<marker v="24 db" ox="1" oy="0" color="graph_alt_1" visibility="false"/>
-						<axis min="-72 db" max="24 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
-						<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
+						<axis min="-108 db" max="12 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
+						<axis min="-108 db" max="12 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
 
 						<!-- 0 dB markers -->
 						<marker v="0 db" ox="0" oy="1" width="2" color="graph_prim"/>
@@ -303,26 +301,30 @@
 						</ui:if>
 
 						<!-- Text -->
-						<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
-						<ui:attributes x="0 db" halign="1" valign="-1">
-							<text y="24 db" text="graph.units.db"/>
-							<text y="12 db" text="+12"/>
+						<text x="0 db" y="0 db" text="0" halign="1" valign="1" pgroup="0" priority="0"/>
+						<ui:attributes x="0 db" halign="1" valign="-1" pgroup="0" priority="10">
+							<text y="12 db" text="graph.units.db" halign="-1" priority="0" />
 							<text y="-12 db" text="-12"/>
 							<text y="-24 db" text="-24"/>
 							<text y="-36 db" text="-36"/>
 							<text y="-48 db" text="-48"/>
 							<text y="-60 db" text="-60"/>
-							<text y="-72 db" text="graph.axis.out" valign="1"/>
+							<text y="-72 db" text="-72"/>
+							<text y="-84 db" text="-84"/>
+							<text y="-96 db" text="-96"/>
+							<text y="-108 db" text="graph.axis.out" valign="1" priority="0"/>
 						</ui:attributes>
-						<ui:attributes y="0 db" halign="-1" valign="1">
-							<text x="24 db" text="graph.units.db"/>
-							<text x="12 db" text="+12"/>
+						<ui:attributes y="0 db" halign="-1" valign="1" pgroup="0" priority="10">
+							<text x="12 db" text="graph.units.db" valign="-1" priority="0" />
 							<text x="-12 db" text="-12"/>
 							<text x="-24 db" text="-24"/>
 							<text x="-36 db" text="-36"/>
 							<text x="-48 db" text="-48"/>
 							<text x="-60 db" text="-60"/>
-							<text x="-72 db" text="graph.axis.in" halign="1"/>
+							<text x="-72 db" text="-72"/>
+							<text x="-84 db" text="-84"/>
+							<text x="-96 db" text="-96"/>
+							<text x="-108 db" text="graph.axis.in" halign="1" priority="0"/>
 						</ui:attributes>
 					</graph>
 				</group>
@@ -364,12 +366,12 @@
 				<ui:if test=":mono">
 					<!-- Input signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="ilm" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="mono_in"/>
+						<ledchannel id="ilm" min="-108 db" max="12 db" log="true" type="rms_peak" peak.visibility="true" value.color="mono_in"/>
 					</ledmeter>
 
 					<!-- Output signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="olm" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="mono"/>
+						<ledchannel id="olm" min="-108 db" max="12 db" log="true" type="rms_peak" peak.visibility="true" value.color="mono"/>
 					</ledmeter>
 				</ui:if>
 
@@ -377,14 +379,14 @@
 				<ui:if test="!(:mono)">
 					<!-- Input signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="ilm_${xa}" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_a}_in"/>
-						<ledchannel id="ilm_${xb}" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_b}_in"/>
+						<ledchannel id="ilm_${xa}" min="-108 db" max="12 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_a}_in"/>
+						<ledchannel id="ilm_${xb}" min="-108 db" max="12 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_b}_in"/>
 					</ledmeter>
 
 					<!-- Output signal meter -->
 					<ledmeter vexpand="true" height.min="256" angle="1">
-						<ledchannel id="olm_${xa}" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_a}"/>
-						<ledchannel id="olm_${xb}" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_b}"/>
+						<ledchannel id="olm_${xa}" min="-108 db" max="12 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_a}"/>
+						<ledchannel id="olm_${xb}" min="-108 db" max="12 db" log="true" type="rms_peak" peak.visibility="true" value.color="${clr_b}"/>
 					</ledmeter>
 				</ui:if>
 			</grid>

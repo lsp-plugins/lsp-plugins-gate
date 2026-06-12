@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-gate
  * Created on: 3 авг. 2021 г.
@@ -649,7 +649,7 @@ namespace lsp
             {
                 channel_t *c    = &vChannels[i];
                 plug::IPort *sc = (bStereoSplit) ? pScSpSource : c->pScSource;
-                size_t sc_src   = (sc != NULL) ? sc->value() : dspu::SCS_MIDDLE;
+                size_t sc_src   = (sc != NULL) ? size_t(sc->value()) : size_t(dspu::SCS_MIDDLE);
 
                 // Update bypass settings
                 c->sBypass.set_bypass(bypass);
@@ -659,7 +659,7 @@ namespace lsp
                 c->bScListen    = c->pScListen->value() >= 0.5f;
 
                 c->sSC.set_gain(c->pScPreamp->value());
-                c->sSC.set_mode((c->pScMode != NULL) ? c->pScMode->value() : dspu::SCM_RMS);
+                c->sSC.set_mode((c->pScMode != NULL) ? size_t(c->pScMode->value()) : size_t(dspu::SCM_RMS));
                 c->sSC.set_source(decode_sidechain_source(sc_src, bStereoSplit, i));
                 c->sSC.set_reactivity(c->pScReactivity->value());
                 c->sSC.set_stereo_mode(((nMode == GM_MS) && (!use_sidechain(*c))) ? dspu::SCSM_MIDSIDE : dspu::SCSM_STEREO);
@@ -1148,15 +1148,15 @@ namespace lsp
             cv->set_color_rgb((bypassing) ? CV_DISABLED : CV_BACKGROUND);
             cv->paint();
 
-            float zx    = 1.0f/GAIN_AMP_M_72_DB;
-            float zy    = 1.0f/GAIN_AMP_M_72_DB;
-            float dx    = width/(logf(GAIN_AMP_P_24_DB)-logf(GAIN_AMP_M_72_DB));
-            float dy    = height/(logf(GAIN_AMP_M_72_DB)-logf(GAIN_AMP_P_24_DB));
+            float zx    = 1.0f/GAIN_AMP_M_108_DB;
+            float zy    = 1.0f/GAIN_AMP_M_108_DB;
+            float dx    = float(width)/(logf(GAIN_AMP_P_12_DB/GAIN_AMP_M_108_DB));
+            float dy    = -float(height)/(logf(GAIN_AMP_P_12_DB/GAIN_AMP_M_108_DB));
 
             // Draw horizontal and vertical lines
-            cv->set_line_width(1.0);
+            cv->set_line_width(1.0f);
             cv->set_color_rgb((bypassing) ? CV_SILVER: CV_YELLOW, 0.5f);
-            for (float i=GAIN_AMP_M_72_DB; i<GAIN_AMP_P_24_DB; i *= GAIN_AMP_P_24_DB)
+            for (float i=GAIN_AMP_M_96_DB; i<GAIN_AMP_P_12_DB; i *= GAIN_AMP_P_12_DB)
             {
                 float ax = dx*(logf(i*zx));
                 float ay = height + dy*(logf(i*zy));
@@ -1165,13 +1165,13 @@ namespace lsp
             }
 
             // Draw 1:1 line
-            cv->set_line_width(2.0);
+            cv->set_line_width(2.0f);
             cv->set_color_rgb(CV_GRAY);
             {
-                float ax1 = dx*(logf(GAIN_AMP_M_72_DB*zx));
-                float ax2 = dx*(logf(GAIN_AMP_P_24_DB*zx));
-                float ay1 = height + dy*(logf(GAIN_AMP_M_72_DB*zy));
-                float ay2 = height + dy*(logf(GAIN_AMP_P_24_DB*zy));
+                float ax1 = dx*(logf(GAIN_AMP_M_108_DB*zx));
+                float ax2 = dx*(logf(GAIN_AMP_P_12_DB*zx));
+                float ay1 = height + dy*(logf(GAIN_AMP_M_108_DB*zy));
+                float ay2 = height + dy*(logf(GAIN_AMP_P_12_DB*zy));
                 cv->line(ax1, ay1, ax2, ay2);
             }
 

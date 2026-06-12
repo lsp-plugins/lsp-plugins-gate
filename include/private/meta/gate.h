@@ -32,12 +32,12 @@ namespace lsp
     {
         struct gate_metadata
         {
-            static constexpr float  THRESHOLD_MIN           = GAIN_AMP_M_60_DB;
+            static constexpr float  THRESHOLD_MIN           = GAIN_AMP_M_96_DB;
             static constexpr float  THRESHOLD_MAX           = GAIN_AMP_0_DB;
             static constexpr float  THRESHOLD_DFL           = GAIN_AMP_M_24_DB;
             static constexpr float  THRESHOLD_STEP          = 0.05f;
 
-            static constexpr float  H_THRESHOLD_MIN         = GAIN_AMP_M_60_DB;
+            static constexpr float  H_THRESHOLD_MIN         = GAIN_AMP_M_96_DB;
             static constexpr float  H_THRESHOLD_MAX         = GAIN_AMP_0_DB;
             static constexpr float  H_THRESHOLD_DFL         = GAIN_AMP_M_12_DB;
             static constexpr float  H_THRESHOLD_STEP        = 0.05f;
@@ -98,8 +98,8 @@ namespace lsp
             static constexpr float  LPF_STEP                = 0.0025f;
 
             static constexpr size_t CURVE_MESH_SIZE         = 256;
-            static constexpr float  CURVE_DB_MIN            = -72;
-            static constexpr float  CURVE_DB_MAX            = +24;
+            static constexpr float  CURVE_DB_MIN            = -108;
+            static constexpr float  CURVE_DB_MAX            = +12;
 
             static constexpr size_t TIME_MESH_SIZE          = 400;
             static constexpr float  TIME_HISTORY_MAX        = 5.0f;

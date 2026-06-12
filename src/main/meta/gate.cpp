@@ -26,7 +26,7 @@
 
 #define LSP_PLUGINS_GATE_VERSION_MAJOR       1
 #define LSP_PLUGINS_GATE_VERSION_MINOR       0
-#define LSP_PLUGINS_GATE_VERSION_MICRO       35
+#define LSP_PLUGINS_GATE_VERSION_MICRO       36
 
 #define LSP_PLUGINS_GATE_VERSION  \
     LSP_MODULE_VERSION( \
@@ -163,9 +163,9 @@ namespace lsp
 
         #define GATE_CHANNEL(id, label, alias) \
             SWITCH("gh" id, "Hysteresis" label, "Hysteresis" alias, 0.0f), \
-            LOG_CONTROL("gt" id, "Curve threshold" label, "Thresh" alias, U_GAIN_AMP, gate_metadata::THRESHOLD), \
+            EXT_LOG_CONTROL("gt" id, "Curve threshold" label, "Thresh" alias, U_GAIN_AMP, gate_metadata::THRESHOLD), \
             LOG_CONTROL("gz" id, "Curve zone size" label, "Zone" alias, U_GAIN_AMP, gate_metadata::ZONE), \
-            LOG_CONTROL("ht" id, "Hysteresis threshold" label, "Hyst thresh" alias, U_GAIN_AMP, gate_metadata::H_THRESHOLD), \
+            EXT_LOG_CONTROL("ht" id, "Hysteresis threshold" label, "Hyst thresh" alias, U_GAIN_AMP, gate_metadata::H_THRESHOLD), \
             LOG_CONTROL("hz" id, "Hysteresis zone size" label, "Hyst zone" alias, U_GAIN_AMP, gate_metadata::ZONE), \
             LOG_CONTROL("at" id, "Attack" label, "Att time" alias, U_MSEC, gate_metadata::ATTACK_TIME), \
             LOG_CONTROL("rt" id, "Release" label, "Rel time" alias, U_MSEC, gate_metadata::RELEASE_TIME), \
